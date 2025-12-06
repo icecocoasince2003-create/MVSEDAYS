@@ -1,0 +1,167 @@
+<div class="container">
+  <!-- ページヘッダー -->
+  <div class="page-header">
+    <h1 class="page-title">マイページ</h1>
+  </div>
+
+  <!-- ユーザープロフィール -->
+  <div class="profile-section">
+    <div class="profile-card">
+      <div class="profile-icon">
+        <%= (current_user.username || current_user.email).first.upcase %>
+      </div>
+      <div class="profile-info">
+        <h2 class="profile-username"><%= current_user.username || current_user.email %></h2>
+        <p class="profile-email"><%= current_user.email %></p>
+      </div>
+    </div>
+
+    <!-- 統計情報 -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number"><%= @journals.count %></div>
+        <div class="stat-label">投稿数</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><%= @visit_dates.size %></div>
+        <div class="stat-label">訪問日数</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><%= @journals.pluck(:museum_id).uniq.size %></div>
+        <div class="stat-label">訪問博物館数</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- カレンダーセクション -->
+  <div class="calendar-section">
+    <div class="section-header">
+      <h2 class="section-title">訪問カレンダー</h2>
+      <div class="calendar-legend">
+        <span class="legend-item">
+          <span class="legend-dot legend-today"></span>
+          今日
+        </span>
+        <span class="legend-item">
+          <span class="legend-dot legend-visited"></span>
+          訪問日
+        </span>
+      </div>
+    </div>
+
+    <div class="calendar-container">
+      <!-- カレンダーナビゲーション -->
+      <div class="calendar-nav">
+        <%= link_to "« #{@prev_month.strftime('%Y年%m月')}", 
+                    my_page_path(year: @prev_month.year, month: @prev_month.month), 
+                    class: "btn btn-secondary calendar-nav-btn" %>
+        <h3 class="calendar-title"><%= @current_date.strftime('%Y年 %m月') %></h3>
+        <%= link_to "#{@next_month.strftime('%Y年%m月')} »", 
+                    my_page_path(year: @next_month.year, month: @next_month.month), 
+                    class: "btn btn-secondary calendar-nav-btn" %>
+      </div>
+
+      <!-- カレンダーグリッド -->
+      <div class="calendar-grid">
+        <!-- 曜日ヘッダー -->
+        <% %w[日 月 火 水 木 金 土].each do |day| %>
+          <div class="calendar-day-header"><%= day %></div>
+        <% end %>
+
+        <!-- 日付セル -->
+        <% (@start_date..@end_date).each do |date| %>
+          <% 
+            is_current_month = date.month == @current_date.month
+            is_today = date == Date.today
+            visits_on_date = @visit_dates.select { |visit_date, id| visit_date == date }
+            has_visit = visits_on_date.any?
+          %>
+          
+          <% if is_current_month %>
+            <% day_class = "calendar-day" %>
+            <% day_class += " calendar-today" if is_today %>
+            <% day_class += " calendar-visited" if has_visit %>
+            
+            <div class="<%= day_class %>">
+              <% if has_visit %>
+                <%= link_to journals_path(user_id: current_user.id, visit_date: date), 
+                            class: "day-link" do %>
+                  <span class="day-number"><%= date.day %></span>
+                  <span class="visit-badge"><%= visits_on_date.count %></span>
+                <% end %>
+              <% else %>
+                <span class="day-number"><%= date.day %></span>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="calendar-day calendar-empty">
+              <span class="day-number"><%= date.day %></span>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- 最近の投稿 -->
+  <div class="recent-journals-section">
+    <div class="section-header">
+      <h2 class="section-title">最近の投稿</h2>
+      <%= link_to "すべて見る", journals_path(user_id: current_user.id), class: "btn btn-primary btn-sm" %>
+    </div>
+
+    <% if @journals.any? %>
+      <div class="journals-grid">
+        <% @journals.limit(6).each do |journal| %>
+          <div class="journal-card">
+            <!-- 画像 -->
+            <div class="journal-image">
+              <% if journal.images.attached? && journal.images.any? %>
+                <%= image_tag journal.images.first, alt: "Journal image" %>
+              <% else %>
+                <div class="journal-no-image">
+                  <i class="fas fa-image"></i>
+                </div>
+              <% end %>
+            </div>
+
+            <!-- コンテンツ -->
+            <div class="journal-content">
+              <div class="journal-date">
+                <i class="far fa-calendar"></i>
+                <%= journal.visit_date&.strftime('%Y年%m月%d日') || '日付未設定' %>
+              </div>
+
+              <% if journal.museum %>
+                <h3 class="journal-museum"><%= journal.museum.name %></h3>
+              <% end %>
+
+              <p class="journal-body"><%= truncate(journal.body, length: 100) %></p>
+
+              <!-- タグ -->
+              <% if journal.tags.any? %>
+                <div class="journal-tags">
+                  <% journal.tags.limit(3).each do |tag| %>
+                    <span class="tag"><%= tag.name %></span>
+                  <% end %>
+                </div>
+              <% end %>
+
+              <!-- アクション -->
+              <div class="journal-actions">
+                <%= link_to "詳細", journal_path(journal), class: "btn btn-primary btn-sm" %>
+                <%= link_to "編集", edit_journal_path(journal), class: "btn btn-secondary btn-sm" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <i class="far fa-book"></i>
+        <p>まだ日記が投稿されていません</p>
+        <%= link_to "最初の日記を書く", new_journal_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

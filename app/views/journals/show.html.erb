@@ -1,0 +1,275 @@
+<%= stylesheet_link_tag 'show', :media => "all" %>
+
+<div class="show-journal-container">
+  <div class="show-grid">
+    <!-- メインコンテンツ -->
+    <div class="main-content">
+      <div class="journal-detail-card">
+        <!-- ヘッダー -->
+        <div class="journal-header">
+          <h1 class="journal-title">
+            <%= @journal.body.present? ? truncate(@journal.body, length: 50) : "日記 ##{@journal.id}" %>
+          </h1>
+          
+          <!-- メタ情報 -->
+          <div class="journal-meta">
+            <div class="meta-item">
+              <span class="meta-icon">👤</span>
+              <span><%= @journal.user.email %></span>
+            </div>
+            
+            <% if @journal.visit_date.present? %>
+              <div class="meta-item">
+                <span class="meta-icon">📅</span>
+                <span>訪問日: <%= @journal.visit_date.strftime('%Y年%m月%d日') %></span>
+              </div>
+            <% end %>
+            
+            <div class="meta-item">
+              <span class="meta-icon">🕐</span>
+              <span>投稿日: <%= @journal.created_at.strftime('%Y年%m月%d日') %></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 博物館情報 -->
+        <% if @museum %>
+          <div class="museum-info-card">
+            <div class="museum-info-content">
+              <div class="museum-info-main">
+                <h3 class="museum-section-title">訪問した博物館</h3>
+                <%= link_to museum_path(@museum), class: "museum-name-link" do %>
+                  <p class="museum-name"><%= @museum.name %></p>
+                <% end %>
+                <div class="museum-details">
+                  <p class="museum-detail-item">
+                    <span class="detail-icon">📍</span>
+                    <span><%= @museum.full_address %></span>
+                  </p>
+                  <% if @museum.museum_type.present? %>
+                    <p class="museum-detail-item">
+                      <span class="detail-icon">🏛️</span>
+                      <span><%= @museum.museum_type %></span>
+                    </p>
+                  <% end %>
+                </div>
+              </div>
+              <%= link_to "博物館の詳細", museum_path(@museum), class: "btn-museum-detail" %>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- 評価セクション -->
+        <% if @journal.overall.present? || @journal.rate.present? %>
+          <div class="ratings-display">
+            <!-- 満足度 -->
+            <% if @journal.overall.present? %>
+              <div class="rating-item">
+                <span class="rating-label">満足度</span>
+                <div class="stars">
+                  <% @journal.overall.times do %>
+                    <span class="star star-filled">★</span>
+                  <% end %>
+                  <% (5 - @journal.overall).times do %>
+                    <span class="star star-empty">★</span>
+                  <% end %>
+                </div>
+                <span class="rating-text">
+                  <%= case @journal.overall
+                      when 5 then "5"
+                      when 4 then "4"
+                      when 3 then "3"
+                      when 2 then "2"
+                      when 1 then "1"
+                      end %>
+                </span>
+              </div>
+            <% end %>
+
+            <!-- おすすめ度 -->
+            <% if @journal.rate.present? %>
+              <div class="rating-item">
+                <span class="rating-label">おすすめ度</span>
+                <div class="stars">
+                  <% @journal.rate.times do %>
+                    <span class="star star-filled">★</span>
+                  <% end %>
+                  <% (5 - @journal.rate).times do %>
+                    <span class="star star-empty">★</span>
+                  <% end %>
+                </div>
+                <span class="rating-text">
+                  <%= case @journal.rate
+                      when 5 then "5"
+                      when 4 then "4"
+                      when 3 then "3"
+                      when 2 then "2"
+                      when 1 then "1"
+                      end %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <!-- 画像表示 -->
+        <% if @journal.images.attached? && @journal.images.any? %>
+          <div class="journal-image-section">
+            <% @journal.images.each do |image| %>
+              <%= image_tag image, alt: "Journal image", class: "journal-image" %>
+            <% end %>
+          </div>
+        <% end %>        
+
+        <!-- 本文 -->
+        <% if @journal.body.present? %>
+          <div class="journal-body">
+            <h3 class="body-title">本文</h3>
+            <div class="body-content">
+              <%= simple_format(@journal.body) %>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- タグ -->
+        <% if @journal.tag_list.present? %>
+          <div class="tags-section">
+            <h3 class="tags-title">タグ</h3>
+            <div class="tags-list">
+              <% 
+                # tag_listが文字列の場合は配列に変換
+                tags = @journal.tag_list.is_a?(String) ? @journal.tag_list.split(',').map(&:strip) : @journal.tag_list
+                tags.each do |tag|
+              %>
+                <span class="tag-item">#<%= tag %></span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- ソーシャルアクション -->
+        <div class="social-actions">
+          <div class="social-stats">
+            <span class="stat-item">
+              <i class="far fa-heart"></i>
+              <span id="likes-count"><%= @journal.likes_count %></span> いいね
+            </span>
+            <span class="stat-item">
+              <i class="far fa-comment"></i>
+              <span id="comments-count"><%= @journal.comments_count %></span> コメント
+            </span>
+          </div>
+          
+          <div class="action-buttons">
+            <div id="like-button-container">
+              <%= render 'journal_likes/like_button', journal: @journal %>
+            </div>
+          </div>
+        </div>
+        
+        <!-- コメントセクション -->
+        <div class="comments-section">
+          <h3 class="comments-title">
+            <i class="far fa-comments"></i>
+            コメント (<span id="comments-count-text"><%= @journal.comments_count %></span>)
+          </h3>
+          
+          <!-- コメント投稿フォーム -->
+          <% if user_signed_in? %>
+          <div class="comment-form-container" id="comment-form">
+            <%= form_with model: [@journal, JournalComment.new], 
+                          html: { class: 'comment-form' }, 
+                          data: { turbo: true } do |f| %>
+              <div class="comment-input-wrapper">
+                <%= f.text_area :body, 
+                                rows: 3, 
+                                placeholder: 'コメントを入力...', 
+                                class: 'comment-input' %>
+              </div>
+              <div class="comment-form-actions">
+                <%= f.submit '投稿する', class: 'btn-comment-submit' %>
+              </div>
+            <% end %>
+          </div>
+        
+          <% else %>
+            <p class="login-prompt">
+              コメントするには<%= link_to 'Login', new_user_session_path %>してください
+            </p>
+          <% end %>          
+          
+          <!-- コメント一覧 -->
+          <div id="comments-list" class="comments-list">
+            <%= render @journal.journal_comments.order(created_at: :desc) %>
+          </div>
+        </div>
+        
+        <!-- アクションボタン -->
+        <% if @journal.user == current_user || (current_user && current_user.admin?) %>
+          <div class="action-buttons">
+            <%= link_to edit_journal_path(@journal), class: "btn btn-edit" do %>
+              <span class="btn-icon">✏️</span>
+              <span>編集</span>
+            <% end %>
+            
+            <%= button_to journal_path(@journal), 
+                         method: :delete,
+                         data: { confirm: '本当に削除しますか?' },
+                         class: "btn btn-delete" do %>
+              <span class="btn-icon">🗑️</span>
+              <span>削除</span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- サイドバー -->
+    <div class="sidebar">
+      <!-- この博物館の他の日記 -->
+      <% if @museum && @related_journals.any? %>
+        <div class="sidebar-card">
+          <h3 class="sidebar-title">
+            <%= truncate(@museum.name, length: 20) %>の他の日記
+          </h3>
+          <div class="related-journals">
+            <% @related_journals.each do |journal| %>
+              <%= link_to journal_path(journal), class: "related-journal-item" do %>
+                <p class="related-journal-title">
+                  <%= truncate(journal.body.presence || "日記 ##{journal.id}", length: 40) %>
+                </p>
+                <div class="related-journal-meta">
+                  <span class="related-date">
+                    <%= journal.visit_date.present? ? journal.visit_date.strftime('%Y年%m月%d日') : journal.created_at.strftime('%Y年%m月%d日') %>
+                  </span>
+                  <% if journal.rate.present? %>
+                    <span class="related-rating">
+                      <% journal.rate.times do %>★<% end %>
+                    </span>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- 戻るリンク -->
+      <div class="sidebar-card">
+        <%= link_to journals_path, class: "back-link" do %>
+          <span class="back-icon">←</span>
+          <span>日記一覧に戻る</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+# <%= link_to "HOME", journals_path %>
+# <div class="journal">
+#   <p><%= @journal.body %></p>
+#   <p><%= @journal.created_at %></p>
+# </div>
+
+# <%= link_to "編集する", edit_journal_path(@journal.id) %>

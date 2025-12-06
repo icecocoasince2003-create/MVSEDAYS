@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MVSEDAYS ミューズ・デイズ：博物館nikki</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%#= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+
+  <body>
+    <header class="main-header">
+      <div class="header-container">
+        <div class="logo-section">
+          <div class="logo-icon">
+            <%= image_tag "logo.png", alt: "MVSEDAYS Logo" %>
+          </div>
+          <div class="logo-text">
+            <h1><%= link_to "MVSEDAYS", journals_path %></h1>
+            <p class="subtitle">ミューズ・デイズ：博物館nikki</p>
+          </div>
+        </div>
+
+        <nav class="main-nav">
+          <ul>
+            <li><%= link_to "HOME", journals_path, class: "nav-link" %></li>
+            <li><%= link_to "Museums", museums_path, class: "nav-link" %></li>
+            <li><%= link_to "New Diary", new_journal_path, class: "nav-link" %></li>
+            
+            <% if user_signed_in? %>
+              <% if current_user.admin? %>
+                <li><%= link_to "管理画面", users_path, class: "nav-link nav-link-admin" %></li>
+              <% end %>
+              
+              <li><%= link_to "My page", my_page_path, class: "nav-link nav-user-email" %></li>
+              <li><%= button_to "Logout", destroy_user_session_path, method: :delete, form_class: "nav-logout-form", class: "nav-link nav-link-logout" %></li>
+            <% else %>
+              <li><%= link_to "Login", new_user_session_path, class: "nav-link" %></li>
+              <li><%= link_to "Registration", new_user_registration_path, class: "nav-link nav-link-primary" %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <%= yield %>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-content">
+        <p>&copy; 2025 MVSEDAYS - All rights reserved</p>
+      </div>
+    </footer>
+  </body>
+</html>

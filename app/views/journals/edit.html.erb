@@ -1,0 +1,151 @@
+<%= stylesheet_link_tag 'edit', :media => "all" %>
+
+<div class="edit-journal-container">
+  <!-- ヘッダー -->
+  <div class="form-header">
+    <h1 class="form-title">日記を編集</h1>
+    <p class="form-subtitle">あなたと博物館の出会いの記録を更新しましょう</p>
+  </div>
+
+  <%= form_for @journal, html: {class: 'journal-form'} do |f| %>
+    
+    <!-- 本文 -->
+    <div class="form-group">
+      <%= f.label :body, "本文", class: "form-label" %>
+      <%= f.text_area :body, rows: 8, placeholder: "博物館での体験を綴りましょう...", class: "form-textarea" %>
+    </div>
+
+    <!-- カラム -->
+    <div class="form-row">
+      <!-- 訪問日 -->
+      <div class="form-group form-group-half">
+        <%= f.label :visit_date, "訪問日", class: "form-label" %>
+        <%= f.date_field :visit_date, class: "form-input" %>
+      </div>
+
+      <!-- タグ -->
+      <div class="form-group form-group-half">
+        <%= f.label :tag_list, "タグ", class: "form-label" %>
+        <%= f.text_field :tag_list, placeholder: "例: 国立博物館, 土器, 特別展", class: "form-input" %>
+        <span class="form-hint">複数のタグはカンマ(,)で区切ってください</span>
+      </div>
+    </div>
+
+    <!-- 現在の画像表示 -->
+    <% if @journal.images.attached? && @journal.images.any? %>
+      <div class="current-image-section">
+        <p class="current-image-label">写真</p>
+        <div class="current-image-wrapper">
+          <%= image_tag @journal.images.first, class: "current-image" %>
+        </div>
+        <div class="image-actions">
+          <%= check_box_tag 'journal[remove_images]', '1', false, class: "remove-checkbox", id: "remove_images_checkbox" %>
+          <%= label_tag 'remove_images_checkbox', "この写真を削除", class: "remove-label" %>
+        </div>
+      </div>
+    <% end %>
+    
+    <!-- 画像アップロード -->
+    <div class="form-group">
+      <%= f.label :images, @journal.images.attached? ? "新しい写真に変更" : "写真", class: "form-label" %>
+      <div class="file-upload-area">
+        <%= f.file_field :images, class: "file-input", accept: "image/*", multiple: true %>
+        <div class="file-upload-label">
+          <span class="upload-icon">📷</span>
+          <span class="upload-text">クリックして写真を選択</span>
+        </div>
+      </div>
+      <% if @journal.images.attached? %>
+        <span class="form-hint">新しい写真を選択すると、現在の写真が置き換わります</span>
+      <% end %>
+    </div>    
+
+    <!-- 評価 -->
+    <div class="rating-section">
+      <!-- 満足度 -->
+      <div class="rating-group">
+        <h5 class="rating-title">満足度</h5>
+        <div class="post_form">
+          <%= f.radio_button :overall, 5, id: 'star1' %>
+          <label for="star1"><span class="text">5</span>★</label>
+          
+          <%= f.radio_button :overall, 4, id: 'star2' %>
+          <label for="star2"><span class="text">4</span>★</label>
+          
+          <%= f.radio_button :overall, 3, id: 'star3' %>
+          <label for="star3"><span class="text">3</span>★</label>
+          
+          <%= f.radio_button :overall, 2, id: 'star4' %>
+          <label for="star4"><span class="text">2/span>★</label>
+          
+          <%= f.radio_button :overall, 1, id: 'star5' %>
+          <label for="star5"><span class="text">1</span>★</label>
+        </div>
+      </div>
+
+      <!-- おすすめ度 -->
+      <div class="rating-group">
+        <h5 class="rating-title">おすすめ度</h5>
+        <div class="post_form">
+          <%= f.radio_button :rate, 5, id: 'star6' %>
+          <label for="star6"><span class="text">5</span>★</label>
+          
+          <%= f.radio_button :rate, 4, id: 'star7' %>
+          <label for="star7"><span class="text">4</span>★</label>
+          
+          <%= f.radio_button :rate, 3, id: 'star8' %>
+          <label for="star8"><span class="text">3</span>★</label>
+          
+          <%= f.radio_button :rate, 2, id: 'star9' %>
+          <label for="star9"><span class="text">2</span>★</label>
+          
+          <%= f.radio_button :rate, 1, id: 'star10' %>
+          <label for="star10"><span class="text">1</span>★</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 博物館選択 -->
+    <div class="form-group">
+      <%= f.label :museum_id, "博物館", class: "form-label" %>
+      <div class="museum-select-wrapper">
+        <%= f.select :museum_id, 
+                     options_for_select(
+                       [["博物館を選択", ""]] + 
+                       Museum.all.map { |m| [m.name, m.id] },
+                       @journal.museum_id
+                     ),
+                     {},
+                     class: "form-select",
+                     id: "museum_select" %>
+        
+        <!-- 検索ボタン -->
+        <%= link_to museums_path, 
+                    class: "museum-search-btn",
+                    target: "_blank" do %>
+          🔍 博物館を検索
+        <% end %>
+      </div>
+      
+      <!-- 選択された博物館情報 -->
+      <% if @journal.museum.present? %>
+        <div class="selected-museum-info">
+          <p class="museum-info-text">
+            <span class="museum-info-label">選択中:</span> 
+            <span class="museum-info-name"><%= @journal.museum.name %></span>
+          </p>
+          <p class="museum-info-location">
+            <%= @journal.museum.prefecture %> <%= @journal.museum.city %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- 送信ボタン -->
+    <div class="form-actions">
+      <%= link_to "キャンセル", @journal, class: "btn btn-cancel" %>
+      <%= f.submit "変更を保存", class: "btn btn-submit" %>
+    </div>
+
+  <% end %>
+</div>

@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "like-button-container" do %>
+  <%= render "journal_likes/like_button", journal: @journal %>
+<% end %>
+
+<%= turbo_stream.replace "likes-count" do %>
+  <%= @journal.likes_count %>
+<% end %>

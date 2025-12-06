@@ -1,0 +1,109 @@
+<div class="admin-header">
+  <h1>ユーザー管理</h1>
+  <%= link_to "戻る", root_path, class: "btn btn-secondary" %>
+</div>
+
+<div class="users-table">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>メールアドレス</th>
+        <th>ユーザー名</th>
+        <th>管理者</th>
+        <th>登録日</th>
+        <th>アクション</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.email %></td>
+          <td><%= user.username || 'N/A' %></td>
+          <td>
+            <% if user.admin? %>
+              <span class="badge badge-admin">管理者</span>
+            <% else %>
+              <span class="badge badge-user">一般</span>
+            <% end %>
+          </td>
+          <td><%= user.created_at.strftime('%Y/%m/%d') %></td>
+          <td>
+            <%= link_to "詳細", user_path(user), class: "btn btn-sm btn-info" %>
+            <% unless user == current_user %>
+              <%= link_to "削除", user_path(user), method: :delete, 
+                  data: { confirm: "本当に削除しますか？" }, 
+                  class: "btn btn-sm btn-danger" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <div class="users-summary">
+    <p>合計ユーザー数: <%= @users.count %></p>
+  </div>
+</div>
+
+<style>
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.users-table {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.users-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.users-table th,
+.users-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.users-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+}
+
+.badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.badge-admin {
+  background: #dc3545;
+  color: white;
+}
+
+.badge-user {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.users-summary {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  font-weight: 600;
+}
+</style>

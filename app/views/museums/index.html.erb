@@ -1,0 +1,124 @@
+<!-- app/views/museums/index.html.erb -->
+<div class="museums-container">
+  <!-- ページヘッダー -->
+  <div class="page-header">
+    <h1 class="page-title">博物館検索</h1>
+    <p class="page-subtitle">全国 <%= @total_count %> 件の博物館から検索できます</p>
+  </div>
+
+  <!-- 検索フォーム -->
+  <div class="search-section">
+    <%= form_with url: museums_path, method: :get, local: true, class: "search-form" do |f| %>
+      <div class="search-grid">
+        <!-- 都道府県検索 -->
+        <div class="search-field">
+          <%= f.label :prefecture, "都道府県", class: "search-label" %>
+          <%= f.select :prefecture, 
+                       options_for_select([["すべて", ""]] + @prefectures.map { |p| [p, p] }, params[:prefecture]),
+                       {},
+                       class: "search-select" %>
+        </div>
+
+        <!-- 館種検索 -->
+        <div class="search-field">
+          <%= f.label :museum_type, "館種", class: "search-label" %>
+          <%= f.select :museum_type,
+                       options_for_select([["すべて", ""]] + @museum_types.map { |t| [t, t] }, params[:museum_type]),
+                       {},
+                       class: "search-select" %>
+        </div>
+
+        <!-- 登録区分検索 -->
+        <div class="search-field">
+          <%= f.label :registration_type, "登録区分", class: "search-label" %>
+          <%= f.select :registration_type,
+                       options_for_select([["すべて", ""]] + @registration_types.map { |t| [t, t] }, params[:registration_type]),
+                       {},
+                       class: "search-select" %>
+        </div>
+
+        <!-- キーワード検索 -->
+        <div class="search-field">
+          <%= f.label :keyword, "キーワード", class: "search-label" %>
+          <%= f.text_field :keyword,
+                           value: params[:keyword],
+                           placeholder: "博物館名、都市名など",
+                           class: "search-input" %>
+        </div>
+      </div>
+
+      <!-- 検索ボタン -->
+      <div class="search-actions">
+        <%= f.submit "検索", class: "btn-search" %>
+        <%= link_to "クリア", museums_path, class: "btn-clear" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 検索結果 -->
+  <div class="results-header">
+    <p class="results-count">
+      <span class="count-number"><%= @museums.total_count %></span>件の博物館が見つかりました
+    </p>
+  </div>
+
+  <!-- 博物館リスト -->
+  <div class="museums-grid">
+    <% @museums.each do |museum| %>
+      <div class="museum-card">
+        <%= link_to museum_path(museum), class: "museum-card-link" do %>
+          <div class="museum-card-content">
+            <!-- 博物館名 -->
+            <h3 class="museum-name"><%= museum.name %></h3>
+
+            <!-- 基本情報 -->
+            <div class="museum-info">
+              <div class="info-item">
+                <span class="info-icon">📍</span>
+                <span><%= museum.prefecture %> <%= museum.city %></span>
+              </div>
+
+              <% if museum.museum_type.present? %>
+                <div class="info-item">
+                  <span class="info-icon">🏛️</span>
+                  <span><%= museum.museum_type %></span>
+                </div>
+              <% end %>
+
+              <% if museum.registration_type.present? %>
+                <div class="info-item">
+                  <span class="info-icon">✓</span>
+                  <span><%= museum.registration_type %></span>
+                </div>
+              <% end %>
+            </div>
+
+            <!-- 統計情報 -->
+            <div class="museum-stats">
+              <span class="stat-item">
+                <span class="stat-number"><%= museum.visit_count || 0 %></span> 訪問
+              </span>
+              <span class="stat-item">
+                <span class="stat-number"><%= museum.journals_count %></span> 日記
+              </span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @museums.empty? %>
+    <div class="empty-state">
+      <p class="empty-icon">🔍</p>
+      <p class="empty-title">博物館が見つかりませんでした</p>
+      <p class="empty-text">検索条件を変更してもう一度お試しください</p>
+      <%= link_to "検索をクリア", museums_path, class: "btn-search" %>
+    </div>
+  <% end %>
+
+  <!-- ページネーション -->
+  <div class="pagination-wrapper">
+    <%= paginate @museums %>
+  </div>
+</div>

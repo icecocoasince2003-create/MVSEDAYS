@@ -1,0 +1,99 @@
+<%= stylesheet_link_tag 'index', :media => "all" %>
+
+<div class="page-header">
+  <h1 class="page-title">MVSEDAYSへようこそ</h1>
+  <p class="page-description">あなたと博物館との出会いを綴りましょう</p>
+
+  <% if user_signed_in? %>
+    <div class="header-actions">
+      <%= link_to "新しい日記を書く", new_journal_path, class: "btn btn-primary btn-create" %>
+    </div>
+  <% end %>
+</div>
+
+<section class="search-section">
+  <h2 class="section-title">日記を探す</h2>
+  <div class="search-container">
+    <%= form_tag({controller: "journals", action: "index"}, method: :get, class: "search-form") do %>
+      <div class="search-input-group">
+        <%= text_field_tag :search, params[:search], placeholder: "キーワードで検索...", class: "search-input" %>
+        <%= submit_tag "検索", class: "btn btn-search" %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<section class="journals-section">
+  <h2 class="section-title">みんなの日記</h2>
+  
+  <% if @journals.any? %>
+    <div class="journals-grid">
+      <% @journals.each do |journal| %>
+        <article class="journal-card">
+          <% if journal.images.attached? && journal.images.any? %>
+            <div class="journal-image">
+              <%= image_tag journal.images.first, alt: "image" %>
+            </div>
+          <% end %>
+
+          <div class="journal-content">
+            <div class="journal-body">
+              <%= truncate(journal.body, length: 150, omission: '...') %>
+            </div>
+
+            <div class="journal-meta">
+              <div class="meta-item">
+                <i class="icon-user"></i>
+                <span><%= journal.user.email.split('@').first %></span>
+              </div>
+              <% if journal.visit_date %>
+                <div class="meta-item">
+                  <i class="icon-calendar"></i>
+                  <span><%= journal.visit_date.strftime('%Y年%m月%d日') %></span>
+                </div>
+              <% end %>
+              <%# 修正: journal.tag → journal.tags %>
+              <% if journal.tags.any? %>
+                <div class="meta-item tag">
+                  <i class="icon-tag"></i>
+                  <span><%= journal.tags.map(&:name).join(', ') %></span>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="journal-footer">
+              <div class="post-date">
+                <%= journal.created_at.strftime('%Y年%m月%d日 %H:%M') %>
+              </div>
+              
+              <div class="journal-actions">
+                <%= link_to "詳細", journal_path(journal.id), class: "btn btn-detail" %>
+                
+                <% if user_signed_in? %>
+                  <% if current_user.id == journal.user_id %>
+                    <%= link_to "編集", edit_journal_path(journal.id), class: "btn btn-edit" %>
+                    <%= link_to "削除", journal_path(journal.id), method: :delete, 
+                        data: { confirm: "本当に削除しますか?" }, class: "btn btn-delete" %>
+                  <% elsif current_user.admin? %>
+                    <%= link_to "管理者編集", edit_journal_path(journal.id), class: "btn btn-admin-edit" %>
+                    <%= link_to "管理者削除", journal_path(journal.id), method: :delete, 
+                        data: { confirm: "管理者権限で削除しますか?" }, class: "btn btn-admin-delete" %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <p class="empty-message">まだ日記が投稿されていません</p>
+      <% if user_signed_in? %>
+        <%= link_to "最初の日記を書く", new_journal_path, class: "btn btn-primary" %>
+      <% else %>
+        <p class="empty-sub-message">ログインして日記を書きましょう</p>
+      <% end %>
+    </div>
+  <% end %>
+</section>

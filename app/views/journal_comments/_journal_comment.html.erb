@@ -1,0 +1,33 @@
+<div class="comment-item" id="comment-<%= journal_comment.id %>">
+  <div class="comment-header">
+    <div class="comment-user-info">
+      <div class="comment-avatar-placeholder">
+        <%= journal_comment.user.avatar_initial %>
+      </div>
+      <div class="comment-meta">
+        <span class="comment-username">
+          <%= journal_comment.user.display_name %>
+        </span>
+        <span class="comment-date">
+          <%= time_ago_in_words(journal_comment.created_at) %>前
+        </span>
+      </div>
+    </div>
+    
+    <% if user_signed_in? && journal_comment.user == current_user %>
+      <%= link_to journal_journal_comment_path(journal_comment.journal, journal_comment), 
+                  data: { 
+                    turbo_method: :delete, 
+                    turbo_confirm: 'このコメントを削除しますか?',
+                    turbo: true 
+                  },
+                  class: 'btn-comment-delete' do %>
+        <i class="fas fa-trash-alt"></i>
+      <% end %>
+    <% end %>
+  </div>
+  
+  <div class="comment-body">
+    <%= simple_format(journal_comment.body) %>
+  </div>
+</div>

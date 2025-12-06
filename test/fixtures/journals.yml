@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tweet: MyText
+  visit_date: 2025-11-19
+  post_date: 2025-11-19
+  tag: MyText
+
+two:
+  tweet: MyText
+  visit_date: 2025-11-19
+  post_date: 2025-11-19
+  tag: MyText

@@ -1,0 +1,223 @@
+<div class="user-detail-container">
+  <div class="user-detail-header">
+    <h1>ユーザー詳細</h1>
+    <%= link_to "← 戻る", users_path, class: "btn btn-secondary" %>
+  </div>
+
+  <div class="user-detail-card">
+    <div class="user-info-section">
+      <h2>基本情報</h2>
+      <dl class="user-info-list">
+        <dt>ID</dt>
+        <dd><%= @user.id %></dd>
+        
+        <dt>ユーザー名</dt>
+        <dd><%= @user.username || 'N/A' %></dd>
+        
+        <dt>メールアドレス</dt>
+        <dd><%= @user.email %></dd>
+        
+        <dt>権限</dt>
+        <dd>
+          <% if @user.admin? %>
+            <span class="badge badge-admin">管理者</span>
+          <% else %>
+            <span class="badge badge-user">一般ユーザー</span>
+          <% end %>
+        </dd>
+        
+        <dt>登録日</dt>
+        <dd><%= @user.created_at.strftime('%Y年%m月%d日 %H:%M') %></dd>
+        
+        <dt>最終更新</dt>
+        <dd><%= @user.updated_at.strftime('%Y年%m月%d日 %H:%M') %></dd>
+      </dl>
+    </div>
+
+    <div class="user-stats-section">
+      <h2>活動統計</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-label">投稿した日記</span>
+          <span class="stat-value"><%= @user.journals.count %></span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">訪問した美術館</span>
+          <span class="stat-value"><%= @user.journals.where.not(museum_id: nil).count %></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="user-journals-section">
+      <h2>最近の日記</h2>
+      <% if @user.journals.any? %>
+        <div class="journals-list">
+          <% @user.journals.order(created_at: :desc).limit(5).each do |journal| %>
+            <div class="journal-item">
+              <div class="journal-date">
+                <%= journal.visit_date&.strftime('%Y/%m/%d') || journal.created_at.strftime('%Y/%m/%d') %>
+              </div>
+              <div class="journal-content">
+                <%= truncate(journal.body, length: 100) %>
+              </div>
+              <%= link_to "詳細", journal_path(journal), class: "btn btn-sm btn-link" %>
+            </div>
+          <% end %>
+        </div>
+        <% if @user.journals.count > 5 %>
+          <p class="more-journals">他 <%= @user.journals.count - 5 %> 件の日記</p>
+        <% end %>
+      <% else %>
+        <p class="empty-message">まだ日記が投稿されていません</p>
+      <% end %>
+    </div>
+
+    <% unless @user == current_user %>
+      <div class="danger-zone">
+        <h2>危険な操作</h2>
+        <%= link_to "このユーザーを削除", user_path(@user), 
+            method: :delete, 
+            data: { confirm: "#{@user.email} を削除しますか？\nこのユーザーの全ての日記も削除されます。\nこの操作は取り消せません。" }, 
+            class: "btn btn-danger" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<style>
+.user-detail-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.user-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.user-detail-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.user-info-section,
+.user-stats-section,
+.user-journals-section,
+.danger-zone {
+  padding: 2rem;
+  border-bottom: 1px solid #eee;
+}
+
+.user-info-section h2,
+.user-stats-section h2,
+.user-journals-section h2,
+.danger-zone h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.user-info-list {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 1rem;
+}
+
+.user-info-list dt {
+  font-weight: 600;
+  color: #666;
+}
+
+.user-info-list dd {
+  margin: 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stat-item {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.journals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.journal-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.journal-date {
+  font-weight: 600;
+  color: #667eea;
+  white-space: nowrap;
+}
+
+.journal-content {
+  flex: 1;
+  color: #666;
+}
+
+.more-journals {
+  margin-top: 1rem;
+  text-align: center;
+  color: #666;
+}
+
+.empty-message {
+  text-align: center;
+  color: #999;
+  padding: 2rem;
+}
+
+.danger-zone {
+  background: #fff5f5;
+  border-bottom: none;
+}
+
+.danger-zone h2 {
+  color: #dc3545;
+}
+
+.btn-link {
+  background: transparent;
+  color: #667eea;
+  padding: 0.25rem 0.5rem;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+</style>

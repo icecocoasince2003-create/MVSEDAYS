@@ -1,0 +1,26 @@
+<% if user_signed_in? %>
+  <% if journal.liked_by?(current_user) %>
+    <%= button_to unlike_journal_path(journal), 
+                  method: :delete,
+                  class: 'btn-like liked',
+                  id: 'like-button',
+                  form_class: 'like-form' do %>
+      <i class="fas fa-heart"></i>
+      <span>いいね済み</span>
+    <% end %>
+  <% else %>
+    <%= button_to like_journal_path(journal), 
+                  method: :post,
+                  class: 'btn-like',
+                  id: 'like-button',
+                  form_class: 'like-form' do %>
+      <i class="far fa-heart"></i>
+      <span>いいね</span>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= link_to new_user_session_path, class: 'btn-like disabled' do %>
+    <i class="far fa-heart"></i>
+    <span>ログインしていいね</span>
+  <% end %>
+<% end %>

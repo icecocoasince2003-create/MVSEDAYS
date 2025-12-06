@@ -1,0 +1,510 @@
+/* ========================================
+ Museum Show Page
+ ======================================== */
+
+// カラー変数（application.scssから継承）
+$color-primary-black: #0a0a0a;
+$color-secondary-black: #1a1a1a;
+$color-tertiary-black: #2a2a2a;
+$color-accent-gold: #c9a961;
+$color-accent-cream: #e8d5b5;
+$color-white: #ffffff;
+$color-gray-light: #4a4a4a;
+$color-gray-medium: #313131;
+
+/* ========================================
+ コンテナ
+ ======================================== */
+.museum-show-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ========================================
+ パンくずリスト
+ ======================================== */
+.breadcrumb {
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: $color-accent-cream;
+
+  .breadcrumb-link {
+    color: $color-accent-cream;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $color-accent-gold;
+    }
+  }
+
+  .breadcrumb-current {
+    color: $color-accent-gold;
+    font-weight: 500;
+  }
+}
+
+/* ========================================
+ グリッドレイアウト
+ ======================================== */
+.museum-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
+}
+
+.main-content {
+  min-width: 0;
+}
+
+.sidebar {
+  min-width: 0;
+}
+
+/* ========================================
+ 博物館情報カード
+ ======================================== */
+.museum-info-card {
+  background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
+  border: 1px solid $color-gray-medium;
+  border-radius: 12px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+  .museum-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $color-accent-gold;
+    margin-bottom: 2rem;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+    border-bottom: 2px solid $color-accent-gold;
+    padding-bottom: 1rem;
+  }
+}
+
+/* ========================================
+ 博物館詳細
+ ======================================== */
+.museum-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+
+  .detail-icon {
+    font-size: 1.5rem;
+    min-width: 1.5rem;
+  }
+
+  .detail-content {
+    flex: 1;
+  }
+
+  .detail-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: $color-accent-gold;
+    margin-bottom: 0.3rem;
+  }
+
+  .detail-value {
+    font-size: 1rem;
+    color: $color-accent-cream;
+    line-height: 1.6;
+  }
+
+  .detail-link {
+    display: inline-block;
+    color: $color-accent-gold;
+    text-decoration: none;
+    word-break: break-all;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: $color-accent-cream;
+      text-decoration: underline;
+    }
+  }
+}
+
+/* ========================================
+ 統計情報
+ ======================================== */
+.museum-stats {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem 0;
+  border-top: 1px solid $color-gray-medium;
+  border-bottom: 1px solid $color-gray-medium;
+}
+
+.stat-box {
+  text-align: center;
+  flex: 1;
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $color-accent-gold;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: $color-accent-cream;
+    font-weight: 500;
+  }
+}
+
+/* ========================================
+ アクションボタン
+ ======================================== */
+.museum-action {
+  margin-top: 2rem;
+}
+
+.btn-write-journal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, $color-accent-gold 0%, $color-accent-cream 100%);
+  color: $color-primary-black;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(135deg, $color-accent-cream 0%, $color-accent-gold 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($color-accent-gold, 0.5);
+  }
+
+  .btn-icon {
+    font-size: 1.2rem;
+  }
+}
+
+/* ========================================
+ 関連日記セクション
+ ======================================== */
+.journals-section {
+  background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
+  border: 1px solid $color-gray-medium;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+  .journals-section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $color-accent-gold;
+    margin-bottom: 2rem;
+    letter-spacing: 0.03em;
+  }
+}
+
+/* ========================================
+ 日記リスト
+ ======================================== */
+.journals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.journal-item {
+  background-color: rgba($color-tertiary-black, 0.5);
+  border: 1px solid $color-gray-medium;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $color-accent-gold;
+    box-shadow: 0 4px 12px rgba($color-accent-gold, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .journal-item-link {
+    text-decoration: none;
+    display: block;
+  }
+
+  .journal-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .journal-item-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: $color-accent-gold;
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .journal-item-rating {
+    display: flex;
+    gap: 0.1rem;
+    flex-shrink: 0;
+
+    .star {
+      color: $color-accent-gold;
+      font-size: 1rem;
+    }
+  }
+
+  .journal-item-date {
+    font-size: 0.85rem;
+    color: $color-gray-light;
+    margin-bottom: 0.75rem;
+  }
+
+  .journal-item-body {
+    font-size: 0.95rem;
+    color: $color-accent-cream;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .journal-item-author {
+    font-size: 0.85rem;
+    color: $color-gray-light;
+    font-style: italic;
+  }
+}
+
+/* ========================================
+ すべて見るリンク
+ ======================================== */
+.view-all-journals {
+  margin-top: 2rem;
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid $color-gray-medium;
+
+  .view-all-link {
+    color: $color-accent-gold;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: $color-accent-cream;
+      text-decoration: underline;
+    }
+  }
+}
+
+/* ========================================
+ 空の状態
+ ======================================== */
+.empty-journals {
+  text-align: center;
+  padding: 4rem 2rem;
+
+  .empty-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  .empty-text {
+    font-size: 1rem;
+    color: $color-accent-cream;
+    margin-bottom: 2rem;
+  }
+
+  .btn-first-journal {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    background-color: $color-accent-gold;
+    color: $color-primary-black;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $color-accent-cream;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba($color-accent-gold, 0.4);
+    }
+  }
+}
+
+/* ========================================
+ サイドバー
+ ======================================== */
+.sidebar-card {
+  background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
+  border: 1px solid $color-gray-medium;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .sidebar-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $color-accent-gold;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .sidebar-btn {
+    display: block;
+    width: 100%;
+    padding: 0.85rem 1.5rem;
+    background-color: rgba($color-accent-gold, 0.1);
+    color: $color-accent-cream;
+    border: 1px solid rgba($color-accent-gold, 0.3);
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba($color-accent-gold, 0.2);
+      border-color: $color-accent-gold;
+      color: $color-accent-gold;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* ========================================
+ レスポンシブ対応
+ ======================================== */
+@media (max-width: 1024px) {
+  .museum-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+
+    .sidebar-card {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .museum-show-container {
+    padding: 1rem;
+  }
+
+  .museum-info-card,
+  .journals-section {
+    padding: 1.5rem;
+  }
+
+  .museum-info-card {
+    .museum-title {
+      font-size: 1.6rem;
+    }
+  }
+
+  .museum-stats {
+    gap: 1rem;
+
+    .stat-box {
+      .stat-number {
+        font-size: 2rem;
+      }
+
+      .stat-label {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .journal-item {
+    padding: 1rem;
+
+    .journal-item-header {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .journal-item-title {
+      font-size: 1.1rem;
+    }
+  }
+
+  .sidebar {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .museum-show-container {
+    padding: 0.75rem;
+  }
+
+  .museum-info-card,
+  .journals-section {
+    padding: 1rem;
+  }
+
+  .museum-info-card {
+    .museum-title {
+      font-size: 1.4rem;
+    }
+  }
+
+  .museum-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .stat-box {
+      .stat-number {
+        font-size: 2.5rem;
+      }
+    }
+  }
+
+  .btn-write-journal {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .journals-section {
+    .journals-section-title {
+      font-size: 1.4rem;
+    }
+  }
+
+  .empty-journals {
+    padding: 2rem 1rem;
+
+    .btn-first-journal {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,400 @@
+/* ========================================
+   ソーシャル機能スタイル
+   ======================================== */
+
+$color-primary-black: #0a0a0a;
+$color-secondary-black: #1a1a1a;
+$color-tertiary-black: #2a2a2a;
+$color-accent-gold: #c9a961;
+$color-accent-cream: #e8d5b5;
+$color-white: #ffffff;
+$color-gray-light: #4a4a4a;
+$color-gray-medium: #313131;
+$color-like: #ff6b6b;
+
+/* ========================================
+   ソーシャルアクション
+   ======================================== */
+.social-actions {
+  background: $color-secondary-black;
+  border: 1px solid $color-gray-medium;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.social-stats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $color-gray-medium;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $color-accent-cream;
+  font-size: 1rem;
+
+  i {
+    color: $color-accent-gold;
+    font-size: 1.2rem;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-like {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: $color-tertiary-black;
+  border: 2px solid $color-gray-medium;
+  border-radius: 6px;
+  color: $color-accent-cream;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  i {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    border-color: $color-like;
+    background: rgba($color-like, 0.1);
+    transform: translateY(-2px);
+
+    i {
+      color: $color-like;
+    }
+  }
+
+  &.liked {
+    border-color: $color-like;
+    background: rgba($color-like, 0.15);
+
+    i {
+      color: $color-like;
+    }
+
+    &:hover {
+      background: rgba($color-like, 0.2);
+    }
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      transform: none;
+      border-color: $color-gray-medium;
+      background: $color-tertiary-black;
+    }
+  }
+}
+
+.animate-like {
+  animation: likeAnimation 0.6s ease;
+}
+
+@keyframes likeAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ========================================
+   コメントセクション
+   ======================================== */
+.comments-section {
+  background: $color-secondary-black;
+  border: 1px solid $color-gray-medium;
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.comments-title {
+  font-size: 1.5rem;
+  color: $color-accent-gold;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  i {
+    font-size: 1.3rem;
+  }
+}
+
+/* ========================================
+   コメント投稿フォーム
+   ======================================== */
+.comment-form-container {
+  background: $color-tertiary-black;
+  border: 2px solid $color-gray-medium;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.comment-form {
+  .comment-input-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  .comment-input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    font-family: 'Noto Serif JP', '游明朝', 'Yu Mincho', serif;
+    background-color: $color-secondary-black;
+    border: 2px solid $color-gray-medium;
+    border-radius: 6px;
+    color: $color-white;
+    transition: all 0.3s ease;
+    resize: vertical;
+    line-height: 1.6;
+
+    &::placeholder {
+      color: $color-gray-light;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent-gold;
+      box-shadow: 0 0 0 3px rgba($color-accent-gold, 0.1);
+    }
+  }
+}
+
+.comment-form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-comment-submit {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, $color-accent-gold, darken($color-accent-gold, 10%));
+  color: $color-primary-black;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba($color-accent-gold, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.login-prompt {
+  text-align: center;
+  padding: 2rem;
+  color: $color-gray-light;
+  font-size: 1rem;
+
+  a {
+    color: $color-accent-gold;
+    text-decoration: none;
+    font-weight: 600;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* ========================================
+   コメント一覧
+   ======================================== */
+.comments-list {
+  margin-top: 2rem;
+}
+
+.comment-item {
+  background: $color-tertiary-black;
+  border: 1px solid $color-gray-medium;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $color-accent-gold;
+    box-shadow: 0 2px 8px rgba($color-accent-gold, 0.1);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.comment-user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid $color-accent-gold;
+}
+
+.comment-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $color-accent-gold, darken($color-accent-gold, 10%));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: $color-primary-black;
+  font-size: 1.2rem;
+}
+
+.comment-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.comment-username {
+  color: $color-accent-cream;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.comment-date {
+  color: $color-gray-light;
+  font-size: 0.85rem;
+}
+
+.btn-comment-delete {
+  color: $color-gray-light;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  text-decoration: none;
+
+  &:hover {
+    color: #dc3545;
+    background: rgba(#dc3545, 0.1);
+  }
+}
+
+.comment-body {
+  color: $color-white;
+  font-size: 1rem;
+  line-height: 1.6;
+  padding-left: 56px;
+}
+
+/* ========================================
+   コメントアニメーション
+   ======================================== */
+.comment-new {
+  animation: commentAppear 0.5s ease;
+}
+
+@keyframes commentAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.comment-deleting {
+  animation: commentDisappear 0.3s ease;
+}
+
+@keyframes commentDisappear {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
+/* ========================================
+   レスポンシブ対応
+   ======================================== */
+@media (max-width: 768px) {
+  .social-actions {
+    padding: 1rem;
+  }
+
+  .social-stats {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .comments-section {
+    padding: 1.5rem;
+  }
+
+  .comments-title {
+    font-size: 1.3rem;
+  }
+
+  .comment-form-container {
+    padding: 1rem;
+  }
+
+  .btn-comment-submit {
+    width: 100%;
+  }
+
+  .comment-item {
+    padding: 1rem;
+  }
+
+  .comment-body {
+    padding-left: 0;
+    margin-top: 1rem;
+  }
+}

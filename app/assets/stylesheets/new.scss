@@ -1,0 +1,1177 @@
+/* ========================================
+   カラーパレット
+   ======================================== */
+$color-primary-black: #0a0a0a;
+$color-secondary-black: #1a1a1a;
+$color-tertiary-black: #2a2a2a;
+$color-accent-gold: #c9a961;
+$color-accent-cream: #e8d5b5;
+$color-white: #ffffff;
+$color-gray-light: #4a4a4a;
+$color-gray-medium: #313131;
+$color-error: #dc3545;
+
+/* ========================================
+   コンテナ
+   ======================================== */
+.new-journal-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ========================================
+   フォームヘッダー
+   ======================================== */
+.form-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
+  border-radius: 8px;
+  border: 1px solid rgba($color-accent-gold, 0.3);
+
+  .form-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: $color-accent-gold;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+
+  .form-subtitle {
+    font-size: 1rem;
+    color: $color-accent-cream;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* ========================================
+   フォーム全体
+   ======================================== */
+.journal-form {
+  background-color: $color-secondary-black;
+  padding: 2.5rem;
+  border-radius: 8px;
+  border: 1px solid $color-tertiary-black;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* ========================================
+   フォームグループ
+   ======================================== */
+.form-group {
+  margin-bottom: 2rem;
+
+  &.form-group-half {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+/* ========================================
+   ラベル
+   ======================================== */
+.form-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $color-accent-gold;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.05em;
+}
+
+/* ========================================
+   テキストエリア & インプット
+   ======================================== */
+.form-textarea,
+.form-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  font-family: 'Noto Serif JP', '游明朝', 'Yu Mincho', serif;
+  background-color: $color-tertiary-black;
+  border: 2px solid $color-gray-medium;
+  border-radius: 6px;
+  color: $color-white;
+  transition: all 0.3s ease;
+  line-height: 1.6;
+
+  &::placeholder {
+    color: $color-gray-light;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent-gold;
+    box-shadow: 0 0 0 3px rgba($color-accent-gold, 0.1);
+  }
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 150px;
+
+  &.form-textarea-small {
+    min-height: 80px;
+  }
+}
+
+.form-input {
+  height: 48px;
+}
+
+/* ========================================
+   ヒントテキスト
+   ======================================== */
+.form-hint {
+  display: block;
+  font-size: 0.85rem;
+  color: $color-gray-light;
+  margin-top: 0.4rem;
+  font-style: italic;
+}
+
+/* ========================================
+   ファイルアップロード
+   ======================================== */
+.file-upload-area {
+  position: relative;
+  border: 2px dashed $color-gray-medium;
+  border-radius: 6px;
+  padding: 2rem;
+  text-align: center;
+  background-color: $color-tertiary-black;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $color-accent-gold;
+    background-color: rgba($color-accent-gold, 0.05);
+  }
+
+  .file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .file-upload-label {
+    pointer-events: none;
+
+    .upload-icon {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+
+    .upload-text {
+      font-size: 1rem;
+      color: $color-accent-cream;
+      display: block;
+    }
+  }
+}
+
+/* ========================================
+   評価セクション
+   ======================================== */
+.rating-section {
+  background-color: $color-tertiary-black;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border: 1px solid $color-gray-medium;
+}
+
+.rating-group {
+  margin-bottom: 2.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.rating-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: $color-accent-gold;
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+/* ========================================
+   星評価フォーム
+   ======================================== */
+.post_form {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  padding: 1rem;
+  background-color: $color-secondary-black;
+  border-radius: 6px;
+  border: 1px solid $color-gray-medium;
+
+  input[type='radio'] {
+    display: none;
+  }
+
+  label {
+    position: relative;
+    padding: 10px 10px 0;
+    color: $color-gray-light;
+    cursor: pointer;
+    font-size: 35px;
+    transition: all 0.3s ease;
+
+    .text {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      text-align: center;
+      font-size: 11px;
+      color: $color-accent-cream;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    &:hover {
+      color: $color-accent-gold;
+      transform: scale(1.1);
+    }
+
+    &:hover ~ label {
+      color: $color-accent-gold;
+    }
+  }
+
+  input[type='radio']:checked ~ label {
+    color: $color-accent-gold;
+    text-shadow: 0 0 10px rgba($color-accent-gold, 0.5);
+  }
+}
+
+/* ========================================
+   博物館選択セクション
+   ======================================== */
+
+// 博物館表示ボックス
+.museum-display-box {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: $color-tertiary-black;
+  border: 2px solid $color-gray-medium;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    border-color: $color-accent-gold;
+    background: lighten($color-tertiary-black, 3%);
+  }
+
+  &.selected {
+    border-color: $color-accent-gold;
+    background: rgba($color-accent-gold, 0.1);
+  }
+
+  .museum-display-text {
+    color: $color-white;
+    font-size: 1rem;
+    
+    strong {
+      color: $color-accent-gold;
+      font-size: 1.1rem;
+    }
+    
+    small {
+      color: $color-gray-light;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      display: inline-block;
+    }
+  }
+}
+
+// 博物館検索ボタン
+.museum-search-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, $color-accent-gold, darken($color-accent-gold, 10%));
+  color: $color-primary-black;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($color-accent-gold, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// 選択された博物館情報
+.selected-museum-info {
+  margin-top: 1rem;
+  padding: 1.2rem;
+  background: linear-gradient(135deg, 
+    rgba($color-accent-gold, 0.08) 0%, 
+    rgba($color-accent-gold, 0.03) 100%
+  );
+  border-radius: 6px;
+  border-left: 4px solid $color-accent-gold;
+  animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.museum-info-text {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.museum-info-label {
+  font-weight: 600;
+  color: $color-accent-gold;
+  margin-right: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.museum-info-name {
+  color: $color-accent-cream;
+  font-weight: 500;
+}
+
+.museum-info-location {
+  margin: 0;
+  color: $color-gray-light;
+  font-size: 0.9rem;
+  font-style: italic;
+  padding-left: 1.5rem;
+}
+
+/* ========================================
+   博物館検索モーダル
+   ======================================== */
+.museum-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.museum-modal-content {
+  background-color: $color-secondary-black;
+  border: 2px solid $color-accent-gold;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.4s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.museum-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 2px solid $color-gray-medium;
+  background: linear-gradient(135deg, 
+    rgba($color-accent-gold, 0.1) 0%, 
+    rgba($color-accent-gold, 0.05) 100%
+  );
+
+  h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: $color-accent-gold;
+    margin: 0;
+    letter-spacing: 0.05em;
+  }
+}
+
+.museum-modal-close {
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  color: $color-accent-gold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  line-height: 1;
+  padding: 0;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+
+  &:hover {
+    color: $color-accent-cream;
+    background-color: rgba($color-accent-gold, 0.1);
+    transform: rotate(90deg);
+  }
+}
+
+.museum-modal-body {
+  padding: 2rem;
+  overflow-y: auto;
+  flex: 1;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $color-tertiary-black;
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-accent-gold;
+    border-radius: 5px;
+
+    &:hover {
+      background: $color-accent-cream;
+    }
+  }
+}
+
+.museum-search-input {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  background-color: $color-tertiary-black;
+  border: 2px solid $color-gray-medium;
+  border-radius: 8px;
+  color: $color-white;
+  transition: all 0.3s ease;
+  font-family: 'Noto Serif JP', '游明朝', 'Yu Mincho', serif;
+  margin-bottom: 1.5rem;
+
+  &::placeholder {
+    color: $color-gray-light;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent-gold;
+    box-shadow: 0 0 0 4px rgba($color-accent-gold, 0.15);
+  }
+}
+
+.museum-results {
+  max-height: 450px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $color-tertiary-black;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-accent-gold;
+    border-radius: 4px;
+
+    &:hover {
+      background: $color-accent-cream;
+    }
+  }
+}
+
+.museum-item {
+  padding: 1.2rem;
+  margin-bottom: 0.8rem;
+  background-color: $color-tertiary-black;
+  border: 2px solid $color-gray-medium;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(135deg, 
+      rgba($color-accent-gold, 0.15) 0%, 
+      rgba($color-accent-gold, 0.08) 100%
+    );
+    border-color: $color-accent-gold;
+    transform: translateX(8px);
+    box-shadow: 0 4px 12px rgba($color-accent-gold, 0.2);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.museum-item-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: $color-accent-cream;
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
+}
+
+.museum-item-location {
+  font-size: 0.9rem;
+  color: $color-gray-light;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  &::before {
+    content: "📍";
+    font-size: 0.85rem;
+  }
+}
+
+.museum-no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: $color-gray-light;
+  font-size: 1.1rem;
+
+  &::before {
+    content: "🔍";
+    display: block;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.3;
+  }
+}
+
+// レスポンシブ対応（モーダル用）
+@media (max-width: 768px) {
+  .museum-modal-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .museum-modal-header {
+    padding: 1.2rem 1.5rem;
+
+    h3 {
+      font-size: 1.3rem;
+    }
+  }
+
+  .museum-modal-body {
+    padding: 1.5rem;
+  }
+
+  .museum-results {
+    max-height: 300px;
+  }
+
+  .selected-museum-info {
+    padding: 1rem;
+  }
+
+  .museum-info-text {
+    font-size: 0.95rem;
+  }
+
+  .museum-info-location {
+    font-size: 0.85rem;
+    padding-left: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .museum-modal-content {
+    width: 98%;
+    border-radius: 8px;
+  }
+
+  .museum-modal-header {
+    padding: 1rem;
+
+    h3 {
+      font-size: 1.1rem;
+    }
+  }
+
+  .museum-modal-body {
+    padding: 1rem;
+  }
+
+  .museum-search-input {
+    font-size: 0.95rem;
+    padding: 0.9rem 1rem;
+  }
+
+  .museum-item {
+    padding: 1rem;
+  }
+
+  .museum-item-name {
+    font-size: 1rem;
+  }
+
+  .museum-item-location {
+    font-size: 0.85rem;
+  }
+
+  .selected-museum-info {
+    padding: 0.9rem;
+  }
+
+  .museum-info-text {
+    font-size: 0.9rem;
+  }
+
+  .museum-info-location {
+    font-size: 0.8rem;
+  }
+}
+
+/* ========================================
+   博物館検索モーダル
+   ======================================== */
+.museum-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.museum-modal-content {
+  background-color: $color-secondary-black;
+  border: 2px solid $color-accent-gold;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.4s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.museum-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 2px solid $color-gray-medium;
+  background: linear-gradient(135deg, 
+    rgba($color-accent-gold, 0.1) 0%, 
+    rgba($color-accent-gold, 0.05) 100%
+  );
+}
+
+.museum-modal-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: $color-accent-gold;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.museum-modal-close {
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  color: $color-accent-gold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  line-height: 1;
+  padding: 0;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+
+  &:hover {
+    color: $color-accent-cream;
+    background-color: rgba($color-accent-gold, 0.1);
+    transform: rotate(90deg);
+  }
+}
+
+.museum-modal-body {
+  padding: 2rem;
+  overflow-y: auto;
+  flex: 1;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $color-tertiary-black;
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-accent-gold;
+    border-radius: 5px;
+
+    &:hover {
+      background: $color-accent-cream;
+    }
+  }
+}
+
+.museum-search-input-wrapper {
+  margin-bottom: 1.5rem;
+  position: relative;
+
+  &::before {
+    content: "🔍";
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    pointer-events: none;
+  }
+}
+
+.museum-search-input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  font-size: 1rem;
+  background-color: $color-tertiary-black;
+  border: 2px solid $color-gray-medium;
+  border-radius: 8px;
+  color: $color-white;
+  transition: all 0.3s ease;
+  font-family: 'Noto Serif JP', '游明朝', 'Yu Mincho', serif;
+
+  &::placeholder {
+    color: $color-gray-light;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent-gold;
+    box-shadow: 0 0 0 4px rgba($color-accent-gold, 0.15);
+  }
+}
+
+.museum-search-results {
+  max-height: 450px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $color-tertiary-black;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-accent-gold;
+    border-radius: 4px;
+
+    &:hover {
+      background: $color-accent-cream;
+    }
+  }
+}
+
+.museum-item {
+  padding: 1.2rem;
+  margin-bottom: 0.8rem;
+  background-color: $color-tertiary-black;
+  border: 2px solid $color-gray-medium;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(135deg, 
+      rgba($color-accent-gold, 0.15) 0%, 
+      rgba($color-accent-gold, 0.08) 100%
+    );
+    border-color: $color-accent-gold;
+    transform: translateX(8px);
+    box-shadow: 0 4px 12px rgba($color-accent-gold, 0.2);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.museum-item-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: $color-accent-cream;
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
+}
+
+.museum-item-location {
+  font-size: 0.9rem;
+  color: $color-gray-light;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  &::before {
+    content: "📍";
+    font-size: 0.85rem;
+  }
+}
+
+.museum-no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: $color-gray-light;
+  font-size: 1.1rem;
+
+  &::before {
+    content: "🔍";
+    display: block;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.3;
+  }
+}
+
+/* ========================================
+   フォームアクション
+   ======================================== */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid $color-gray-medium;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.btn {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  letter-spacing: 0.05em;
+  min-width: 200px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+.btn-submit {
+  background-color: $color-accent-gold;
+  color: $color-primary-black;
+  font-weight: 700;
+
+  &:hover {
+    background-color: $color-accent-cream;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba($color-accent-gold, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-cancel {
+  background-color: transparent;
+  color: $color-white;
+  border: 2px solid $color-gray-medium;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background-color: $color-gray-medium;
+    border-color: $color-gray-light;
+    color: $color-accent-cream;
+  }
+}
+
+/* ========================================
+   レスポンシブ対応
+   ======================================== */
+@media (max-width: 768px) {
+  .new-journal-container {
+    padding: 1rem;
+  }
+
+  .form-header {
+    padding: 1.5rem;
+
+    .form-title {
+      font-size: 1.8rem;
+    }
+
+    .form-subtitle {
+      font-size: 0.9rem;
+    }
+  }
+
+  .journal-form {
+    padding: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .rating-section {
+    padding: 1.5rem;
+  }
+
+  .rating-title {
+    font-size: 1rem;
+  }
+
+  .post_form {
+    label {
+      font-size: 28px;
+      padding: 8px 8px 0;
+
+      .text {
+        font-size: 9px;
+      }
+    }
+  }
+
+  .file-upload-area {
+    padding: 1.5rem;
+
+    .upload-icon {
+      font-size: 2.5rem;
+    }
+
+    .upload-text {
+      font-size: 0.9rem;
+    }
+  }
+
+  .museum-modal-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .museum-modal-header {
+    padding: 1.2rem 1.5rem;
+  }
+
+  .museum-modal-title {
+    font-size: 1.3rem;
+  }
+
+  .museum-modal-body {
+    padding: 1.5rem;
+  }
+
+  .museum-search-results {
+    max-height: 300px;
+  }
+
+  .selected-museum-info {
+    padding: 1rem;
+  }
+
+  .museum-info-text {
+    font-size: 0.95rem;
+  }
+
+  .museum-info-location {
+    font-size: 0.85rem;
+    padding-left: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-header {
+    .form-title {
+      font-size: 1.5rem;
+    }
+
+    .form-subtitle {
+      font-size: 0.85rem;
+    }
+  }
+
+  .journal-form {
+    padding: 1rem;
+  }
+
+  .post_form {
+    padding: 0.8rem;
+
+    label {
+      font-size: 24px;
+      padding: 6px 6px 0;
+
+      .text {
+        font-size: 8px;
+      }
+    }
+  }
+
+  .btn {
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
+  }
+
+  .museum-modal-content {
+    width: 98%;
+    border-radius: 8px;
+  }
+
+  .museum-modal-header {
+    padding: 1rem;
+  }
+
+  .museum-modal-title {
+    font-size: 1.1rem;
+  }
+
+  .museum-modal-body {
+    padding: 1rem;
+  }
+
+  .museum-search-input {
+    font-size: 0.95rem;
+    padding: 0.9rem 0.9rem 0.9rem 2.8rem;
+  }
+
+  .museum-item {
+    padding: 1rem;
+  }
+
+  .museum-item-name {
+    font-size: 1rem;
+  }
+
+  .museum-item-location {
+    font-size: 0.85rem;
+  }
+
+  .selected-museum-info {
+    padding: 0.9rem;
+  }
+
+  .museum-info-text {
+    font-size: 0.9rem;
+  }
+
+  .museum-info-location {
+    font-size: 0.8rem;
+  }
+}

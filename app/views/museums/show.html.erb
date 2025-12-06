@@ -1,0 +1,171 @@
+<%= stylesheet_link_tag 'museum_show', :media => "all" %>
+
+<div class="museum-show-container">
+  <!-- パンくずリスト -->
+  <nav class="breadcrumb">
+    <%= link_to "ホーム", journals_path, class: "breadcrumb-link" %> / 
+    <%= link_to "博物館検索", museums_path, class: "breadcrumb-link" %> / 
+    <span class="breadcrumb-current"><%= truncate(@museum.name, length: 30) %></span>
+  </nav>
+
+  <div class="museum-grid">
+    <!-- メインコンテンツ -->
+    <div class="main-content">
+      <!-- 博物館情報カード -->
+      <div class="museum-info-card">
+        <h1 class="museum-title">
+          <%= @museum.name %>
+        </h1>
+
+        <!-- 基本情報 -->
+        <div class="museum-details">
+          <div class="detail-item">
+            <span class="detail-icon">📍</span>
+            <div class="detail-content">
+              <p class="detail-label">所在地</p>
+              <p class="detail-value"><%= @museum.full_address %></p>
+            </div>
+          </div>
+
+          <% if @museum.museum_type.present? %>
+            <div class="detail-item">
+              <span class="detail-icon">🏛️</span>
+              <div class="detail-content">
+                <p class="detail-label">館種</p>
+                <p class="detail-value"><%= @museum.museum_type %></p>
+              </div>
+            </div>
+          <% end %>
+
+          <% if @museum.registration_type.present? %>
+            <div class="detail-item">
+              <span class="detail-icon">✓</span>
+              <div class="detail-content">
+                <p class="detail-label">登録区分</p>
+                <p class="detail-value"><%= @museum.registration_type %></p>
+              </div>
+            </div>
+          <% end %>
+
+          <% if @museum.official_website.present? %>
+            <div class="detail-item">
+              <span class="detail-icon">🌐</span>
+              <div class="detail-content">
+                <p class="detail-label">公式サイト</p>
+                <%= link_to @museum.official_website, 
+                           @museum.official_website, 
+                           target: "_blank", 
+                           class: "detail-link" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- 統計情報 -->
+        <div class="museum-stats">
+          <div class="stat-box">
+            <p class="stat-number"><%= @museum.visit_count || 0 %></p>
+            <p class="stat-label">訪問数</p>
+          </div>
+          <div class="stat-box">
+            <p class="stat-number"><%= @journals_count || 0 %></p>
+            <p class="stat-label">日記投稿</p>
+          </div>
+        </div>
+
+        <!-- アクションボタン -->
+        <div class="museum-action">
+          <%= link_to new_journal_path(museum_id: @museum.id), 
+                     class: "btn-write-journal" do %>
+            <span class="btn-icon">✏️</span>
+            <span>この博物館の日記を書く</span>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- 関連日記セクション -->
+      <div class="journals-section">
+        <h2 class="journals-section-title">
+          この博物館の日記 (<%= @journals_count || 0 %>件)
+        </h2>
+
+        <% if @related_journals && @related_journals.any? %>
+          <div class="journals-list">
+            <% @related_journals.each do |journal| %>
+              <div class="journal-item">
+                <%= link_to journal_path(journal), class: "journal-item-link" do %>
+                  <div class="journal-item-header">
+                    <h3 class="journal-item-title">
+                      <%= truncate(journal.body.presence || "日記 ##{journal.id}", length: 50) %>
+                    </h3>
+                    <% if journal.rate.present? %>
+                      <div class="journal-item-rating">
+                        <% journal.rate.times do %>
+                          <span class="star">★</span>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <% if journal.visit_date.present? %>
+                    <p class="journal-item-date">
+                      訪問日: <%= journal.visit_date.strftime('%Y年%m月%d日') %>
+                    </p>
+                  <% end %>
+                  <% if journal.body.present? %>
+                    <p class="journal-item-body">
+                      <%= truncate(journal.body, length: 150) %>
+                    </p>
+                  <% end %>
+                  <p class="journal-item-author">
+                    by <%= journal.user.email.split('@').first %>
+                  </p>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+
+          <% if @journals_count && @journals_count > 10 %>
+            <div class="view-all-journals">
+              <%= link_to "すべての日記を見る (#{@journals_count}件)", 
+                         journals_path(museum_id: @museum.id), 
+                         class: "view-all-link" %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="empty-journals">
+            <span class="empty-icon">📝</span>
+            <p class="empty-text">まだ日記が投稿されていません</p>
+            <%= link_to "最初の日記を書く", 
+                       new_journal_path(museum_id: @museum.id), 
+                       class: "btn-first-journal" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- サイドバー -->
+    <div class="sidebar">
+      <!-- 同じ都道府県の博物館 -->
+      <div class="sidebar-card">
+        <h3 class="sidebar-title">
+          <%= @museum.prefecture %>の他の博物館
+        </h3>
+        <%= link_to "#{@museum.prefecture}の博物館を探す", 
+                   museums_path(prefecture: @museum.prefecture), 
+                   class: "sidebar-btn" %>
+      </div>
+
+      <!-- 同じ館種の博物館 -->
+      <% if @museum.museum_type.present? %>
+        <div class="sidebar-card">
+          <h3 class="sidebar-title">
+            <%= @museum.museum_type %>館を探す
+          </h3>
+          <%= link_to "全国の#{@museum.museum_type}館", 
+                     museums_path(museum_type: @museum.museum_type), 
+                     class: "sidebar-btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

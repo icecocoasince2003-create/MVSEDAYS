@@ -1,0 +1,604 @@
+/* ========================================
+   マイページ - 既存デザイン統一版（黒・金・白）
+======================================== */
+
+/* カラーパレット（application.scssと統一） */
+:root {
+  --color-primary-black: #0a0a0a;
+  --color-secondary-black: #1a1a1a;
+  --color-tertiary-black: #2a2a2a;
+  --color-accent-gold: #c9a961;
+  --color-accent-cream: #e8d5b5;
+  --color-white: #ffffff;
+  --color-gray-light: #4a4a4a;
+  --color-gray-medium: #313131;
+}
+
+/* ページ全体のコンテナ */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--color-primary-black);
+}
+
+/* ページヘッダー */
+.page-header {
+  margin-bottom: 30px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--color-accent-gold);
+  border-bottom: 3px solid var(--color-accent-gold);
+  padding-bottom: 10px;
+  letter-spacing: 0.1em;
+}
+
+/* ========================================
+   プロフィールセクション
+======================================== */
+.profile-section {
+  margin-bottom: 40px;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  padding: 30px;
+  background: linear-gradient(135deg, var(--color-secondary-black) 0%, var(--color-tertiary-black) 100%);
+  border: 2px solid var(--color-accent-gold);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+}
+
+.profile-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-accent-gold) 0%, var(--color-accent-cream) 100%);
+  color: var(--color-primary-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: bold;
+  margin-right: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 8px rgba(201, 169, 97, 0.4);
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-username {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--color-accent-gold);
+  margin: 0 0 5px 0;
+  letter-spacing: 0.05em;
+}
+
+.profile-email {
+  color: var(--color-accent-cream);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* 統計カード */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, var(--color-secondary-black) 0%, var(--color-tertiary-black) 100%);
+  border: 1px solid var(--color-gray-medium);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(201, 169, 97, 0.3);
+  border-color: var(--color-accent-gold);
+}
+
+.stat-number {
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--color-accent-gold);
+  margin-bottom: 5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--color-accent-cream);
+  letter-spacing: 0.05em;
+}
+
+/* ========================================
+   カレンダーセクション
+======================================== */
+.calendar-section {
+  margin-bottom: 40px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--color-gray-medium);
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--color-accent-gold);
+  margin: 0;
+  letter-spacing: 0.1em;
+}
+
+/* カレンダー凡例 */
+.calendar-legend {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--color-white);
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legend-today {
+  background: var(--color-accent-cream);
+  border: 2px solid var(--color-accent-gold);
+}
+
+.legend-visited {
+  background: var(--color-accent-gold);
+  border: 2px solid var(--color-accent-cream);
+  box-shadow: 0 0 8px rgba(201, 169, 97, 0.5);
+}
+
+/* カレンダーコンテナ */
+.calendar-container {
+  background: var(--color-secondary-black);
+  border: 2px solid var(--color-gray-medium);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* カレンダーナビゲーション */
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--color-accent-gold);
+  margin: 0;
+  letter-spacing: 0.1em;
+}
+
+.calendar-nav-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: var(--color-tertiary-black);
+  color: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.calendar-nav-btn:hover {
+  background-color: var(--color-gray-light);
+  border-color: var(--color-accent-gold);
+  color: var(--color-accent-gold);
+}
+
+/* 既存の .btn スタイル（ない場合の基本定義） */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background-color: var(--color-accent-gold);
+  color: var(--color-primary-black);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-cream);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(201, 169, 97, 0.4);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-gray-light);
+  border-color: var(--color-accent-gold);
+  color: var(--color-accent-gold);
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+/* カレンダーグリッド */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.calendar-day-header {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  color: var(--color-accent-gold);
+  font-size: 14px;
+  background: var(--color-tertiary-black);
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-gray-medium);
+  border-radius: 4px;
+  background: var(--color-tertiary-black);
+  transition: all 0.2s;
+  position: relative;
+  cursor: default;
+}
+
+.calendar-day:not(.calendar-empty):hover {
+  border-color: var(--color-accent-gold);
+  box-shadow: 0 0 12px rgba(201, 169, 97, 0.3);
+  background: var(--color-secondary-black);
+}
+
+.calendar-empty {
+  background: var(--color-primary-black);
+  border-color: var(--color-secondary-black);
+}
+
+.calendar-empty .day-number {
+  color: var(--color-gray-light);
+  opacity: 0.5;
+}
+
+.calendar-today {
+  background: linear-gradient(135deg, var(--color-secondary-black) 0%, var(--color-tertiary-black) 100%);
+  border: 2px solid var(--color-accent-cream);
+  font-weight: bold;
+  box-shadow: 0 0 16px rgba(232, 213, 181, 0.4);
+}
+
+.calendar-visited {
+  background: linear-gradient(135deg, var(--color-tertiary-black) 0%, var(--color-gray-medium) 100%);
+  border: 2px solid var(--color-accent-gold);
+  box-shadow: 0 0 12px rgba(201, 169, 97, 0.4);
+}
+
+.calendar-visited.calendar-today {
+  background: linear-gradient(135deg, var(--color-tertiary-black) 0%, var(--color-gray-medium) 100%);
+  border: 2px solid var(--color-accent-gold);
+  box-shadow: 0 0 20px rgba(201, 169, 97, 0.6);
+}
+
+.day-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--color-accent-gold);
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.day-link:hover {
+  color: var(--color-accent-cream);
+}
+
+.day-number {
+  color: var(--color-white);
+  font-size: 16px;
+}
+
+.calendar-visited .day-number {
+  color: var(--color-accent-gold);
+  font-weight: bold;
+}
+
+.visit-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: var(--color-accent-gold);
+  color: var(--color-primary-black);
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   最近の投稿セクション
+======================================== */
+.recent-journals-section {
+  margin-bottom: 40px;
+}
+
+.journals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.journal-card {
+  background: var(--color-secondary-black);
+  border: 1px solid var(--color-gray-medium);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.journal-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(201, 169, 97, 0.3);
+  border-color: var(--color-accent-gold);
+}
+
+.journal-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--color-tertiary-black);
+  border-bottom: 1px solid var(--color-gray-medium);
+}
+
+.journal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.journal-card:hover .journal-image img {
+  transform: scale(1.05);
+}
+
+.journal-no-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-light);
+  font-size: 48px;
+  background: linear-gradient(135deg, var(--color-tertiary-black) 0%, var(--color-secondary-black) 100%);
+}
+
+.journal-content {
+  padding: 15px;
+}
+
+.journal-date {
+  color: var(--color-accent-cream);
+  font-size: 13px;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.journal-date i {
+  margin-right: 5px;
+  color: var(--color-accent-gold);
+}
+
+.journal-museum {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--color-accent-gold);
+  margin: 0 0 10px 0;
+  letter-spacing: 0.05em;
+}
+
+.journal-body {
+  color: var(--color-white);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 10px 0;
+}
+
+/* タグ */
+.journal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.tag {
+  display: inline-block;
+  background: var(--color-tertiary-black);
+  color: var(--color-accent-gold);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--color-gray-medium);
+  transition: all 0.2s;
+}
+
+.tag:hover {
+  background: var(--color-accent-gold);
+  color: var(--color-primary-black);
+  border-color: var(--color-accent-gold);
+}
+
+/* アクションボタン */
+.journal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* 空の状態 */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--color-secondary-black);
+  border: 2px dashed var(--color-gray-medium);
+  border-radius: 8px;
+}
+
+.empty-state i {
+  font-size: 64px;
+  color: var(--color-gray-light);
+  margin-bottom: 20px;
+}
+
+.empty-state p {
+  color: var(--color-accent-cream);
+  font-size: 16px;
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+}
+
+/* ========================================
+   レスポンシブ対応
+======================================== */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .profile-icon {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .calendar-legend {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .calendar-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .calendar-grid {
+    gap: 4px;
+  }
+
+  .journals-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .profile-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+  }
+
+  .profile-username {
+    font-size: 20px;
+  }
+
+  .stat-number {
+    font-size: 28px;
+  }
+
+  .calendar-day-header,
+  .day-number {
+    font-size: 12px;
+  }
+
+  .calendar-day {
+    min-height: 50px;
+  }
+
+  .visit-badge {
+    font-size: 8px;
+    padding: 1px 4px;
+  }
+}

@@ -1,0 +1,10 @@
+// コメントを削除
+const comment = document.getElementById('comment-<%= @comment.id %>');
+comment.classList.add('comment-deleting');
+setTimeout(() => {
+  comment.remove();
+  
+  // コメント数を更新
+  document.getElementById('comments-count').textContent = '<%= @journal.comments_count %>';
+  document.getElementById('comments-count-text').textContent = '<%= @journal.comments_count %>';
+}, 300);

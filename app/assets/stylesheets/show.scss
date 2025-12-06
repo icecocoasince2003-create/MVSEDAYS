@@ -1,0 +1,720 @@
+/* ========================================
+ カラーパレット
+ ======================================== */
+$color-primary-black: #0a0a0a;
+$color-secondary-black: #1a1a1a;
+$color-tertiary-black: #2a2a2a;
+$color-accent-gold: #c9a961;
+$color-accent-cream: #e8d5b5;
+$color-white: #ffffff;
+$color-gray-light: #4a4a4a;
+$color-gray-medium: #313131;
+
+// 詳細ページ特有の色
+$color-danger: #d46d6d;
+
+/* ========================================
+ コンテナ
+ ======================================== */
+.show-journal-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ========================================
+ グリッドレイアウト
+ ======================================== */
+.show-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
+}
+
+.main-content {
+  min-width: 0; // グリッド内でのオーバーフロー防止
+}
+
+.sidebar {
+  min-width: 0;
+}
+
+/* ========================================
+ 日記詳細カード
+ ======================================== */
+.journal-detail-card {
+  background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
+  border: 1px solid $color-gray-medium;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ========================================
+ ヘッダー
+ ======================================== */
+.journal-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid $color-accent-gold;
+
+  .journal-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $color-accent-gold;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+  }
+
+  .journal-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: $color-accent-cream;
+
+    .meta-icon {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+/* ========================================
+ 博物館情報カード
+ ======================================== */
+.museum-info-card {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba($color-accent-gold, 0.1) 0%, rgba($color-accent-cream, 0.05) 100%);
+  border: 1px solid rgba($color-accent-gold, 0.3);
+  border-radius: 8px;
+
+  .museum-info-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .museum-info-main {
+    flex: 1;
+  }
+
+  .museum-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $color-accent-gold;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .museum-name-link {
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    &:hover .museum-name {
+      color: $color-accent-cream;
+      text-decoration: underline;
+    }
+  }
+
+  .museum-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: $color-accent-gold;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    transition: all 0.3s ease;
+  }
+
+  .museum-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .museum-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: $color-accent-cream;
+
+    .detail-icon {
+      font-size: 1rem;
+    }
+  }
+
+  .btn-museum-detail {
+    padding: 0.7rem 1.5rem;
+    background-color: $color-accent-gold;
+    color: $color-primary-black;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $color-accent-cream;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba($color-accent-gold, 0.4);
+    }
+  }
+}
+
+/* ========================================
+ 評価表示
+ ======================================== */
+.ratings-display {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: rgba($color-tertiary-black, 0.5);
+  border: 1px solid $color-gray-medium;
+  border-radius: 8px;
+}
+
+.rating-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .rating-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: $color-accent-gold;
+    min-width: 80px;
+  }
+
+  .stars {
+    display: flex;
+    gap: 0.2rem;
+
+    .star {
+      font-size: 1.5rem;
+
+      &.star-filled {
+        color: $color-accent-gold;
+      }
+
+      &.star-empty {
+        color: $color-gray-medium;
+      }
+    }
+  }
+
+  .rating-text {
+    font-size: 0.9rem;
+    color: $color-accent-cream;
+    font-weight: 500;
+  }
+}
+
+/* ========================================
+ 画像表示
+ ======================================== */
+.journal-image-section {
+  margin-bottom: 2rem;
+  text-align: center;
+  background-color: $color-primary-black;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid $color-gray-medium;
+
+  .journal-image {
+    max-width: 100%;
+    max-height: 600px;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ========================================
+ 本文
+ ======================================== */
+.journal-body {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: rgba($color-tertiary-black, 0.3);
+  border: 1px solid $color-gray-medium;
+  border-radius: 8px;
+
+  .body-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $color-accent-gold;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .body-content {
+    font-size: 1rem;
+    color: $color-white;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}
+
+/* ========================================
+ タグセクション
+ ======================================== */
+.tags-section {
+  margin-bottom: 2rem;
+
+  .tags-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $color-accent-gold;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .tag-item {
+    padding: 0.5rem 1rem;
+    background-color: rgba($color-accent-gold, 0.1);
+    color: $color-accent-cream;
+    border: 1px solid rgba($color-accent-gold, 0.3);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba($color-accent-gold, 0.2);
+      border-color: $color-accent-gold;
+    }
+  }
+}
+
+/* ========================================
+ アクションボタン
+ ======================================== */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid $color-gray-medium;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  .btn-icon {
+    font-size: 1.1rem;
+  }
+}
+
+.btn-edit {
+  background-color: $color-accent-gold;
+  color: $color-primary-black;
+
+  &:hover {
+    background-color: $color-accent-cream;
+    box-shadow: 0 6px 16px rgba($color-accent-gold, 0.5);
+  }
+}
+
+.btn-delete {
+  background-color: $color-danger;
+  color: $color-white;
+
+  &:hover {
+    background-color: darken($color-danger, 10%);
+    box-shadow: 0 6px 16px rgba($color-danger, 0.5);
+  }
+}
+
+/* ========================================
+ サイドバー
+ ======================================== */
+.sidebar-card {
+  background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
+  border: 1px solid $color-gray-medium;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .sidebar-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $color-accent-gold;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* ========================================
+ 関連日記
+ ======================================== */
+.related-journals {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.related-journal-item {
+  display: block;
+  padding: 1rem;
+  background-color: rgba($color-tertiary-black, 0.5);
+  border: 1px solid $color-gray-medium;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $color-accent-gold;
+    background-color: rgba($color-accent-gold, 0.05);
+    transform: translateX(4px);
+  }
+
+  .related-journal-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: $color-accent-cream;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .related-journal-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .related-date {
+      font-size: 0.75rem;
+      color: $color-gray-light;
+    }
+
+    .related-rating {
+      font-size: 0.85rem;
+      color: $color-accent-gold;
+    }
+  }
+}
+
+/* ========================================
+ 戻るリンク
+ ======================================== */
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $color-accent-cream;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: $color-accent-gold;
+
+    .back-icon {
+      transform: translateX(-4px);
+    }
+  }
+
+  .back-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+}
+
+/* ========================================
+ レスポンシブ対応
+ ======================================== */
+@media (max-width: 1024px) {
+  .show-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    .show-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .show-journal-container {
+    padding: 1rem;
+  }
+
+  .journal-detail-card {
+    padding: 1.5rem;
+  }
+
+  .journal-header {
+    .journal-title {
+      font-size: 1.6rem;
+    }
+
+    .journal-meta {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+
+  .museum-info-card {
+    .museum-info-content {
+      flex-direction: column;
+    }
+
+    .btn-museum-detail {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .ratings-display {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .sidebar {
+    .show-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .show-journal-container {
+    padding: 0.75rem;
+  }
+
+  .journal-detail-card {
+    padding: 1rem;
+  }
+
+  .journal-header {
+    .journal-title {
+      font-size: 1.4rem;
+    }
+  }
+
+  .museum-info-card {
+    padding: 1rem;
+
+    .museum-name {
+      font-size: 1.1rem;
+    }
+  }
+
+  .rating-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+
+    .rating-label {
+      min-width: auto;
+    }
+  }
+
+  .journal-image-section {
+    padding: 1rem;
+
+    .journal-image {
+      max-height: 400px;
+    }
+  }
+
+  .sidebar-card {
+    padding: 1rem;
+  }
+}
+/* ========================================
+   いいねボタン用スタイル
+======================================== */
+
+/* フォームをインライン表示 */
+.like-form {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+/* ソーシャルアクションエリア */
+.social-actions {
+  background: var(--color-secondary-black, #1a1a1a);
+  border: 1px solid var(--color-gray-medium, #313131);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 30px 0;
+}
+
+.social-stats {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--color-gray-medium, #313131);
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-accent-cream, #e8d5b5);
+  font-size: 14px;
+}
+
+.stat-item i {
+  color: var(--color-accent-gold, #c9a961);
+  font-size: 18px;
+}
+
+/* アクションボタンエリア */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#like-button-container {
+  display: inline-block;
+}
+
+/* いいねボタン */
+.btn-like {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background-color: transparent;
+  color: var(--color-accent-gold, #c9a961);
+  border: 2px solid var(--color-accent-gold, #c9a961);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Noto Serif JP', '游明朝', 'Yu Mincho', serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.btn-like:hover {
+  background-color: var(--color-accent-gold, #c9a961);
+  color: var(--color-primary-black, #0a0a0a);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(201, 169, 97, 0.4);
+}
+
+.btn-like.liked {
+  background-color: var(--color-accent-gold, #c9a961);
+  color: var(--color-primary-black, #0a0a0a);
+  border-color: var(--color-accent-gold, #c9a961);
+  box-shadow: 0 0 12px rgba(201, 169, 97, 0.3);
+}
+
+.btn-like.liked:hover {
+  background-color: var(--color-accent-cream, #e8d5b5);
+  border-color: var(--color-accent-cream, #e8d5b5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(232, 213, 181, 0.4);
+}
+
+.btn-like.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-like i {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.btn-like:hover i {
+  transform: scale(1.1);
+}
+
+.btn-like.liked i {
+  animation: heartBeat 0.3s ease;
+}
+
+@keyframes heartBeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+}
+
+.btn-like span {
+  font-size: 14px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .social-stats {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .btn-like {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}

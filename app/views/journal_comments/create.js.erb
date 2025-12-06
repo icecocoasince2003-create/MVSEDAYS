@@ -1,0 +1,27 @@
+<%= turbo_stream.prepend "comments-list" do %>
+  <%= render @comment %>
+<% end %>
+
+<%= turbo_stream.replace "comments-count" do %>
+  <%= @journal.comments_count %>
+<% end %>
+
+<%= turbo_stream.replace "comments-count-text" do %>
+  <%= @journal.comments_count %>
+<% end %>
+
+<%= turbo_stream.replace "comment-form" do %>
+  <%= form_with model: [@journal, JournalComment.new], 
+                html: { class: 'comment-form', id: 'comment-form' }, 
+                data: { turbo: true } do |f| %>
+    <div class="comment-input-wrapper">
+      <%= f.text_area :body, 
+                      rows: 3, 
+                      placeholder: 'コメントを入力...', 
+                      class: 'comment-input' %>
+    </div>
+    <div class="comment-form-actions">
+      <%= f.submit '投稿する', class: 'btn-comment-submit' %>
+    </div>
+  <% end %>
+<% end %>

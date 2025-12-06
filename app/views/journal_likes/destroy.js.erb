@@ -1,0 +1,9 @@
+<%= turbo_stream.remove "comment-#{@comment.id}" %>
+
+<%= turbo_stream.replace "comments-count" do %>
+  <%= @journal.comments_count %>
+<% end %>
+
+<%= turbo_stream.replace "comments-count-text" do %>
+  <%= @journal.comments_count %>
+<% end %>
