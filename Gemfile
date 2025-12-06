@@ -66,7 +66,6 @@ end
 
 gem 'devise'
 
-gem 'dotenv-rails'
 gem 'cloudinary'
 gem 'activestorage-cloudinary-service'
 
