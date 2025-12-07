@@ -204,27 +204,13 @@ class User < ApplicationRecord
   end  
   
   private
-
-  def set_default_username
-    if username.blank? && email.present?
-      base_username = email.split('@').first.gsub(/[^a-zA-Z0-9_]/, '_')
-      self.username = base_username
-      
-      # 既に存在する場合は数字を付加
-      counter = 1
-      while User.exists?(username: self.username)
-        self.username = "#{base_username}#{counter}"
-        counter += 1
-      end
-    end
-  end
   
   def create_default_profile
     # UserProfile を自動作成
     create_user_profile! unless user_profile.present?
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.error "Failed to create user_profile: #{e.message}"
-  end  
+  end
 end
 # class User < ApplicationRecord
 #   # Include default devise modules. Others available are:
