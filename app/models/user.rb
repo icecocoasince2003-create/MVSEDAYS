@@ -3,7 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :trackable, :lockable を追加
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :confirmable, :trackable, :lockable
+         :trackable, :lockable
+         # confirmable
 
   # リレーション
   has_many :journals, dependent: :destroy
@@ -24,7 +25,8 @@ class User < ApplicationRecord
   # スコープ
   scope :admins, -> { where(admin: true) }
   scope :regular_users, -> { where(admin: false) }
-  scope :confirmed, -> { where.not(confirmed_at: nil) }
+  # 以下コメントアウト
+  # scope :confirmed, -> { where.not(confirmed_at: nil) }
 
   # メソッド
   def admin?
@@ -53,7 +55,7 @@ class User < ApplicationRecord
   has_many :active_followships, class_name: "Followship", 
            foreign_key: "follower_id", dependent: :destroy
   has_many :passive_followships, class_name: "Followship",
-           foreign_key: "followee_id", dependent: :destroy
+           foreign_key: "followe_id", dependent: :destroy
   has_many :following, through: :active_followships, source: :follower
   has_many :followers, through: :passive_followships, source: :follower
   
