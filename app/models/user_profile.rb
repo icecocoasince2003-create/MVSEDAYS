@@ -6,7 +6,7 @@ class UserProfile < ApplicationRecord
   has_one_attached :cover_image
   
   # Validations
-  validates :user_id, uniqueness: true
+  # validates :user_id, uniqueness: true
   validates :display_name, length: { maximum: 50 }, allow_blank: true
   validates :bio, length: { maximum: 500 }, allow_blank: true
   validates :location, length: { maximum: 100 }, allow_blank: true
