@@ -4,7 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :trackable, :lockable
-         # confirmable
 
   # リレーション
   has_many :journals, dependent: :destroy
@@ -25,8 +24,7 @@ class User < ApplicationRecord
   # スコープ
   scope :admins, -> { where(admin: true) }
   scope :regular_users, -> { where(admin: false) }
-  # 以下コメントアウト
-  # scope :confirmed, -> { where.not(confirmed_at: nil) }
+  scope :confirmed, -> { where.not(confirmed_at: nil) }
 
   # メソッド
   def admin?
@@ -47,9 +45,9 @@ class User < ApplicationRecord
   end
   # ===== ソーシャル機能: 追加 =====
   # プロフィール
-  # has_one :user_profile, dependent: :destroy
-  # accepts_nested_attributes_for :user_profile
-  # after_create :create_default_profile
+  has_one :user_profile, dependent: :destroy
+  accepts_nested_attributes_for :user_profile
+  after_create :create_default_profile
   
   # フォロー機能
   has_many :active_followships, class_name: "Followship", 
@@ -206,11 +204,27 @@ class User < ApplicationRecord
   end  
   
   private
+
+  def set_default_username
+    if username.blank? && email.present?
+      base_username = email.split('@').first.gsub(/[^a-zA-Z0-9_]/, '_')
+      self.username = base_username
+      
+      # 既に存在する場合は数字を付加
+      counter = 1
+      while User.exists?(username: self.username)
+        self.username = "#{base_username}#{counter}"
+        counter += 1
+      end
+    end
+  end
   
   def create_default_profile
-    # UserProfile モデルが存在する場合のみ作成
-    create_user_profile if defined?(UserProfile) && !user_profile
-  end
+    # UserProfile を自動作成
+    create_user_profile! unless user_profile.present?
+  rescue ActiveRecord::RecordInvalid => e
+    Rails.logger.error "Failed to create user_profile: #{e.message}"
+  end  
 end
 # class User < ApplicationRecord
 #   # Include default devise modules. Others available are:
