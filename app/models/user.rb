@@ -12,14 +12,20 @@ class User < ApplicationRecord
   has_many :communities, through: :community_memberships
 
   # バリデーション
-  validates :username, presence: true, 
-                       uniqueness: { case_sensitive: false },
-                       length: { minimum: 3, maximum: 20 },
-                       format: { 
-                         with: /\A[a-zA-Z0-9_]+\z/,
-                         message: "は半角英数字とアンダースコアのみ使用できます" 
-                       }
   validates :email, presence: true, uniqueness: { case_sensitive: false }
+  validates :username, 
+            uniqueness: { case_sensitive: false, allow_blank: true },
+            length: { minimum: 3, maximum: 20, allow_blank: true },
+            format: { 
+              with: /\A[a-zA-Z0-9_]+\z/,
+              message: "は半角英数字とアンダースコアのみ使用できます",
+              allow_blank: true
+            },
+            if: -> { username.present? }
+  
+  # コールバック
+  before_validation :set_default_username, on: :create
+  after_create :create_default_profile
 
   # スコープ
   scope :admins, -> { where(admin: true) }
@@ -204,13 +210,48 @@ class User < ApplicationRecord
   end  
   
   private
+
+  def set_default_username
+    # 既にusernameがある場合は何もしない
+    return if username.present?
+    
+    if email.present?
+      # emailの@より前を取得
+      base_username = email.split('@').first
+      # 英数字とアンダースコア以外を削除
+      base_username = base_username.gsub(/[^a-zA-Z0-9_]/, '')
+      # 空になった場合はデフォルト値
+      base_username = 'user' if base_username.blank?
+      # 最低3文字を確保
+      base_username = base_username.ljust(3, '0') if base_username.length < 3
+      
+      # ユニークなusernameを生成
+      candidate_username = base_username
+      counter = 1
+      
+      while User.where(username: candidate_username).exists?
+        candidate_username = "#{base_username}#{counter}"
+        counter += 1
+      end
+      
+      self.username = candidate_username
+    else
+      # emailがない場合のフォールバック
+      self.username = "user#{SecureRandom.hex(4)}"
+    end
+  end
   
   def create_default_profile
-    # UserProfile を自動作成
-    create_user_profile! unless user_profile.present?
-  rescue ActiveRecord::RecordInvalid => e
-    Rails.logger.error "Failed to create user_profile: #{e.message}"
-  end
+    return if user_profile.present?
+    
+    UserProfile.create!(
+      user: self,
+      is_public: true,
+      allow_messages: true
+    )
+  rescue => e
+    Rails.logger.error "Failed to create user_profile for user #{id}: #{e.message}"
+  end  
 end
 # class User < ApplicationRecord
 #   # Include default devise modules. Others available are:
