@@ -25,7 +25,6 @@ class User < ApplicationRecord
   
   # コールバック
   before_validation :set_default_username, on: :create
-  after_create :create_default_profile
 
   # スコープ
   scope :admins, -> { where(admin: true) }
