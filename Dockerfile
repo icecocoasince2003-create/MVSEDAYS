@@ -18,7 +18,7 @@ RUN apt-get update -qq && \
 
 # Set production environment
 ENV RAILS_ENV="production" \
-    # BUNDLE_DEPLOYMENT="1" \ # 追加修正
+    BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development"
 
