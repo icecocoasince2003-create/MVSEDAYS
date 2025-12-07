@@ -12,7 +12,7 @@ class Conversation < ApplicationRecord
   
   # Scopes
   scope :direct, -> { where(conversation_type: "direct") }
-  scope :group, -> { where(conversation_type: "group") }
+  scope :group_type, -> { where(conversation_type: "group") }
   scope :recent, -> { order(updated_at: :desc) }
   
   # Instance methods
