@@ -1,8 +1,4 @@
-/* ========================================
-   マイページ - 既存デザイン統一版（黒・金・白）
-======================================== */
-
-/* カラーパレット（application.scssと統一） */
+// カラーパレッド
 :root {
   --color-primary-black: #0a0a0a;
   --color-secondary-black: #1a1a1a;
@@ -14,7 +10,7 @@
   --color-gray-medium: #313131;
 }
 
-/* ページ全体のコンテナ */
+// ページコンテナ
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -22,7 +18,7 @@
   background-color: var(--color-primary-black);
 }
 
-/* ページヘッダー */
+// ページヘッダー
 .page-header {
   margin-bottom: 30px;
 }
@@ -36,9 +32,9 @@
   letter-spacing: 0.1em;
 }
 
-/* ========================================
-   プロフィールセクション
-======================================== */
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+// プロフィールセクション
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 .profile-section {
   margin-bottom: 40px;
 }
@@ -88,7 +84,7 @@
   margin: 0;
 }
 
-/* 統計カード */
+// 統計
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -125,9 +121,9 @@
   letter-spacing: 0.05em;
 }
 
-/* ========================================
-   カレンダーセクション
-======================================== */
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+// カレンダーセクション
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 .calendar-section {
   margin-bottom: 40px;
 }
@@ -149,7 +145,7 @@
   letter-spacing: 0.1em;
 }
 
-/* カレンダー凡例 */
+// カレンダー
 .calendar-legend {
   display: flex;
   gap: 20px;
@@ -181,7 +177,7 @@
   box-shadow: 0 0 8px rgba(201, 169, 97, 0.5);
 }
 
-/* カレンダーコンテナ */
+// カレンダーコンテナ
 .calendar-container {
   background: var(--color-secondary-black);
   border: 2px solid var(--color-gray-medium);
@@ -190,7 +186,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* カレンダーナビゲーション */
+// カレンダーナビ
 .calendar-nav {
   display: flex;
   justify-content: space-between;
@@ -223,7 +219,6 @@
   color: var(--color-accent-gold);
 }
 
-/* 既存の .btn スタイル（ない場合の基本定義） */
 .btn {
   display: inline-block;
   padding: 10px 20px;
@@ -265,7 +260,7 @@
   font-size: 13px;
 }
 
-/* カレンダーグリッド */
+// カレンダーグリッド
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -372,9 +367,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* ========================================
-   最近の投稿セクション
-======================================== */
+// 最近の投稿
 .recent-journals-section {
   margin-bottom: 40px;
 }
@@ -462,7 +455,7 @@
   margin: 0 0 10px 0;
 }
 
-/* タグ */
+// タグ
 .journal-tags {
   display: flex;
   flex-wrap: wrap;
@@ -488,14 +481,14 @@
   border-color: var(--color-accent-gold);
 }
 
-/* アクションボタン */
+// アクションボタン
 .journal-actions {
   display: flex;
   gap: 8px;
   margin-top: 12px;
 }
 
-/* 空の状態 */
+// 空
 .empty-state {
   text-align: center;
   padding: 60px 20px;
@@ -517,9 +510,7 @@
   letter-spacing: 0.05em;
 }
 
-/* ========================================
-   レスポンシブ対応
-======================================== */
+// レスポンシブ
 @media (max-width: 768px) {
   .container {
     padding: 15px;

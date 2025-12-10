@@ -1,6 +1,4 @@
-/* ========================================
- カラーパレット
- ======================================== */
+// カラーパレット
 $color-primary-black: #0a0a0a;
 $color-secondary-black: #1a1a1a;
 $color-tertiary-black: #2a2a2a;
@@ -13,18 +11,14 @@ $color-gray-medium: #313131;
 // 詳細ページ特有の色
 $color-danger: #d46d6d;
 
-/* ========================================
- コンテナ
- ======================================== */
+// コンテナ
 .show-journal-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-/* ========================================
- グリッドレイアウト
- ======================================== */
+// グリッドレイアウト
 .show-grid {
   display: grid;
   grid-template-columns: 1fr 320px;
@@ -32,16 +26,14 @@ $color-danger: #d46d6d;
 }
 
 .main-content {
-  min-width: 0; // グリッド内でのオーバーフロー防止
+  min-width: 0;
 }
 
 .sidebar {
   min-width: 0;
 }
 
-/* ========================================
- 日記詳細カード
- ======================================== */
+// 日記カード
 .journal-detail-card {
   background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
   border: 1px solid $color-gray-medium;
@@ -50,9 +42,7 @@ $color-danger: #d46d6d;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
-/* ========================================
- ヘッダー
- ======================================== */
+// ヘッダー
 .journal-header {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
@@ -86,9 +76,7 @@ $color-danger: #d46d6d;
   }
 }
 
-/* ========================================
- 博物館情報カード
- ======================================== */
+// 博物館カード
 .museum-info-card {
   margin-bottom: 2rem;
   padding: 1.5rem;
@@ -171,9 +159,7 @@ $color-danger: #d46d6d;
   }
 }
 
-/* ========================================
- 評価表示
- ======================================== */
+// 評価
 .ratings-display {
   display: flex;
   gap: 2rem;
@@ -220,9 +206,7 @@ $color-danger: #d46d6d;
   }
 }
 
-/* ========================================
- 画像表示
- ======================================== */
+// 画像表示
 .journal-image-section {
   margin-bottom: 2rem;
   text-align: center;
@@ -239,9 +223,7 @@ $color-danger: #d46d6d;
   }
 }
 
-/* ========================================
- 本文
- ======================================== */
+// 本文
 .journal-body {
   margin-bottom: 2rem;
   padding: 1.5rem;
@@ -266,9 +248,7 @@ $color-danger: #d46d6d;
   }
 }
 
-/* ========================================
- タグセクション
- ======================================== */
+// タグ
 .tags-section {
   margin-bottom: 2rem;
 
@@ -303,9 +283,7 @@ $color-danger: #d46d6d;
   }
 }
 
-/* ========================================
- アクションボタン
- ======================================== */
+// アクションボタン
 .action-buttons {
   display: flex;
   gap: 1rem;
@@ -361,9 +339,7 @@ $color-danger: #d46d6d;
   }
 }
 
-/* ========================================
- サイドバー
- ======================================== */
+// サイドバー
 .sidebar-card {
   background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
   border: 1px solid $color-gray-medium;
@@ -385,9 +361,7 @@ $color-danger: #d46d6d;
   }
 }
 
-/* ========================================
- 関連日記
- ======================================== */
+// 関連日記
 .related-journals {
   display: flex;
   flex-direction: column;
@@ -434,9 +408,7 @@ $color-danger: #d46d6d;
   }
 }
 
-/* ========================================
- 戻るリンク
- ======================================== */
+// 戻るリンク
 .back-link {
   display: flex;
   align-items: center;
@@ -461,9 +433,7 @@ $color-danger: #d46d6d;
   }
 }
 
-/* ========================================
- レスポンシブ対応
- ======================================== */
+// レスポンシブ
 @media (max-width: 1024px) {
   .show-grid {
     grid-template-columns: 1fr;
@@ -576,18 +546,15 @@ $color-danger: #d46d6d;
     padding: 1rem;
   }
 }
-/* ========================================
-   いいねボタン用スタイル
-======================================== */
 
-/* フォームをインライン表示 */
+// いいねフォーム
+
 .like-form {
   display: inline-block;
   margin: 0;
   padding: 0;
 }
 
-/* ソーシャルアクションエリア */
 .social-actions {
   background: var(--color-secondary-black, #1a1a1a);
   border: 1px solid var(--color-gray-medium, #313131);
@@ -617,7 +584,6 @@ $color-danger: #d46d6d;
   font-size: 18px;
 }
 
-/* アクションボタンエリア */
 .action-buttons {
   display: flex;
   gap: 10px;
@@ -629,7 +595,7 @@ $color-danger: #d46d6d;
   display: inline-block;
 }
 
-/* いいねボタン */
+// いいねボタン
 .btn-like {
   display: inline-flex;
   align-items: center;
@@ -706,7 +672,7 @@ $color-danger: #d46d6d;
   font-size: 14px;
 }
 
-/* レスポンシブ対応 */
+// レスポンシブ
 @media (max-width: 768px) {
   .social-stats {
     flex-direction: column;

@@ -1,7 +1,4 @@
-/* Kaminariページネーションのカスタムスタイル */
-/* ========================================
- カラーパレット
- ======================================== */
+// カラーパレッド
 $color-primary-black: #0a0a0a;
 $color-secondary-black: #1a1a1a;
 $color-tertiary-black: #2a2a2a;
@@ -73,7 +70,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* レスポンシブ対応 */
+// レスポンシブ
 @media (max-width: 640px) {
   .pagination {
     gap: 0.25rem;
@@ -84,8 +81,7 @@ $color-gray-medium: #313131;
         font-size: 0.875rem;
       }
     }
-
-    /* モバイルで一部のページ番号を非表示 */
+    
     li:not(.first):not(.prev):not(.active):not(.next):not(.last):not(.gap) {
       display: none;
     }

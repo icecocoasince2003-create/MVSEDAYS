@@ -1,6 +1,4 @@
-/* ========================================
-   カラーパレット
-   ======================================== */
+// カラーパレット
 $color-primary-black: #0a0a0a;
 $color-secondary-black: #1a1a1a;
 $color-tertiary-black: #2a2a2a;
@@ -11,18 +9,14 @@ $color-gray-light: #4a4a4a;
 $color-gray-medium: #313131;
 $color-error: #dc3545;
 
-/* ========================================
-   コンテナ
-   ======================================== */
+// コンテナ
 .new-journal-container {
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-/* ========================================
-   フォームヘッダー
-   ======================================== */
+// フォームヘッダー
 .form-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -46,9 +40,7 @@ $color-error: #dc3545;
   }
 }
 
-/* ========================================
-   フォーム全体
-   ======================================== */
+// フォーム
 .journal-form {
   background-color: $color-secondary-black;
   padding: 2.5rem;
@@ -57,9 +49,7 @@ $color-error: #dc3545;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
-/* ========================================
-   フォームグループ
-   ======================================== */
+// フォームグループ
 .form-group {
   margin-bottom: 2rem;
 
@@ -80,9 +70,7 @@ $color-error: #dc3545;
   }
 }
 
-/* ========================================
-   ラベル
-   ======================================== */
+// ラベル
 .form-label {
   display: block;
   font-size: 1rem;
@@ -92,9 +80,7 @@ $color-error: #dc3545;
   letter-spacing: 0.05em;
 }
 
-/* ========================================
-   テキストエリア & インプット
-   ======================================== */
+// テキストエリア
 .form-textarea,
 .form-input {
   width: 100%;
@@ -132,9 +118,7 @@ $color-error: #dc3545;
   height: 48px;
 }
 
-/* ========================================
-   ヒントテキスト
-   ======================================== */
+// ヒントテキスト
 .form-hint {
   display: block;
   font-size: 0.85rem;
@@ -143,9 +127,7 @@ $color-error: #dc3545;
   font-style: italic;
 }
 
-/* ========================================
-   ファイルアップロード
-   ======================================== */
+// 画像ファイルアップロード
 .file-upload-area {
   position: relative;
   border: 2px dashed $color-gray-medium;
@@ -188,9 +170,9 @@ $color-error: #dc3545;
   }
 }
 
-/* ========================================
-   評価セクション
-   ======================================== */
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+// 評価セクション
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 .rating-section {
   background-color: $color-tertiary-black;
   padding: 2rem;
@@ -215,9 +197,7 @@ $color-error: #dc3545;
   letter-spacing: 0.05em;
 }
 
-/* ========================================
-   星評価フォーム
-   ======================================== */
+// 星評価
 .post_form {
   display: flex;
   flex-direction: row-reverse;
@@ -267,9 +247,9 @@ $color-error: #dc3545;
   }
 }
 
-/* ========================================
-   博物館選択セクション
-   ======================================== */
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+// 博物館検索セクション
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
 // 博物館表示ボックス
 .museum-display-box {
@@ -389,9 +369,7 @@ $color-error: #dc3545;
   padding-left: 1.5rem;
 }
 
-/* ========================================
-   博物館検索モーダル
-   ======================================== */
+// 博物館検索
 .museum-modal {
   display: none;
   position: fixed;
@@ -699,248 +677,7 @@ $color-error: #dc3545;
   }
 }
 
-/* ========================================
-   博物館検索モーダル
-   ======================================== */
-.museum-modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(4px);
-  align-items: center;
-  justify-content: center;
-  animation: modalFadeIn 0.3s ease;
-}
-
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.museum-modal-content {
-  background-color: $color-secondary-black;
-  border: 2px solid $color-accent-gold;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 700px;
-  max-height: 85vh;
-  display: flex;
-  flex-direction: column;
-  animation: slideUp 0.4s ease;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.museum-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-  border-bottom: 2px solid $color-gray-medium;
-  background: linear-gradient(135deg, 
-    rgba($color-accent-gold, 0.1) 0%, 
-    rgba($color-accent-gold, 0.05) 100%
-  );
-}
-
-.museum-modal-title {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: $color-accent-gold;
-  margin: 0;
-  letter-spacing: 0.05em;
-}
-
-.museum-modal-close {
-  background: none;
-  border: none;
-  font-size: 2.5rem;
-  color: $color-accent-gold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  line-height: 1;
-  padding: 0;
-  width: 45px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-
-  &:hover {
-    color: $color-accent-cream;
-    background-color: rgba($color-accent-gold, 0.1);
-    transform: rotate(90deg);
-  }
-}
-
-.museum-modal-body {
-  padding: 2rem;
-  overflow-y: auto;
-  flex: 1;
-
-  &::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: $color-tertiary-black;
-    border-radius: 5px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $color-accent-gold;
-    border-radius: 5px;
-
-    &:hover {
-      background: $color-accent-cream;
-    }
-  }
-}
-
-.museum-search-input-wrapper {
-  margin-bottom: 1.5rem;
-  position: relative;
-
-  &::before {
-    content: "🔍";
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.2rem;
-    pointer-events: none;
-  }
-}
-
-.museum-search-input {
-  width: 100%;
-  padding: 1rem 1rem 1rem 3rem;
-  font-size: 1rem;
-  background-color: $color-tertiary-black;
-  border: 2px solid $color-gray-medium;
-  border-radius: 8px;
-  color: $color-white;
-  transition: all 0.3s ease;
-  font-family: 'Noto Serif JP', '游明朝', 'Yu Mincho', serif;
-
-  &::placeholder {
-    color: $color-gray-light;
-  }
-
-  &:focus {
-    outline: none;
-    border-color: $color-accent-gold;
-    box-shadow: 0 0 0 4px rgba($color-accent-gold, 0.15);
-  }
-}
-
-.museum-search-results {
-  max-height: 450px;
-  overflow-y: auto;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: $color-tertiary-black;
-    border-radius: 4px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $color-accent-gold;
-    border-radius: 4px;
-
-    &:hover {
-      background: $color-accent-cream;
-    }
-  }
-}
-
-.museum-item {
-  padding: 1.2rem;
-  margin-bottom: 0.8rem;
-  background-color: $color-tertiary-black;
-  border: 2px solid $color-gray-medium;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: linear-gradient(135deg, 
-      rgba($color-accent-gold, 0.15) 0%, 
-      rgba($color-accent-gold, 0.08) 100%
-    );
-    border-color: $color-accent-gold;
-    transform: translateX(8px);
-    box-shadow: 0 4px 12px rgba($color-accent-gold, 0.2);
-  }
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-.museum-item-name {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: $color-accent-cream;
-  margin-bottom: 0.4rem;
-  line-height: 1.4;
-}
-
-.museum-item-location {
-  font-size: 0.9rem;
-  color: $color-gray-light;
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-
-  &::before {
-    content: "📍";
-    font-size: 0.85rem;
-  }
-}
-
-.museum-no-results {
-  text-align: center;
-  padding: 4rem 2rem;
-  color: $color-gray-light;
-  font-size: 1.1rem;
-
-  &::before {
-    content: "🔍";
-    display: block;
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    opacity: 0.3;
-  }
-}
-
-/* ========================================
-   フォームアクション
-   ======================================== */
+// フォームアクション
 .form-actions {
   display: flex;
   justify-content: center;
@@ -1002,9 +739,7 @@ $color-error: #dc3545;
   }
 }
 
-/* ========================================
-   レスポンシブ対応
-   ======================================== */
+// レスポンシブ
 @media (max-width: 768px) {
   .new-journal-container {
     padding: 1rem;

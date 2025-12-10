@@ -1,8 +1,4 @@
-/* ========================================
- Museum Show Page
- ======================================== */
-
-// カラー変数（application.scssから継承）
+// カラーパレッド
 $color-primary-black: #0a0a0a;
 $color-secondary-black: #1a1a1a;
 $color-tertiary-black: #2a2a2a;
@@ -12,18 +8,13 @@ $color-white: #ffffff;
 $color-gray-light: #4a4a4a;
 $color-gray-medium: #313131;
 
-/* ========================================
- コンテナ
- ======================================== */
+// コンテナ
 .museum-show-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-/* ========================================
- パンくずリスト
- ======================================== */
 .breadcrumb {
   margin-bottom: 2rem;
   font-size: 0.9rem;
@@ -45,9 +36,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- グリッドレイアウト
- ======================================== */
+// グリッドレイアウト
 .museum-grid {
   display: grid;
   grid-template-columns: 1fr 320px;
@@ -62,9 +51,7 @@ $color-gray-medium: #313131;
   min-width: 0;
 }
 
-/* ========================================
- 博物館情報カード
- ======================================== */
+// 博物館カード
 .museum-info-card {
   background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
   border: 1px solid $color-gray-medium;
@@ -85,9 +72,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- 博物館詳細
- ======================================== */
+// 博物館詳細
 .museum-details {
   display: flex;
   flex-direction: column;
@@ -136,9 +121,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- 統計情報
- ======================================== */
+// 統計
 .museum-stats {
   display: flex;
   gap: 2rem;
@@ -165,9 +148,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- アクションボタン
- ======================================== */
+// アクションボタン
 .museum-action {
   margin-top: 2rem;
 }
@@ -196,9 +177,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- 関連日記セクション
- ======================================== */
+// 関連日記セクション
 .journals-section {
   background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
   border: 1px solid $color-gray-medium;
@@ -215,9 +194,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- 日記リスト
- ======================================== */
+// 日記リスト
 .journals-list {
   display: flex;
   flex-direction: column;
@@ -289,9 +266,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- すべて見るリンク
- ======================================== */
+// すべて見るリンク
 .view-all-journals {
   margin-top: 2rem;
   text-align: center;
@@ -312,9 +287,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- 空の状態
- ======================================== */
+// 空
 .empty-journals {
   text-align: center;
   padding: 4rem 2rem;
@@ -350,9 +323,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- サイドバー
- ======================================== */
+// サイドバー
 .sidebar-card {
   background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
   border: 1px solid $color-gray-medium;
@@ -395,9 +366,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- レスポンシブ対応
- ======================================== */
+// レスポンシブ
 @media (max-width: 1024px) {
   .museum-grid {
     grid-template-columns: 1fr;

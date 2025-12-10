@@ -1,6 +1,4 @@
-/* ========================================
- カラーパレット
- ======================================== */
+// カラーパレッド
 $color-primary-black: #0a0a0a;
 $color-secondary-black: #1a1a1a;
 $color-tertiary-black: #2a2a2a;
@@ -11,18 +9,16 @@ $color-gray-light: #4a4a4a;
 $color-gray-medium: #313131;
 
 
-/* ========================================
- コンテナ
- ======================================== */
+// コンテナ
 .museums-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-/* ========================================
- ページヘッダー
- ======================================== */
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+// ページヘッダー
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 .page-header {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
@@ -43,9 +39,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- 検索セクション
- ======================================== */
+// 検索セクション
 .search-section {
   background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
   border: 1px solid $color-gray-medium;
@@ -173,9 +167,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- 検索結果ヘッダー
- ======================================== */
+// 検索結果ヘッダー
 .results-header {
   margin-bottom: 1.5rem;
   padding: 1rem 0;
@@ -194,9 +186,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- 博物館グリッド
- ======================================== */
+// 博物館グリッド
 .museums-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -284,9 +274,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- 空の状態
- ======================================== */
+// 空
 .empty-state {
   text-align: center;
   padding: 4rem 2rem;
@@ -317,9 +305,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- ページネーション
- ======================================== */
+// ページネーション
 .pagination-wrapper {
   display: flex;
   justify-content: center;
@@ -370,9 +356,7 @@ $color-gray-medium: #313131;
   }
 }
 
-/* ========================================
- レスポンシブ対応
- ======================================== */
+// レスポンシブ
 @media (max-width: 1024px) {
   .museums-container {
     padding: 1.5rem;

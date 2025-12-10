@@ -1,34 +1,32 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
- /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- */
+// /*
+//  * This is a manifest file that'll be compiled into application.css, which will include all the files
+//  * listed below.
+//  *
+//  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+//  * vendor/assets/stylesheets directory can be referenced here using a relative path.
+//  *
+//  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+//  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+//  * files in this directory. Styles in this file should be added after the last require_* statement.
+//  * It is generally better to create a new file per style scope.
+//  *
+//  *= require_tree .
+//  *= require_self
+//  */
+//  /*
+//  * This is a manifest file that'll be compiled into application.css, which will include all the files
+//  * listed below.
+//  *
+//  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+//  * vendor/assets/stylesheets directory can be referenced here using a relative path.
+//  *
+//  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+//  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+//  * files in this directory. Styles in this file should be added after the last require_* statement.
+//  * It is generally better to create a new file per style scope.
+//  */
 
-/* ========================================
- カラーパレット
- ======================================== */
+// カラーパレッド
 $color-primary-black: #0a0a0a;
 $color-secondary-black: #1a1a1a;
 $color-tertiary-black: #2a2a2a;
@@ -38,14 +36,10 @@ $color-white: #ffffff;
 $color-gray-light: #4a4a4a;
 $color-gray-medium: #313131;
 
-/* ========================================
- フォント
- ======================================== */
+// フォント
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&display=swap');
 
-/* ========================================
- リセット & ベーススタイル
- ======================================== */
+// リセット
 * {
   margin: 0;
   padding: 0;
@@ -72,9 +66,7 @@ a {
   }
 }
 
-/* ========================================
- ヘッダー - 統一ナビゲーション版
- ======================================== */
+// ヘッダー
 .main-header {
   background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
   border-bottom: 2px solid $color-accent-gold;
@@ -132,9 +124,7 @@ a {
   }
 }
 
-/* ========================================
- 統一ナビゲーション
- ======================================== */
+// ナビ
 .main-nav {
   flex: 1;
   display: flex;
@@ -235,9 +225,7 @@ a {
   }
 }
 
-/* ========================================
- ボタン
- ======================================== */
+// ボタン
 .btn {
   display: inline-block;
   padding: 0.6rem 1.2rem;
@@ -284,9 +272,7 @@ a {
   }
 }
 
-/* ========================================
- メインコンテンツ
- ======================================== */
+// メインコンテンツ
 .main-content {
   flex: 1;
   max-width: 1400px;
@@ -295,9 +281,7 @@ a {
   padding: 3rem 2rem;
 }
 
-/* ========================================
- フッター
- ======================================== */
+// フッター
 .main-footer {
   background-color: $color-secondary-black;
   border-top: 1px solid $color-tertiary-black;
@@ -317,9 +301,7 @@ a {
   }
 }
 
-/* ========================================
- レスポンシブ対応 - 統一ナビゲーション版
- ======================================== */
+// レスポンシブ
 @media (max-width: 1200px) {
   .main-nav {
     ul {

@@ -1,7 +1,4 @@
-/* ========================================
-   ソーシャル機能スタイル
-   ======================================== */
-
+// カラーパレット
 $color-primary-black: #0a0a0a;
 $color-secondary-black: #1a1a1a;
 $color-tertiary-black: #2a2a2a;
@@ -12,9 +9,7 @@ $color-gray-light: #4a4a4a;
 $color-gray-medium: #313131;
 $color-like: #ff6b6b;
 
-/* ========================================
-   ソーシャルアクション
-   ======================================== */
+// ソーシャルアクション
 .social-actions {
   background: $color-secondary-black;
   border: 1px solid $color-gray-medium;
@@ -119,9 +114,7 @@ $color-like: #ff6b6b;
   }
 }
 
-/* ========================================
-   コメントセクション
-   ======================================== */
+// コメントセクション
 .comments-section {
   background: $color-secondary-black;
   border: 1px solid $color-gray-medium;
@@ -143,9 +136,7 @@ $color-like: #ff6b6b;
   }
 }
 
-/* ========================================
-   コメント投稿フォーム
-   ======================================== */
+// コメント投稿フォーム
 .comment-form-container {
   background: $color-tertiary-black;
   border: 2px solid $color-gray-medium;
@@ -227,9 +218,7 @@ $color-like: #ff6b6b;
   }
 }
 
-/* ========================================
-   コメント一覧
-   ======================================== */
+// コメント一覧
 .comments-list {
   margin-top: 2rem;
 }
@@ -327,9 +316,7 @@ $color-like: #ff6b6b;
   padding-left: 56px;
 }
 
-/* ========================================
-   コメントアニメーション
-   ======================================== */
+// コメントアニメーション
 .comment-new {
   animation: commentAppear 0.5s ease;
 }
@@ -360,9 +347,7 @@ $color-like: #ff6b6b;
   }
 }
 
-/* ========================================
-   レスポンシブ対応
-   ======================================== */
+// レスポンシブ
 @media (max-width: 768px) {
   .social-actions {
     padding: 1rem;
