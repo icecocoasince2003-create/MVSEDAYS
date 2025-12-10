@@ -33,5 +33,5 @@ production:
   <<: *default
   adapter: postgresql
   encoding: unicode
-  url: <%= ENV["postgresql://neondb_owner:npg_Y6v9bcjkdBRK@ep-noisy-sea-a1ncrpm9-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"] %>
+  url: <%= ENV["DATABASE_URL"] %>
   # database: path/to/persistent/storage/production.sqlite3
