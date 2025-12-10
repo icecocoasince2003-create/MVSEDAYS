@@ -48,7 +48,8 @@ class User < ApplicationRecord
       where(conditions).first
     end
   end
-  # ===== ソーシャル機能: 追加 =====
+
+  # ===== コミュニティ機能 =====
   # プロフィール
   has_one :user_profile, dependent: :destroy
   accepts_nested_attributes_for :user_profile

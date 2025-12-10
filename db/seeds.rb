@@ -18,21 +18,15 @@ puts "=" * 60
 # =====================================
 puts "\n管理者ユーザーを作成中..."
 
-admin_user = User.find_or_initialize_by(email: "icecocoa.since2003@icloud.com")
-
-if admin_user.new_record?
-  admin_user.password = "Icecocoa5959drink"
-  admin_user.password_confirmation = "Icecocoa5959drink"
-  admin_user.admin = true
-  
-  if admin_user.save
-    puts "  ✓ 管理者ユーザーを作成しました: #{admin_user.email}"
-  else
-    puts "  ✗ エラー: #{admin_user.errors.full_messages.join(', ')}"
-  end
-else
-  puts "  - 管理者ユーザーは既に存在します: #{admin_user.email}"
-end
+User.create!(
+  {
+    user_name: "kokos"
+    email: "s2520048@u.tsukuba.ac.jp"
+    password: "Icecocoa5959drink"
+    password_confirmation: "Icecocoa5959drink"
+    admin: true
+  }
+)
 
 # =====================================
 # タグデータ
