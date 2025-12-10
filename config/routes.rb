@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
   end
   
-  # マイページのルート（この行を追加）
+  # マイページルート
   get 'my_page', to: 'users#my_page', as: :my_page
 
   # ユーザー管理ルート
