@@ -1,10 +1,4 @@
-﻿# 一時的に追加
-if Rails.env.production?
-  get 'setup/run_migrations', to: 'setup#run_migrations'
-  get 'setup/run_seeds', to: 'setup#run_seeds'
-end
-
-Rails.application.routes.draw do
+﻿Rails.application.routes.draw do
   devise_for :users
 
   resources :journals do
