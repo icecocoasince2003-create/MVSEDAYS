@@ -1,8 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-MVSEDAYS museum csv data converter
-"""
+# """
+# MVSEDAYS museum csv data converter
+# """
 
 import csv
 import sys
