@@ -73,7 +73,7 @@ gem 'sass-rails'
 
 # ページネーション
 gem 'redis','~>5.0'
-gem 'sidekiq','~>7.0'
+gem 'sidekiq','~>8.1'
 gem 'kaminari','~>1.2'
 
 # 検索機能
