@@ -32,7 +32,7 @@ class Museum < ApplicationRecord
     end
   }
 
-  # クラスメソッド - 複合検索
+  # 複合検索
   def self.search(params)
     results = all
     results = results.by_prefecture(params[:prefecture]) if params[:prefecture].present?
