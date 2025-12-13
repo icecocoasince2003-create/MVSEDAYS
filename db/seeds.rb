@@ -12,15 +12,21 @@
 # 管理者ユーザー
 puts "\n管理者ユーザーを作成中..."
 
-User.create!(
-  {
-    username: "kokos"
-    email: "s2520048@u.tsukuba.ac.jp"
-    password: "Icecocoa5959drink"
-    password_confirmation: "Icecocoa5959drink"
-    admin: true
-  }
-)
+# User.create!(
+#   {
+#     username: "kokos"
+#     email: "s2520048@u.tsukuba.ac.jp"
+#     password: "Icecocoa5959drink"
+#     password_confirmation: "Icecocoa5959drink"
+#     admin: true
+#   }
+# )
+User.find_or_create_by!(email: "s2520048@u.tsukuba.ac.jp") do |user|
+  user.username = "kokos"
+  user.password = "Icecocoa5959drink"
+  user.password_confirmation = "Icecocoa5959drink"
+  user.admin = true
+end
 
 # データ投入処理
 created_count = 0
