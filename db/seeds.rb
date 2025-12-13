@@ -33,60 +33,6 @@ created_count = 0
 updated_count = 0
 error_count = 0
 
-museums_data.each do |data|
-  museum = Museum.find_or_initialize_by(
-    name: data[:name],
-    prefecture: data[:prefecture]
-  )
-  
-  was_new = museum.new_record?
-  museum.assign_attributes(data)
-  
-  if museum.save
-    if was_new
-      created_count += 1
-      print '+'
-    else
-      updated_count += 1
-      print '.'
-    end
-  else
-    error_count += 1
-    puts "\n✗ #{museum.name}: #{museum.errors.full_messages.join(', ')}"
-  end
-end
-
-puts "\n"
-puts "=" * 60
-puts "✓ 博物館データの投入完了"
-puts "  新規作成: #{created_count}件"
-puts "  更新: #{updated_count}件"
-puts "  エラー: #{error_count}件" if error_count > 0
-puts "  合計: #{Museum.count}件"
-puts "=" * 60
-
-# データ確認
-if Museum.count > 0
-  puts "\n【おすすめ博物館(is_featured=true)】"
-  Museum.where(is_featured: true).limit(5).each do |m|
-    puts "  ・#{m.name} (#{m.city})"
-  end
-
-  puts "\n【館種別の件数】"
-  Museum.group(:museum_type).count.each do |type, count|
-    puts "  #{type}: #{count}件"
-  end
-
-  puts "\n【都市別の件数(トップ5)】"
-  Museum.group(:city).count.sort_by { |_, count| -count }.first(5).each do |city, count|
-    puts "  #{city}: #{count}件"
-  end
-end
-
-puts "\n" + "=" * 60
-puts "シード投入完了"
-puts "=" * 60# frozen_string_literal: true
-
 # =================================================
 # MVSEDAYS museum data
 # 総データ数: 1440件
