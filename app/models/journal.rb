@@ -7,7 +7,7 @@ class Journal < ApplicationRecord
   has_many_attached :images
 
   # バリデーション
-  validates :body, presence: true, length: { minimum: 10 }
+  validates :body, presence: true # 変更
   validates :visit_date, presence: true
   validates :user_id, presence: true
   validates :overall, numericality: { 
@@ -45,18 +45,11 @@ class Journal < ApplicationRecord
       Tag.where(name: name.strip).first_or_create! if name.strip.present?
     end.compact
   end
-
-  # ===== ソーシャル機能: 追加のアソシエーション =====
   
-  # いいね・コメント（テーブルが存在するもののみ有効）
+  # いいね・コメント
   has_many :journal_likes, dependent: :destroy
   has_many :liked_users, through: :journal_likes, source: :user
   has_many :journal_comments, dependent: :destroy
-  
-  # コミュニティ共有（未実装のためコメントアウト）
-  # has_many :community_posts, dependent: :nullify
-  
-  # ===== スコープ追加 =====
   
   # 公開日記のみ（is_publicカラムがある場合のみ有効）
   # scope :public_journals, -> { where(is_public: true) }
@@ -87,11 +80,6 @@ class Journal < ApplicationRecord
     joins(:journal_likes).where(journal_likes: { user_id: user.id })
   }
   
-  # タイムライン用 (フォローしているユーザーの日記)
-  # scope :from_users, ->(user_ids) {
-  #   where(user_id: user_ids, is_public: true)
-  # }
-  
   # キーワード検索
   scope :search_by_keyword, ->(keyword) {
     return all if keyword.blank?
@@ -111,8 +99,6 @@ class Journal < ApplicationRecord
     journals = journals.by_user(params[:user_id]) if params[:user_id].present?
     journals
   }
-  
-  # ===== インスタンスメソッド =====
   
   # いいねされているか
   def liked_by?(user)

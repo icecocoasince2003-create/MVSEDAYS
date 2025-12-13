@@ -29,14 +29,16 @@ class JournalsController < ApplicationController
         end
     end
 
+    # 変更済
     def create
-        @journal = Journal.new(journal_params)
-        @journal.user_id = current_user.id
-        
+        @journal = Journal.new(journal_params.except(:tag_list))
+        @journal.user = current_user
+      
         if @journal.save
-            redirect_to @journal, notice: '日記を作成しました。'
+          @journal.tag_list = journal_params[:tag_list]
+          redirect_to @journal, notice: '日記を作成しました。'
         else
-            render :new, status: :unprocessable_entity
+          render :new, status: :unprocessable_entity
         end
     end
 
@@ -96,7 +98,7 @@ class JournalsController < ApplicationController
             :tag_list,
             :overall,
             :rate,
-            :image
+            images: []
         )
     end
 end
