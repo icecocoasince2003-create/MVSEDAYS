@@ -51,7 +51,7 @@
             <div class="journal-meta">
               <div class="meta-item">
                 <i class="icon-user"></i>
-                <span><%= journal.user.email.split('@').first %></span>
+                <span><%= journal.user.display_name %></span>
               </div>
               <% if journal.visit_date %>
                 <div class="meta-item">
