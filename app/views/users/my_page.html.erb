@@ -15,8 +15,17 @@
       <div class="profile-info">
         <h2 class="profile-username"><%= current_user.username || current_user.email %></h2>
         <p class="profile-email"><%= current_user.email %></p>
-        <%= link_to "プロフィール編集", edit_user_registration_path, class: "btn btn-secondary btn-sm", style: "margin-top: 0.5rem;" %>
-        <%= link_to "プロフィール編集", edit_user_registration_path, class: "btn btn-secondary btn-sm" %>
+        <div class="profile-actions" style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+          <%= link_to "プロフィール編集", edit_user_registration_path, class: "btn btn-primary btn-sm" %>
+          <%= button_to "アカウント削除", 
+              registration_path(:user), 
+              method: :delete,
+              data: { 
+                confirm: "本当にアカウントを削除しますか？この操作は取り消せません。", 
+                turbo_confirm: "本当にアカウントを削除しますか？この操作は取り消せません。" 
+              },
+              class: "btn btn-danger btn-sm" %>
+        </div>
       </div>
     </div>
 

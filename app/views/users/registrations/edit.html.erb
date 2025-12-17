@@ -1,31 +1,31 @@
-<%= stylesheet_link_tag 'admin', media: 'all' %>
+ï»¿<%= stylesheet_link_tag 'admin', media: 'all' %>
 
 <div class="admin-container">
   <div class="admin-header">
-    <h1 class="admin-title">ƒvƒƒtƒB[ƒ‹•ÒW</h1>
-    <%= link_to "© ƒ}ƒCƒy[ƒW‚É–ß‚é", my_page_path, class: "btn btn-secondary" %>
+    <h1 class="admin-title">ï¿½vï¿½ï¿½ï¿½tï¿½Bï¿½[ï¿½ï¿½ï¿½ÒW</h1>
+    <%= link_to "ï¿½ï¿½ ï¿½}ï¿½Cï¿½yï¿½[ï¿½Wï¿½É–ß‚ï¿½", my_page_path, class: "btn btn-secondary" %>
   </div>
 
   <div class="form-container">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "profile-form" }) do |f| %>
       <%= render "users/shared/error_messages", resource: resource %>
 
-      <!-- ƒ†[ƒU[ƒl[ƒ€ -->
+      <!-- ï¿½ï¿½ï¿½[ï¿½Uï¿½[ï¿½lï¿½[ï¿½ï¿½ -->
       <div class="form-group">
-        <%= f.label :username, "ƒ†[ƒU[ƒl[ƒ€", class: "form-label" %>
-        <small class="form-help">3~20•¶Žš‚Ì‰p”Žš‚ÆƒAƒ“ƒ_[ƒXƒRƒA‚Ì‚ÝŽg—p‚Å‚«‚Ü‚·</small>
+        <%= f.label :username, "ï¿½ï¿½ï¿½[ï¿½Uï¿½[ï¿½lï¿½[ï¿½ï¿½", class: "form-label" %>
+        <small class="form-help">3~20ï¿½ï¿½ï¿½ï¿½ï¿½Ì‰pï¿½ï¿½ï¿½ï¿½ï¿½ÆƒAï¿½ï¿½ï¿½_ï¿½[ï¿½Xï¿½Rï¿½Aï¿½Ì‚ÝŽgï¿½pï¿½Å‚ï¿½ï¿½Ü‚ï¿½</small>
         <%= f.text_field :username, 
             autofocus: true, 
             autocomplete: "username", 
-            placeholder: "—á: MVSE",
+            placeholder: "ï¿½ï¿½: MVSE",
             class: "form-control",
             pattern: "^[a-zA-Z0-9_]{3,20}$",
-            title: "3~20•¶Žš‚Ì‰p”Žš‚ÆƒAƒ“ƒ_[ƒXƒRƒA(_)‚Ì‚Ý" %>
+            title: "3~20ï¿½ï¿½ï¿½ï¿½ï¿½Ì‰pï¿½ï¿½ï¿½ï¿½ï¿½ÆƒAï¿½ï¿½ï¿½_ï¿½[ï¿½Xï¿½Rï¿½A(_)ï¿½Ì‚ï¿½" %>
       </div>
 
-      <!-- ƒ[ƒ‹ƒAƒhƒŒƒX -->
+      <!-- ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Aï¿½hï¿½ï¿½ï¿½X -->
       <div class="form-group">
-        <%= f.label :email, "ƒ[ƒ‹ƒAƒhƒŒƒX", class: "form-label" %>
+        <%= f.label :email, "ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Aï¿½hï¿½ï¿½ï¿½X", class: "form-label" %>
         <%= f.email_field :email, 
             autocomplete: "email",
             class: "form-control" %>
@@ -33,68 +33,68 @@
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div class="alert alert-info">
-          Šm”F‘Ò‚¿‚Ìƒ[ƒ‹ƒAƒhƒŒƒX: <%= resource.unconfirmed_email %>
+          ï¿½mï¿½Fï¿½Ò‚ï¿½ï¿½Ìƒï¿½ï¿½[ï¿½ï¿½ï¿½Aï¿½hï¿½ï¿½ï¿½X: <%= resource.unconfirmed_email %>
         </div>
       <% end %>
 
       <hr class="form-divider">
 
-      <!-- ƒpƒXƒ[ƒh•ÏXƒZƒNƒVƒ‡ƒ“ -->
+      <!-- ï¿½pï¿½Xï¿½ï¿½ï¿½[ï¿½hï¿½ÏXï¿½Zï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½ -->
       <div class="form-section">
-        <h3 class="form-section-title">ƒpƒXƒ[ƒh•ÏX</h3>
-        <p class="form-help">ƒpƒXƒ[ƒh‚ð•ÏX‚µ‚È‚¢ê‡‚ÍAˆÈ‰º‚Ì€–Ú‚ð‹ó—“‚É‚µ‚Ä‚­‚¾‚³‚¢</p>
+        <h3 class="form-section-title">ï¿½pï¿½Xï¿½ï¿½ï¿½[ï¿½hï¿½ÏX</h3>
+        <p class="form-help">ï¿½pï¿½Xï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ÏXï¿½ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½ÍAï¿½È‰ï¿½ï¿½Ìï¿½ï¿½Ú‚ï¿½ó—“‚É‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</p>
 
-        <!-- V‚µ‚¢ƒpƒXƒ[ƒh -->
+        <!-- ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Xï¿½ï¿½ï¿½[ï¿½h -->
         <div class="form-group">
-          <%= f.label :password, "V‚µ‚¢ƒpƒXƒ[ƒh", class: "form-label" %>
+          <%= f.label :password, "ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Xï¿½ï¿½ï¿½[ï¿½h", class: "form-label" %>
           <% if @minimum_password_length %>
-            <small class="form-help"><%= @minimum_password_length %>•¶ŽšˆÈã</small>
+            <small class="form-help"><%= @minimum_password_length %>ï¿½ï¿½ï¿½ï¿½ï¿½Èï¿½</small>
           <% end %>
           <%= f.password_field :password, 
               autocomplete: "new-password",
-              placeholder: "V‚µ‚¢ƒpƒXƒ[ƒh‚ð“ü—Í",
+              placeholder: "ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Xï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½",
               class: "form-control" %>
         </div>
 
-        <!-- V‚µ‚¢ƒpƒXƒ[ƒhiŠm”Fj -->
+        <!-- ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Xï¿½ï¿½ï¿½[ï¿½hï¿½iï¿½mï¿½Fï¿½j -->
         <div class="form-group">
-          <%= f.label :password_confirmation, "V‚µ‚¢ƒpƒXƒ[ƒhiŠm”Fj", class: "form-label" %>
+          <%= f.label :password_confirmation, "ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Xï¿½ï¿½ï¿½[ï¿½hï¿½iï¿½mï¿½Fï¿½j", class: "form-label" %>
           <%= f.password_field :password_confirmation, 
               autocomplete: "new-password",
-              placeholder: "‚à‚¤ˆê“x“ü—Í",
+              placeholder: "ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½ï¿½",
               class: "form-control" %>
         </div>
       </div>
 
       <hr class="form-divider">
 
-      <!-- Œ»Ý‚ÌƒpƒXƒ[ƒhi•K{j -->
+      <!-- ï¿½ï¿½ï¿½Ý‚Ìƒpï¿½Xï¿½ï¿½ï¿½[ï¿½hï¿½iï¿½Kï¿½{ï¿½j -->
       <div class="form-group">
-        <%= f.label :current_password, "Œ»Ý‚ÌƒpƒXƒ[ƒh", class: "form-label required" %>
-        <small class="form-help">•ÏX‚ðŠm”F‚·‚é‚½‚ß‚É•K—v‚Å‚·</small>
+        <%= f.label :current_password, "ï¿½ï¿½ï¿½Ý‚Ìƒpï¿½Xï¿½ï¿½ï¿½[ï¿½h", class: "form-label required" %>
+        <small class="form-help">ï¿½ÏXï¿½ï¿½mï¿½Fï¿½ï¿½ï¿½é‚½ï¿½ß‚É•Kï¿½vï¿½Å‚ï¿½</small>
         <%= f.password_field :current_password, 
             autocomplete: "current-password",
-            placeholder: "Œ»Ý‚ÌƒpƒXƒ[ƒh‚ð“ü—Í",
+            placeholder: "ï¿½ï¿½ï¿½Ý‚Ìƒpï¿½Xï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½",
             class: "form-control",
             required: true %>
       </div>
 
-      <!-- ‘—Mƒ{ƒ^ƒ“ -->
+      <!-- ï¿½ï¿½ï¿½Mï¿½{ï¿½^ï¿½ï¿½ -->
       <div class="form-actions">
-        <%= f.submit "XV‚·‚é", class: "btn btn-primary" %>
-        <%= link_to "ƒLƒƒƒ“ƒZƒ‹", my_page_path, class: "btn btn-secondary" %>
+        <%= f.submit "ï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½", class: "btn btn-primary" %>
+        <%= link_to "ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½", my_page_path, class: "btn btn-secondary" %>
       </div>
     <% end %>
 
-    <!-- ƒAƒJƒEƒ“ƒgíœ -->
+    <!-- ï¿½Aï¿½Jï¿½Eï¿½ï¿½ï¿½gï¿½íœ -->
     <div class="danger-zone">
-      <h3 class="danger-zone-title">ŠëŒ¯‚È‘€ì</h3>
-      <p class="danger-zone-description">ƒAƒJƒEƒ“ƒg‚ðíœ‚·‚é‚ÆA‚·‚×‚Ä‚Ìƒf[ƒ^‚ªŠ®‘S‚Éíœ‚³‚ê‚Ü‚·B‚±‚Ì‘€ì‚ÍŽæ‚èÁ‚¹‚Ü‚¹‚ñB</p>
-      <%= button_to "ƒAƒJƒEƒ“ƒg‚ðíœ", 
+      <h3 class="danger-zone-title">ï¿½ëŒ¯ï¿½È‘ï¿½ï¿½ï¿½</h3>
+      <p class="danger-zone-description">ï¿½Aï¿½Jï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½íœï¿½ï¿½ï¿½ï¿½ÆAï¿½ï¿½ï¿½×‚Ä‚Ìƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½Éíœï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½Bï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ï¿½ÍŽï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B</p>
+      <%= button_to "ï¿½Aï¿½Jï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½íœ", 
           registration_path(resource_name), 
           data: { 
-            confirm: "–{“–‚ÉƒAƒJƒEƒ“ƒg‚ðíœ‚µ‚Ü‚·‚©H‚±‚Ì‘€ì‚ÍŽæ‚èÁ‚¹‚Ü‚¹‚ñB", 
-            turbo_confirm: "–{“–‚ÉƒAƒJƒEƒ“ƒg‚ðíœ‚µ‚Ü‚·‚©H‚±‚Ì‘€ì‚ÍŽæ‚èÁ‚¹‚Ü‚¹‚ñB" 
+            confirm: "ï¿½{ï¿½ï¿½ï¿½ÉƒAï¿½Jï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½íœï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½Hï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ï¿½ÍŽï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B", 
+            turbo_confirm: "ï¿½{ï¿½ï¿½ï¿½ÉƒAï¿½Jï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½íœï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½Hï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ï¿½ÍŽï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B" 
           }, 
           method: :delete,
           class: "btn btn-danger" %>
