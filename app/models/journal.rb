@@ -59,8 +59,8 @@
   
   # 人気の日記 (いいね数順)
   scope :popular, -> { 
-    # where(is_public: true)
-    #   .order(likes_count: :desc, created_at: :desc)
+    where(is_public: true)
+      .order(likes_count: :desc, created_at: :desc)
     left_joins(:journal_likes)
       .group(:id)
       .order('COUNT(journal_likes.id) DESC, journals.created_at DESC')
@@ -68,8 +68,8 @@
   
   # コメントが多い日記
   scope :most_commented, -> {
-    # where(is_public: true)
-    #   .order(comments_count: :desc, created_at: :desc)
+    where(is_public: true)
+      .order(comments_count: :desc, created_at: :desc)
     left_joins(:journal_comments)
       .group(:id)
       .order('COUNT(journal_comments.id) DESC, journals.created_at DESC')
@@ -95,7 +95,7 @@
     journals = all
     journals = journals.search_by_keyword(params[:keyword]) if params[:keyword].present?
     journals = journals.by_museum(params[:museum_id]) if params[:museum_id].present?
-    # journals = journals.by_tags(params[:tag_ids]) if params[:tag_ids].present?
+    journals = journals.by_tags(params[:tag_ids]) if params[:tag_ids].present?
     journals = journals.by_user(params[:user_id]) if params[:user_id].present?
     journals
   }
@@ -135,7 +135,7 @@
   # 公開・非公開切り替え（is_publicカラムがある場合のみ有効）
   def toggle_visibility
     update(is_public: !is_public)
-  # end
+  end
   
   # 公開日記か（is_publicカラムがある場合のみ有効）
   def public?
