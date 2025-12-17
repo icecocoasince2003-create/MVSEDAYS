@@ -978,3 +978,278 @@ $color-error: #dc3545;
   background-color: #f5f5f5;
   cursor: not-allowed;
 }
+
+// 博物館選択セクション
+.museum-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: $color-tertiary-black;
+  padding: 1.5rem;
+  border-radius: 6px;
+  border: 2px solid $color-gray-medium;
+}
+
+.museum-option {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.museum-option-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $color-accent-cream;
+  cursor: pointer;
+  padding: 0.75rem;
+  background-color: $color-secondary-black;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $color-accent-gold;
+  }
+
+  input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: $color-accent-gold;
+  }
+
+  span {
+    flex: 1;
+  }
+}
+
+.museum-display-box {
+  padding: 1rem;
+  background-color: $color-secondary-black;
+  border: 2px solid $color-gray-medium;
+  border-radius: 6px;
+  color: $color-white;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+
+  &.selected {
+    border-color: $color-accent-gold;
+  }
+}
+
+.museum-display-text {
+  color: $color-gray-light;
+
+  strong {
+    color: $color-accent-gold;
+    font-size: 1.1rem;
+  }
+
+  small {
+    color: $color-accent-cream;
+    font-size: 0.9rem;
+  }
+}
+
+.museum-search-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: $color-accent-gold;
+  color: $color-primary-black;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $color-accent-cream;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(201, 169, 97, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.museum-custom-input {
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// 公開設定セクション
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: $color-tertiary-black;
+  padding: 1.5rem;
+  border-radius: 6px;
+  border: 2px solid $color-gray-medium;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: $color-secondary-black;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $color-accent-gold;
+  }
+
+  input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: $color-accent-gold;
+  }
+}
+
+.radio-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $color-accent-cream;
+}
+
+// 博物館検索モーダル
+.museum-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.museum-modal-content {
+  background-color: $color-secondary-black;
+  border: 2px solid $color-accent-gold;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.museum-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 2px solid $color-tertiary-black;
+
+  h3 {
+    color: $color-accent-gold;
+    font-size: 1.5rem;
+    margin: 0;
+  }
+}
+
+.museum-modal-close {
+  background: none;
+  border: none;
+  color: $color-accent-cream;
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $color-accent-gold;
+  }
+}
+
+.museum-modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.museum-search-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: $color-tertiary-black;
+  border: 2px solid $color-gray-medium;
+  border-radius: 6px;
+  color: $color-white;
+  margin-bottom: 1rem;
+
+  &::placeholder {
+    color: $color-gray-light;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent-gold;
+  }
+}
+
+.museum-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.museum-item {
+  padding: 1rem;
+  background-color: $color-tertiary-black;
+  border: 2px solid $color-gray-medium;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $color-accent-gold;
+    background-color: $color-gray-medium;
+  }
+}
+
+.museum-item-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $color-accent-cream;
+  margin-bottom: 0.25rem;
+}
+
+.museum-item-location {
+  font-size: 0.875rem;
+  color: $color-gray-light;
+}
+
+.museum-no-results {
+  padding: 2rem;
+  text-align: center;
+  color: $color-gray-light;
+  font-size: 1rem;
+}
+
+// ヒントテキスト
+.form-hint {
+  display: block;
+  font-size: 0.875rem;
+  color: $color-gray-light;
+  margin-top: 0.5rem;
+}

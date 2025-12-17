@@ -119,11 +119,11 @@
       <%= f.label :museum_selection, "博物館", class: "form-label" %>
 
       <div class="museum-input-group">
-        <!-- データベースから選択 -->
+        <!-- 登録博物館・指定博物館から選択 -->
         <div class="museum-option">
           <label class="museum-option-label">
             <input type="radio" name="museum_input_type" value="database" checked>
-            <span>データベースから選択</span>
+            <span>登録博物館・指定博物館から選択</span>
           </label>
 
           <%= f.hidden_field :museum_id, id: 'journal_museum_id' %>
@@ -141,11 +141,11 @@
         <div class="museum-option">
           <label class="museum-option-label">
             <input type="radio" name="museum_input_type" value="custom">
-            <span>その他の博物館（自由記述）</span>
+            <span>検索にヒットしない博物館（自由記述）</span>
           </label>
 
           <%= f.text_field :museum_name,
-                           placeholder: "例: 地元の歴史資料館",
+                           placeholder: "例: ○○市歴史博物館",
                            class: "form-input museum-custom-input",
                            id: "museum_custom_input",
                            disabled: true %>
@@ -159,11 +159,11 @@
       <div class="radio-group">
         <label class="radio-label">
           <%= f.radio_button :is_public, true, checked: true %>
-          <span class="radio-text">🌐 公開（みんなに見せる）</span>
+          <span class="radio-text">🌐 公開（みんなと共有）</span>
         </label>
         <label class="radio-label">
           <%= f.radio_button :is_public, false %>
-          <span class="radio-text">🔒 非公開（自分だけ）</span>
+          <span class="radio-text">🔒 非公開（自分だけの記録）</span>
         </label>
       </div>
       <span class="form-hint">非公開の日記は自分だけが閲覧できます</span>
