@@ -140,7 +140,7 @@
   # 公開日記か（is_publicカラムがある場合のみ有効）
   def public?
     is_public
-  # end
+  end
   
   # 閲覧可能か
   def viewable_by?(viewer)
