@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag 'show', :media => "all" %>
+﻿<%= stylesheet_link_tag 'show', :media => "all" %>
 
 <div class="show-journal-container">
   <div class="show-grid">
@@ -15,7 +15,7 @@
           <div class="journal-meta">
             <div class="meta-item">
               <span class="meta-icon">👤</span>
-              <span><%= @journal.user.email %></span>
+              <span><%= @journal.user.display_name %></span>
             </div>
             
             <% if @journal.visit_date.present? %>
