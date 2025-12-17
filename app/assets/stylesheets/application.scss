@@ -1,29 +1,45 @@
-﻿/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+// /*
+//  * This is a manifest file that'll be compiled into application.css, which will include all the files
+//  * listed below.
+//  *
+//  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+//  * vendor/assets/stylesheets directory can be referenced here using a relative path.
+//  *
+//  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+//  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+//  * files in this directory. Styles in this file should be added after the last require_* statement.
+//  * It is generally better to create a new file per style scope.
+//  *
+//  *= require_tree .
+//  *= require_self
+//  */
+//  /*
+//  * This is a manifest file that'll be compiled into application.css, which will include all the files
+//  * listed below.
+//  *
+//  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+//  * vendor/assets/stylesheets directory can be referenced here using a relative path.
+//  *
+//  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+//  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+//  * files in this directory. Styles in this file should be added after the last require_* statement.
+//  * It is generally better to create a new file per style scope.
+//  */
 
-// 配色変数（黒・金・白）
-$primary-gold: #D4AF37;
-$dark-gold: #B8960F;
-$rich-black: #1a1a1a;
-$soft-black: #2c2c2c;
-$light-gray: #f5f5f5;
-$border-gray: #e0e0e0;
-$white: #ffffff;
+// カラーパレッド
+$color-primary-black: #0a0a0a;
+$color-secondary-black: #1a1a1a;
+$color-tertiary-black: #2a2a2a;
+$color-accent-gold: #c9a961;
+$color-accent-cream: #e8d5b5;
+$color-white: #ffffff;
+$color-gray-light: #4a4a4a;
+$color-gray-medium: #313131;
 
-// グローバルスタイル
+// フォント
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&display=swap');
+
+// リセット
 * {
   margin: 0;
   padding: 0;
@@ -31,116 +47,457 @@ $white: #ffffff;
 }
 
 body {
-  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-  background-color: $light-gray;
-  color: $soft-black;
-  line-height: 1.6;
+  font-family: 'Noto Serif JP', '游明朝', 'Yu Mincho', serif;
+  background-color: $color-primary-black;
+  color: $color-white;
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-// ボタンスタイル
-.btn {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: center;
+a {
+  color: $color-accent-gold;
   text-decoration: none;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    color: $color-accent-cream;
   }
 }
 
-.btn-primary {
-  background-color: $primary-gold;
-  color: $rich-black;
-
-  &:hover {
-    background-color: $dark-gold;
-    color: $white;
-  }
+// ヘッダー
+.main-header {
+  background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
+  border-bottom: 2px solid $color-accent-gold;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-.btn-secondary {
-  background-color: $rich-black;
-  color: $white;
-
-  &:hover {
-    background-color: $soft-black;
-  }
-}
-
-.btn-danger {
-  background-color: #8B0000;
-  color: $white;
-
-  &:hover {
-    background-color: #660000;
-  }
-}
-
-.btn-sm {
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-}
-
-// コンテナ
-.container {
-  max-width: 1200px;
+.header-container {
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
 }
 
-// ページヘッダー
-.page-header {
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid $primary-gold;
-}
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 
-.page-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: $rich-black;
-}
+  .logo-icon {
+    img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+  }
 
-// カード
-.card {
-  background: $white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-}
+  .logo-text {
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin: 0;
+      
+      a {
+        color: $color-accent-gold;
+        &:hover {
+          color: $color-accent-cream;
+        }
+      }
+    }
 
-// リンク
-a {
-  color: $primary-gold;
-  text-decoration: none;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: $dark-gold;
+    .subtitle {
+      font-size: 0.75rem;
+      color: $color-accent-cream;
+      letter-spacing: 0.05em;
+      margin-top: 0.2rem;
+    }
   }
 }
 
-// フォーム
-.form-control {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid $border-gray;
+// ナビ
+.main-nav {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+
+  ul {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    color: $color-white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: rgba($color-accent-gold, 0.1);
+      color: $color-accent-gold;
+    }
+
+    &.nav-link-primary {
+      background-color: $color-accent-gold;
+      color: $color-primary-black;
+      font-weight: 600;
+
+      &:hover {
+        background-color: $color-accent-cream;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba($color-accent-gold, 0.3);
+      }
+    }
+
+    &.nav-link-admin {
+      background-color: $color-tertiary-black;
+      color: $color-accent-gold;
+      border: 1px solid $color-accent-gold;
+
+      &:hover {
+        background-color: $color-accent-gold;
+        color: $color-primary-black;
+      }
+    }
+
+    &.nav-link-logout {
+      background-color: transparent;
+      color: $color-white;
+      border: 1px solid $color-gray-light;
+      cursor: pointer;
+      font-family: 'Noto Serif JP', '游明朝', 'Yu Mincho', serif;
+      font-size: 0.9rem;
+
+      &:hover {
+        background-color: $color-gray-light;
+        border-color: $color-accent-gold;
+        color: $color-accent-gold;
+      }
+    }
+  }
+
+  // ユーザー情報表示（ナビ内）
+  .nav-user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.2rem;
+    padding: 0.4rem 0.8rem;
+    border-left: 1px solid $color-gray-medium;
+    margin-left: 0.5rem;
+
+    .nav-user-email {
+      font-size: 0.75rem;
+      color: $color-accent-cream;
+      white-space: nowrap;
+    }
+
+    .nav-admin-badge {
+      font-size: 0.65rem;
+      background-color: $color-accent-gold;
+      color: $color-primary-black;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+  }
+
+  // ログアウトフォーム
+  .nav-logout-form {
+    display: inline;
+    margin: 0;
+  }
+}
+
+// ボタン
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
   border-radius: 4px;
-  font-size: 1rem;
-  transition: border-color 0.3s;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
 
-  &:focus {
-    outline: none;
-    border-color: $primary-gold;
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+  &.btn-primary {
+    background-color: $color-accent-gold;
+    color: $color-primary-black;
+
+    &:hover {
+      background-color: $color-accent-cream;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba($color-accent-gold, 0.3);
+    }
+  }
+
+  &.btn-secondary {
+    background-color: transparent;
+    color: $color-white;
+    border: 1px solid $color-gray-light;
+
+    &:hover {
+      background-color: $color-gray-light;
+      border-color: $color-accent-gold;
+      color: $color-accent-gold;
+    }
+  }
+
+  &.btn-admin {
+    background-color: $color-tertiary-black;
+    color: $color-accent-gold;
+    border: 1px solid $color-accent-gold;
+
+    &:hover {
+      background-color: $color-accent-gold;
+      color: $color-primary-black;
+    }
   }
 }
+
+// メインコンテンツ
+.main-content {
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+// フッター
+.main-footer {
+  background-color: $color-secondary-black;
+  border-top: 1px solid $color-tertiary-black;
+  padding: 1.5rem 2rem;
+  margin-top: auto;
+
+  .footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+
+    p {
+      font-size: 0.85rem;
+      color: $color-gray-light;
+      letter-spacing: 0.05em;
+    }
+  }
+}
+
+// レスポンシブ
+@media (max-width: 1200px) {
+  .main-nav {
+    ul {
+      gap: 0.7rem;
+    }
+
+    .nav-link {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    .nav-user-info {
+      .nav-user-email {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .header-container {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .main-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    
+    ul {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+
+    .nav-user-info {
+      border-left: none;
+      margin-left: 0;
+      padding: 0.3rem 0.6rem;
+      border: 1px solid $color-gray-medium;
+      border-radius: 4px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 1rem;
+  }
+
+  .logo-section {
+    .logo-text h1 {
+      font-size: 1.4rem;
+    }
+
+    .subtitle {
+      font-size: 0.65rem;
+    }
+
+    .logo-icon img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .main-nav {
+    ul {
+      gap: 0.5rem;
+    }
+
+    .nav-link {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    .nav-user-info {
+      .nav-user-email {
+        font-size: 0.65rem;
+      }
+
+      .nav-admin-badge {
+        font-size: 0.6rem;
+        padding: 0.1rem 0.4rem;
+      }
+    }
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .main-content {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-section {
+    .logo-text h1 {
+      font-size: 1.2rem;
+    }
+
+    .subtitle {
+      display: none;
+    }
+
+    .logo-icon img {
+      width: 35px;
+      height: 35px;
+    }
+  }
+
+  .main-nav {
+    ul {
+      gap: 0.4rem;
+    }
+
+    .nav-link {
+      padding: 0.35rem 0.6rem;
+      font-size: 0.75rem;
+    }
+
+    .nav-user-info {
+      width: 100%;
+      align-items: center;
+      text-align: center;
+      
+      .nav-user-email {
+        font-size: 0.65rem;
+      }
+    }
+  }
+}
+
+// * {
+//   background-color: #000000;
+//   color: white;
+//   padding: 0;
+//   margin: 0;
+// }
+// body {
+//   font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ",
+//     Meiryo, "ＭＳ Ｐゴシック", sans-serif;
+// }
+// header {
+//   background-color: #313131;
+//   height: 80px;
+//   font-weight: bold;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// }
+// header a {
+//   color: white; 
+//   background-color: #313131;
+//   text-decoration: none; 
+// }
+// header h1 {
+//   color: #C9A961;
+//   background-color: #313131;
+//   margin-left: 10px;
+//   font-weight: bold;
+// }
+// header h2 {
+//   color:#C9A961;
+//   background-color: #313131;
+//   margin-right: 20px;
+//   font-size: 10px;
+// }
+// .header-list {
+//   background-color: #313131;
+//   display: flex;
+//   align-items: center;
+// }
+// header ul {
+//   color: white;
+//   background-color: #313131;
+//   display: flex;
+// }
+// header li {
+//   color: white;
+//   background-color: #313131;
+//   list-style: none;
+//   margin-right: 40px;
+// }
+// footer {
+//   background-color: #313131;
+//   color: white;
+//   font-size: 10px;
+//   bottom: 0;
+//   height: 30px;
+//   display: flex;
+//   justify-content: flex-end;
+//   align-items: center;
+//   width: 100%;
+//   position: fixed;
+// }
