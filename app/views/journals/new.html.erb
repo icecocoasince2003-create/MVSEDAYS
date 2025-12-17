@@ -32,23 +32,17 @@
 
     <!-- 画像アップロード -->
     <div class="form-group">
-      <%= f.label :images, "写真（最大5枚）", class: "form-label" %>
-      <div class="image-upload-container">
-        <%= f.file_field :images, 
-            class: "file-input", 
-            accept: "image/*", 
-            multiple: true,
-            id: "journal_images",
-            onchange: "previewImages(event)" %>
-        <div class="file-upload-label" onclick="document.getElementById('journal_images').click()">
-          <span class="upload-icon">📷</span>
-          <span class="upload-text">クリックして写真を選択（複数可）</span>
-          <span class="upload-hint">JPG, PNG, GIF対応 / 最大5枚</span>
-        </div>
-      </div>
+      <%= f.label :images, "写真", class: "form-label" %>
+      <%= f.file_field :images, 
+          class: "form-control", 
+          accept: "image/*", 
+          multiple: true,
+          id: "journal_images",
+          onchange: "previewImages(event)" %>
+      <span class="form-hint">複数選択可（最大5枚）</span>
       
       <!-- プレビューエリア -->
-      <div id="image-preview-container" class="image-preview-grid">
+      <div id="image-preview-container" class="image-preview-grid" style="display: none; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.5rem; margin-top: 1rem;">
         <!-- プレビュー画像がここに表示されます -->
       </div>
     </div>
@@ -185,7 +179,7 @@
 </div>
 
 <script>
-// 画像プレビュー機能
+// 画像プレビュー機能（軽量版）
 function previewImages(event) {
   const container = document.getElementById('image-preview-container');
   container.innerHTML = '';
@@ -199,46 +193,26 @@ function previewImages(event) {
   }
   
   if (files.length === 0) {
+    container.style.display = 'none';
     return;
   }
   
-  Array.from(files).forEach((file, index) => {
+  container.style.display = 'grid';
+  
+  Array.from(files).forEach((file) => {
     if (!file.type.startsWith('image/')) {
-      console.warn('画像ファイル以外はスキップ:', file.name);
       return;
     }
     
     const reader = new FileReader();
     reader.onload = function(e) {
-      const previewDiv = document.createElement('div');
-      previewDiv.className = 'image-preview-item';
-      
       const img = document.createElement('img');
       img.src = e.target.result;
-      img.alt = file.name;
-      
-      const fileName = document.createElement('p');
-      fileName.className = 'image-preview-name';
-      fileName.textContent = file.name;
-      
-      const fileSize = document.createElement('span');
-      fileSize.className = 'image-preview-size';
-      fileSize.textContent = formatFileSize(file.size);
-      
-      previewDiv.appendChild(img);
-      previewDiv.appendChild(fileName);
-      previewDiv.appendChild(fileSize);
-      container.appendChild(previewDiv);
+      img.style.cssText = 'width: 100%; height: 100px; object-fit: cover; border-radius: 4px; border: 2px solid #D4AF37;';
+      container.appendChild(img);
     };
     reader.readAsDataURL(file);
   });
-}
-
-// ファイルサイズをフォーマット
-function formatFileSize(bytes) {
-  if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
 }
 
 // 博物館入力タイプの切り替え
