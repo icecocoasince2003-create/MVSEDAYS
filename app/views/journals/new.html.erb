@@ -7,7 +7,7 @@
   </div>
 
   <%= form_for @journal, url: {controller: 'journals', action: 'create'}, html: {class: 'journal-form'} do |f| %>
-    
+
     <!-- 本文 -->
     <div class="form-group">
       <%= f.label :body, "本文", class: "form-label" %>
@@ -32,15 +32,26 @@
 
     <!-- 画像アップロード -->
     <div class="form-group">
-      <%= f.label :images, "写真", class: "form-label" %>
-      <div class="file-upload-area">
-        <%= f.file_field :images, class: "file-input", accept: "image/*", multiple: true %>
-        <div class="file-upload-label">
+      <%= f.label :images, "写真（最大5枚）", class: "form-label" %>
+      <div class="image-upload-container">
+        <%= f.file_field :images, 
+            class: "file-input", 
+            accept: "image/*", 
+            multiple: true,
+            id: "journal_images",
+            onchange: "previewImages(event)" %>
+        <div class="file-upload-label" onclick="document.getElementById('journal_images').click()">
           <span class="upload-icon">📷</span>
-          <span class="upload-text">クリックして写真を選択</span>
+          <span class="upload-text">クリックして写真を選択（複数可）</span>
+          <span class="upload-hint">JPG, PNG, GIF対応 / 最大5枚</span>
         </div>
       </div>
-    </div>    
+      
+      <!-- プレビューエリア -->
+      <div id="image-preview-container" class="image-preview-grid">
+        <!-- プレビュー画像がここに表示されます -->
+      </div>
+    </div>
 
     <!-- 評価 -->
     <div class="rating-section">
@@ -50,16 +61,16 @@
         <div class="post_form">
           <%= f.radio_button :overall, 5, id: 'star1' %>
           <label for="star1"><span class="text">5</span>★</label>
-          
+
           <%= f.radio_button :overall, 4, id: 'star2' %>
           <label for="star2"><span class="text">4</span>★</label>
-          
+
           <%= f.radio_button :overall, 3, id: 'star3' %>
           <label for="star3"><span class="text">3</span>★</label>
-          
+
           <%= f.radio_button :overall, 2, id: 'star4' %>
           <label for="star4"><span class="text">2</span>★</label>
-          
+
           <%= f.radio_button :overall, 1, id: 'star5' %>
           <label for="star5"><span class="text">1</span>★</label>
         </div>
@@ -71,16 +82,16 @@
         <div class="post_form">
           <%= f.radio_button :rate, 5, id: 'star6' %>
           <label for="star6"><span class="text">5</span>★</label>
-          
+
           <%= f.radio_button :rate, 4, id: 'star7' %>
           <label for="star7"><span class="text">4</span>★</label>
-          
+
           <%= f.radio_button :rate, 3, id: 'star8' %>
           <label for="star8"><span class="text">3</span>★</label>
-          
+
           <%= f.radio_button :rate, 2, id: 'star9' %>
           <label for="star9"><span class="text">2</span>★</label>
-          
+
           <%= f.radio_button :rate, 1, id: 'star10' %>
           <label for="star10"><span class="text">1</span>★</label>
         </div>
@@ -90,7 +101,7 @@
     <!-- 博物館選択 -->
     <div class="form-group">
       <%= f.label :museum_selection, "博物館", class: "form-label" %>
-      
+
       <div class="museum-input-group">
         <!-- データベースから選択 -->
         <div class="museum-option">
@@ -98,27 +109,27 @@
             <input type="radio" name="museum_input_type" value="database" checked>
             <span>データベースから選択</span>
           </label>
-          
+
           <%= f.hidden_field :museum_id, id: 'journal_museum_id' %>
-          
+
           <div class="museum-display-box" id="museum_display_box">
             <span class="museum-display-text" id="museum_display_text">博物館を選択してください</span>
           </div>
-          
+
           <button type="button" class="museum-search-btn" id="open_museum_modal">
             🔍 博物館を検索
           </button>
         </div>
-        
+
         <!-- 自由記述 -->
         <div class="museum-option">
           <label class="museum-option-label">
             <input type="radio" name="museum_input_type" value="custom">
             <span>その他の博物館（自由記述）</span>
           </label>
-          
-          <%= f.text_field :museum_name, 
-                           placeholder: "例: 地元の歴史資料館", 
+
+          <%= f.text_field :museum_name,
+                           placeholder: "例: 地元の歴史資料館",
                            class: "form-input museum-custom-input",
                            id: "museum_custom_input",
                            disabled: true %>
@@ -149,7 +160,7 @@
     </div>
 
   <% end %>
-  
+
 </div>
 
 <!-- 博物館検索モーダル -->
@@ -159,13 +170,13 @@
       <h3>博物館を検索</h3>
       <button type="button" class="museum-modal-close" id="close_museum_modal">&times;</button>
     </div>
-    
+
     <div class="museum-modal-body">
-      <input type="text" 
-             id="museum_search_input" 
-             class="museum-search-input" 
+      <input type="text"
+             id="museum_search_input"
+             class="museum-search-input"
              placeholder="博物館名、都道府県、市区町村で検索...">
-      
+
       <div id="museum_results" class="museum-results">
         <!-- JavaScriptで動的に生成 -->
       </div>
@@ -174,6 +185,62 @@
 </div>
 
 <script>
+// 画像プレビュー機能
+function previewImages(event) {
+  const container = document.getElementById('image-preview-container');
+  container.innerHTML = '';
+  
+  const files = event.target.files;
+  
+  if (files.length > 5) {
+    alert('画像は最大5枚までアップロードできます');
+    event.target.value = '';
+    return;
+  }
+  
+  if (files.length === 0) {
+    return;
+  }
+  
+  Array.from(files).forEach((file, index) => {
+    if (!file.type.startsWith('image/')) {
+      console.warn('画像ファイル以外はスキップ:', file.name);
+      return;
+    }
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const previewDiv = document.createElement('div');
+      previewDiv.className = 'image-preview-item';
+      
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.alt = file.name;
+      
+      const fileName = document.createElement('p');
+      fileName.className = 'image-preview-name';
+      fileName.textContent = file.name;
+      
+      const fileSize = document.createElement('span');
+      fileSize.className = 'image-preview-size';
+      fileSize.textContent = formatFileSize(file.size);
+      
+      previewDiv.appendChild(img);
+      previewDiv.appendChild(fileName);
+      previewDiv.appendChild(fileSize);
+      container.appendChild(previewDiv);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// ファイルサイズをフォーマット
+function formatFileSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
 // 博物館入力タイプの切り替え
 document.addEventListener('DOMContentLoaded', function() {
   const radioButtons = document.querySelectorAll('input[name="museum_input_type"]');
@@ -181,17 +248,15 @@ document.addEventListener('DOMContentLoaded', function() {
   const museumIdField = document.getElementById('journal_museum_id');
   const museumDisplayBox = document.getElementById('museum_display_box');
   const searchButton = document.getElementById('open_museum_modal');
-  
+
   radioButtons.forEach(function(radio) {
     radio.addEventListener('change', function() {
       if (this.value === 'custom') {
-        // 自由記述モード
         customInput.disabled = false;
         museumIdField.disabled = true;
         museumDisplayBox.style.opacity = '0.5';
         searchButton.disabled = true;
       } else {
-        // データベース選択モード
         customInput.disabled = true;
         customInput.value = '';
         museumIdField.disabled = false;
@@ -204,22 +269,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 (function() {
   'use strict';
-  
+
   console.log('博物館選択スクリプト開始');
-  
-  // 博物館データを埋め込み
-  window.museumsData = <%= raw Museum.all.map { |m| 
-    { 
-      id: m.id, 
-      name: m.name, 
-      prefecture: m.prefecture, 
-      city: m.city 
-    } 
+
+  window.museumsData = <%= raw Museum.all.map { |m|
+    {
+      id: m.id,
+      name: m.name,
+      prefecture: m.prefecture,
+      city: m.city
+    }
   }.to_json %>;
-  
+
   console.log('博物館データ数:', window.museumsData.length);
-  
-  // DOM要素の取得
+
   const modal = document.getElementById('museum_modal');
   const openBtn = document.getElementById('open_museum_modal');
   const closeBtn = document.getElementById('close_museum_modal');
@@ -228,14 +291,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const displayBox = document.getElementById('museum_display_box');
   const displayText = document.getElementById('museum_display_text');
   const hiddenField = document.getElementById('journal_museum_id');
-  
-  // 要素の存在確認
+
   if (!modal || !openBtn || !closeBtn || !searchInput || !resultsContainer) {
     console.error('必要なDOM要素が見つかりません');
     return;
   }
-  
-  // モーダルを開く
+
   openBtn.addEventListener('click', function(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -245,31 +306,28 @@ document.addEventListener('DOMContentLoaded', function() {
     renderMuseums(window.museumsData);
     searchInput.focus();
   });
-  
-  // モーダルを閉じる
+
   function closeModal() {
     console.log('モーダルを閉じる');
     modal.style.display = 'none';
   }
-  
+
   closeBtn.addEventListener('click', function(e) {
     e.preventDefault();
     e.stopPropagation();
     closeModal();
   });
-  
-  // モーダル外クリックで閉じる
+
   modal.addEventListener('click', function(e) {
     if (e.target === modal) {
       closeModal();
     }
   });
-  
-  // 検索機能
+
   searchInput.addEventListener('input', function(e) {
     const query = e.target.value.toLowerCase().trim();
     console.log('検索クエリ:', query);
-    
+
     if (query === '') {
       renderMuseums(window.museumsData);
     } else {
@@ -282,66 +340,59 @@ document.addEventListener('DOMContentLoaded', function() {
       renderMuseums(filtered);
     }
   });
-  
-  // 博物館リストを表示
+
   function renderMuseums(museums) {
     resultsContainer.innerHTML = '';
-    
+
     if (museums.length === 0) {
       resultsContainer.innerHTML = '<div class="museum-no-results">該当する博物館が見つかりません</div>';
       return;
     }
-    
+
     museums.forEach(function(museum) {
       const item = document.createElement('div');
       item.className = 'museum-item';
       item.dataset.museumId = museum.id;
-      
+
       const location = [museum.prefecture, museum.city].filter(Boolean).join(' ');
-      
-      item.innerHTML = 
+
+      item.innerHTML =
         '<div class="museum-item-name">' + escapeHtml(museum.name) + '</div>' +
         (location ? '<div class="museum-item-location">' + escapeHtml(location) + '</div>' : '');
-      
+
       item.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         selectMuseum(museum);
       });
-      
+
       resultsContainer.appendChild(item);
     });
   }
-  
-  // 博物館を選択
+
   function selectMuseum(museum) {
     console.log('博物館を選択:', museum);
-    
-    // Hidden fieldに値を設定
+
     hiddenField.value = museum.id;
-    
-    // 表示を更新
+
     const location = [museum.prefecture, museum.city].filter(Boolean).join(' ');
-    displayText.innerHTML = 
+    displayText.innerHTML =
       '<strong>' + escapeHtml(museum.name) + '</strong>' +
       (location ? '<br><small>' + escapeHtml(location) + '</small>' : '');
-    
+
     displayBox.classList.add('selected');
-    
-    // モーダルを閉じる
+
     closeModal();
   }
-  
-  // HTML エスケープ
+
   function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
   }
-  
-  // 初期表示
+
   renderMuseums(window.museumsData);
-  
+
   console.log('博物館選択スクリプト初期化完了');
 })();
 </script>

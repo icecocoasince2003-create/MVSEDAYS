@@ -31,34 +31,46 @@
       </div>
     </div>
 
-    <!-- 現在の画像表示 -->
+        <!-- 現在の画像表示 -->
     <% if @journal.images.attached? && @journal.images.any? %>
-      <div class="current-image-section">
-        <p class="current-image-label">写真</p>
-        <div class="current-image-wrapper">
-          <%= image_tag @journal.images.first, class: "current-image" %>
-        </div>
-        <div class="image-actions">
-          <%= check_box_tag 'journal[remove_images]', '1', false, class: "remove-checkbox", id: "remove_images_checkbox" %>
-          <%= label_tag 'remove_images_checkbox', "この写真を削除", class: "remove-label" %>
+      <div class="current-images-section">
+        <p class="form-label">現在の写真</p>
+        <div class="current-images-grid">
+          <% @journal.images.each do |image| %>
+            <div class="current-image-item">
+              <%= image_tag image, class: "current-image" %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>
-    
+
     <!-- 画像アップロード -->
     <div class="form-group">
-      <%= f.label :images, @journal.images.attached? ? "新しい写真に変更" : "写真", class: "form-label" %>
-      <div class="file-upload-area">
-        <%= f.file_field :images, class: "file-input", accept: "image/*", multiple: true %>
-        <div class="file-upload-label">
+      <%= f.label :images, @journal.images.attached? ? "新しい写真を追加（最大5枚）" : "写真（最大5枚）", class: "form-label" %>
+      <div class="image-upload-container">
+        <%= f.file_field :images, 
+            class: "file-input", 
+            accept: "image/*", 
+            multiple: true,
+            id: "journal_images",
+            onchange: "previewImages(event)" %>
+        <div class="file-upload-label" onclick="document.getElementById('journal_images').click()">
           <span class="upload-icon">📷</span>
-          <span class="upload-text">クリックして写真を選択</span>
+          <span class="upload-text">クリックして写真を選択（複数可）</span>
+          <span class="upload-hint">JPG, PNG, GIF対応 / 最大5枚</span>
         </div>
       </div>
+      
+      <!-- プレビューエリア -->
+      <div id="image-preview-container" class="image-preview-grid">
+        <!-- プレビュー画像がここに表示されます -->
+      </div>
+      
       <% if @journal.images.attached? %>
-        <span class="form-hint">新しい写真を選択すると、現在の写真が置き換わります</span>
+        <span class="form-hint">新しい写真を選択すると、現在の写真に追加されます</span>
       <% end %>
-    </div>    
+    </div>
 
     <!-- 評価 -->
     <div class="rating-section">
@@ -186,3 +198,60 @@
 
   <% end %>
 </div>
+<script>
+// 画像プレビュー機能
+function previewImages(event) {
+  const container = document.getElementById('image-preview-container');
+  container.innerHTML = '';
+  
+  const files = event.target.files;
+  
+  if (files.length > 5) {
+    alert('画像は最大5枚までアップロードできます');
+    event.target.value = '';
+    return;
+  }
+  
+  if (files.length === 0) {
+    return;
+  }
+  
+  Array.from(files).forEach((file, index) => {
+    if (!file.type.startsWith('image/')) {
+      console.warn('画像ファイル以外はスキップ:', file.name);
+      return;
+    }
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const previewDiv = document.createElement('div');
+      previewDiv.className = 'image-preview-item';
+      
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.alt = file.name;
+      
+      const fileName = document.createElement('p');
+      fileName.className = 'image-preview-name';
+      fileName.textContent = file.name;
+      
+      const fileSize = document.createElement('span');
+      fileSize.className = 'image-preview-size';
+      fileSize.textContent = formatFileSize(file.size);
+      
+      previewDiv.appendChild(img);
+      previewDiv.appendChild(fileName);
+      previewDiv.appendChild(fileSize);
+      container.appendChild(previewDiv);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// ファイルサイズをフォーマット
+function formatFileSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+</script>
