@@ -1,49 +1,222 @@
-<h2><%= resource_name.to_s.humanize %>ã•ã‚“ã®ç·¨é›†</h2>
+<%= stylesheet_link_tag 'admin', media: 'all' %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :username,"ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒãƒ¼ãƒ " %><br />
-    <small>3~20æ–‡å­—ã®è‹±æ•°å­—ã¨ã‚¢ãƒ³ãƒ€ãƒ¼ã‚¹ã‚³ã‚¢ã®ã¿ä½¿ç”¨ã§ãã¾ã™ï¼ˆæœªå…¥åŠ›ã®å ´åˆã¯ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ã‹ã‚‰è‡ªå‹•ç”Ÿæˆï¼‰</small><br />
-    <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "ä¾‹: MVSE" %>
+<div class="admin-container">
+  <div class="admin-header">
+    <h1 class="admin-title">ƒvƒƒtƒB[ƒ‹•ÒW</h1>
+    <%= link_to "© ƒ}ƒCƒy[ƒW‚É–ß‚é", my_page_path, class: "btn btn-secondary" %>
   </div>
 
-  <div class="field">
-    <%= f.label :email, "ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹" %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
+  <div class="form-container">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "profile-form" }) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <!-- ƒ†[ƒU[ƒl[ƒ€ -->
+      <div class="form-group">
+        <%= f.label :username, "ƒ†[ƒU[ƒl[ƒ€", class: "form-label" %>
+        <small class="form-help">3~20•¶š‚Ì‰p”š‚ÆƒAƒ“ƒ_[ƒXƒRƒA‚Ì‚İg—p‚Å‚«‚Ü‚·</small>
+        <%= f.text_field :username, 
+            autofocus: true, 
+            autocomplete: "username", 
+            placeholder: "—á: MVSE",
+            class: "form-control",
+            pattern: "^[a-zA-Z0-9_]{3,20}$",
+            title: "3~20•¶š‚Ì‰p”š‚ÆƒAƒ“ƒ_[ƒXƒRƒA(_)‚Ì‚İ" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password, "æ–°ã—ã„ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰" %> <i>(å¤‰æ›´ã—ãªã„å ´åˆã¯ç©ºæ¬„)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> æ–‡å­—ä»¥ä¸Š</em>
+      <!-- ƒ[ƒ‹ƒAƒhƒŒƒX -->
+      <div class="form-group">
+        <%= f.label :email, "ƒ[ƒ‹ƒAƒhƒŒƒX", class: "form-label" %>
+        <%= f.email_field :email, 
+            autocomplete: "email",
+            class: "form-control" %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div class="alert alert-info">
+          Šm”F‘Ò‚¿‚Ìƒ[ƒ‹ƒAƒhƒŒƒX: <%= resource.unconfirmed_email %>
+        </div>
+      <% end %>
+
+      <hr class="form-divider">
+
+      <!-- ƒpƒXƒ[ƒh•ÏXƒZƒNƒVƒ‡ƒ“ -->
+      <div class="form-section">
+        <h3 class="form-section-title">ƒpƒXƒ[ƒh•ÏX</h3>
+        <p class="form-help">ƒpƒXƒ[ƒh‚ğ•ÏX‚µ‚È‚¢ê‡‚ÍAˆÈ‰º‚Ì€–Ú‚ğ‹ó—“‚É‚µ‚Ä‚­‚¾‚³‚¢</p>
+
+        <!-- V‚µ‚¢ƒpƒXƒ[ƒh -->
+        <div class="form-group">
+          <%= f.label :password, "V‚µ‚¢ƒpƒXƒ[ƒh", class: "form-label" %>
+          <% if @minimum_password_length %>
+            <small class="form-help"><%= @minimum_password_length %>•¶šˆÈã</small>
+          <% end %>
+          <%= f.password_field :password, 
+              autocomplete: "new-password",
+              placeholder: "V‚µ‚¢ƒpƒXƒ[ƒh‚ğ“ü—Í",
+              class: "form-control" %>
+        </div>
+
+        <!-- V‚µ‚¢ƒpƒXƒ[ƒhiŠm”Fj -->
+        <div class="form-group">
+          <%= f.label :password_confirmation, "V‚µ‚¢ƒpƒXƒ[ƒhiŠm”Fj", class: "form-label" %>
+          <%= f.password_field :password_confirmation, 
+              autocomplete: "new-password",
+              placeholder: "‚à‚¤ˆê“x“ü—Í",
+              class: "form-control" %>
+        </div>
+      </div>
+
+      <hr class="form-divider">
+
+      <!-- Œ»İ‚ÌƒpƒXƒ[ƒhi•K{j -->
+      <div class="form-group">
+        <%= f.label :current_password, "Œ»İ‚ÌƒpƒXƒ[ƒh", class: "form-label required" %>
+        <small class="form-help">•ÏX‚ğŠm”F‚·‚é‚½‚ß‚É•K—v‚Å‚·</small>
+        <%= f.password_field :current_password, 
+            autocomplete: "current-password",
+            placeholder: "Œ»İ‚ÌƒpƒXƒ[ƒh‚ğ“ü—Í",
+            class: "form-control",
+            required: true %>
+      </div>
+
+      <!-- ‘—Mƒ{ƒ^ƒ“ -->
+      <div class="form-actions">
+        <%= f.submit "XV‚·‚é", class: "btn btn-primary" %>
+        <%= link_to "ƒLƒƒƒ“ƒZƒ‹", my_page_path, class: "btn btn-secondary" %>
+      </div>
     <% end %>
+
+    <!-- ƒAƒJƒEƒ“ƒgíœ -->
+    <div class="danger-zone">
+      <h3 class="danger-zone-title">ŠëŒ¯‚È‘€ì</h3>
+      <p class="danger-zone-description">ƒAƒJƒEƒ“ƒg‚ğíœ‚·‚é‚ÆA‚·‚×‚Ä‚Ìƒf[ƒ^‚ªŠ®‘S‚Éíœ‚³‚ê‚Ü‚·B‚±‚Ì‘€ì‚Íæ‚èÁ‚¹‚Ü‚¹‚ñB</p>
+      <%= button_to "ƒAƒJƒEƒ“ƒg‚ğíœ", 
+          registration_path(resource_name), 
+          data: { 
+            confirm: "–{“–‚ÉƒAƒJƒEƒ“ƒg‚ğíœ‚µ‚Ü‚·‚©H‚±‚Ì‘€ì‚Íæ‚èÁ‚¹‚Ü‚¹‚ñB", 
+            turbo_confirm: "–{“–‚ÉƒAƒJƒEƒ“ƒg‚ğíœ‚µ‚Ü‚·‚©H‚±‚Ì‘€ì‚Íæ‚èÁ‚¹‚Ü‚¹‚ñB" 
+          }, 
+          method: :delete,
+          class: "btn btn-danger" %>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "æ–°ã—ã„ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ï¼ˆç¢ºèªï¼‰" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+<style>
+.form-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-  <div class="field">
-    <%= f.label :current_password, "ç¾åœ¨ã®ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰" %> <i>(å¤‰æ›´ã‚’ç¢ºå®šã™ã‚‹ãŸã‚ã«å¿…è¦)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
+.profile-form {
+  width: 100%;
+}
 
-  <div class="actions">
-    <%= f.submit "æ›´æ–°ã™ã‚‹" %>
-  </div>
-<% end %>
+.form-group {
+  margin-bottom: 1.5rem;
+}
 
-<h3>ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã®å‰Šé™¤</h3>
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
 
-<div>é€€ä¼šã—ã¾ã™ã‹ï¼Ÿ <%= button_to "ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã‚’å‰Šé™¤", registration_path(resource_name), data: { confirm: "æœ¬å½“ã«é€€ä¼šã—ã¾ã™ã‹ï¼Ÿ", turbo_confirm: "æœ¬å½“ã«é€€ä¼šã—ã¾ã™ã‹ï¼Ÿ" }, method: :delete %></div>
+.form-label.required::after {
+  content: " *";
+  color: #dc3545;
+}
 
-<%= link_to "æˆ»ã‚‹", :back %>
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+}
+
+.form-help {
+  display: block;
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+}
+
+.form-divider {
+  margin: 2rem 0;
+  border: none;
+  border-top: 1px solid #e9ecef;
+}
+
+.form-section {
+  margin: 2rem 0;
+}
+
+.form-section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.danger-zone {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border: 2px solid #dc3545;
+  border-radius: 8px;
+  background: #fff5f5;
+}
+
+.danger-zone-title {
+  color: #dc3545;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.danger-zone-description {
+  color: #721c24;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.alert-info {
+  background-color: #d1ecf1;
+  border: 1px solid #bee5eb;
+  color: #0c5460;
+}
+</style>

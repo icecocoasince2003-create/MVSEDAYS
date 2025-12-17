@@ -1,3 +1,5 @@
+﻿<%= stylesheet_link_tag 'my_page', media: 'all' %>
+
 <div class="container">
   <!-- ページヘッダー -->
   <div class="page-header">
@@ -13,6 +15,8 @@
       <div class="profile-info">
         <h2 class="profile-username"><%= current_user.username || current_user.email %></h2>
         <p class="profile-email"><%= current_user.email %></p>
+        <%= link_to "プロフィール編集", edit_user_registration_path, class: "btn btn-secondary btn-sm", style: "margin-top: 0.5rem;" %>
+        <%= link_to "プロフィール編集", edit_user_registration_path, class: "btn btn-secondary btn-sm" %>
       </div>
     </div>
 
@@ -52,12 +56,12 @@
     <div class="calendar-container">
       <!-- カレンダーナビゲーション -->
       <div class="calendar-nav">
-        <%= link_to "« #{@prev_month.strftime('%Y年%m月')}", 
-                    my_page_path(year: @prev_month.year, month: @prev_month.month), 
+        <%= link_to "← #{@prev_month.strftime('%Y年%m月')}",
+                    my_page_path(year: @prev_month.year, month: @prev_month.month),
                     class: "btn btn-secondary calendar-nav-btn" %>
         <h3 class="calendar-title"><%= @current_date.strftime('%Y年 %m月') %></h3>
-        <%= link_to "#{@next_month.strftime('%Y年%m月')} »", 
-                    my_page_path(year: @next_month.year, month: @next_month.month), 
+        <%= link_to "#{@next_month.strftime('%Y年%m月')} →",
+                    my_page_path(year: @next_month.year, month: @next_month.month),
                     class: "btn btn-secondary calendar-nav-btn" %>
       </div>
 
@@ -70,21 +74,21 @@
 
         <!-- 日付セル -->
         <% (@start_date..@end_date).each do |date| %>
-          <% 
+          <%
             is_current_month = date.month == @current_date.month
             is_today = date == Date.today
             visits_on_date = @visit_dates.select { |visit_date, id| visit_date == date }
             has_visit = visits_on_date.any?
           %>
-          
+
           <% if is_current_month %>
             <% day_class = "calendar-day" %>
             <% day_class += " calendar-today" if is_today %>
             <% day_class += " calendar-visited" if has_visit %>
-            
+
             <div class="<%= day_class %>">
               <% if has_visit %>
-                <%= link_to journals_path(user_id: current_user.id, visit_date: date), 
+                <%= link_to journals_path(user_id: current_user.id, visit_date: date),
                             class: "day-link" do %>
                   <span class="day-number"><%= date.day %></span>
                   <span class="visit-badge"><%= visits_on_date.count %></span>
