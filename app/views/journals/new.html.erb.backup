@@ -1,4 +1,4 @@
-﻿<%= stylesheet_link_tag 'new', :media => "all" %>
+<%= stylesheet_link_tag 'new', :media => "all" %>
 
 <div class="new-journal-container">
   <div class="form-header">
@@ -103,22 +103,6 @@
       <button type="button" class="museum-search-btn" id="open_museum_modal">
         🔍 博物館を検索
       </button>
-    </div>
-
-    <!-- 公開設定 -->
-    <div class="form-group">
-      <%= f.label :is_public, "公開設定", class: "form-label" %>
-      <div class="radio-group">
-        <label class="radio-label">
-          <%= f.radio_button :is_public, true, checked: true %>
-          <span class="radio-text">🌐 公開（みんなに見せる）</span>
-        </label>
-        <label class="radio-label">
-          <%= f.radio_button :is_public, false %>
-          <span class="radio-text">🔒 非公開（自分だけ）</span>
-        </label>
-      </div>
-      <span class="form-hint">非公開の日記は自分だけが閲覧できます</span>
     </div>
 
     <!-- 送信ボタン -->

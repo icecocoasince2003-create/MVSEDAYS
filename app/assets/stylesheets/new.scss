@@ -910,3 +910,37 @@ $color-error: #dc3545;
     font-size: 0.8rem;
   }
 }
+/* 公開設定のスタイル */
+.radio-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.radio-label:hover {
+  border-color: #4a90e2;
+  background-color: #f0f8ff;
+}
+
+.radio-label input[type="radio"] {
+  margin-right: 0.5rem;
+}
+
+.radio-label input[type="radio"]:checked + .radio-text {
+  font-weight: bold;
+  color: #4a90e2;
+}
+
+.radio-text {
+  font-size: 0.95rem;
+}

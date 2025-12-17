@@ -1,10 +1,15 @@
-class JournalsController < ApplicationController
+﻿class JournalsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
     before_action :set_journal, only: [:show, :edit, :update, :destroy]
     before_action :authorize_user!, only: [:edit, :update, :destroy]
 
     def index
-        @journals = Journal.all
+        # 公開日記 + 自分の非公開日記を表示
+        if user_signed_in?
+            @journals = Journal.where(is_public: true).or(Journal.where(user: current_user))
+        else
+            @journals = Journal.where(is_public: true)
+        end
         search = params[:search]
         @journals = @journals.joins(:user).where("tag LIKE ?", "%#{search}%") if search.present?
 
@@ -43,6 +48,11 @@ class JournalsController < ApplicationController
     end
 
     def show
+        # 閲覧権限チェック
+        unless @journal.viewable_by?(current_user)
+            redirect_to journals_path, alert: 'この日記は非公開です。'
+            return
+        end
         # @journal は before_action で設定済み
         @museum = @journal.museum
         @related_journals = if @museum
@@ -98,7 +108,6 @@ class JournalsController < ApplicationController
             :tag_list,
             :overall,
             :rate,
-            images: []
-        )
+            :is_public, images: [])
     end
 end

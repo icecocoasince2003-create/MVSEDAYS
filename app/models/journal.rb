@@ -1,4 +1,4 @@
-class Journal < ApplicationRecord
+﻿class Journal < ApplicationRecord
   # リレーション
   belongs_to :user
   belongs_to :museum, optional: true
@@ -52,10 +52,10 @@ class Journal < ApplicationRecord
   has_many :journal_comments, dependent: :destroy
   
   # 公開日記のみ（is_publicカラムがある場合のみ有効）
-  # scope :public_journals, -> { where(is_public: true) }
+  scope :public_journals, -> { where(is_public: true) }
   
   # 非公開日記のみ
-  # scope :private_journals, -> { where(is_public: false) }
+  scope :private_journals, -> { where(is_public: false) }
   
   # 人気の日記 (いいね数順)
   scope :popular, -> { 
@@ -133,20 +133,21 @@ class Journal < ApplicationRecord
   end
   
   # 公開・非公開切り替え（is_publicカラムがある場合のみ有効）
-  # def toggle_visibility
-  #   update(is_public: !is_public)
+  def toggle_visibility
+    update(is_public: !is_public)
   # end
   
   # 公開日記か（is_publicカラムがある場合のみ有効）
-  # def public?
-  #   is_public
+  def public?
+    is_public
   # end
   
   # 閲覧可能か
   def viewable_by?(viewer)
-    # return true if public?
+    return true if is_public
     return true if user == viewer
-    true  # 暫定的に全て閲覧可能
+    return true if viewer&.admin?
+    false
   end
   
   # コミュニティに共有（未実装）

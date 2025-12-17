@@ -439,3 +439,24 @@ $color-gray-medium: #313131;
 //     display: flex;
 //     justify-content: flex-end;
 // }
+/* 非公開バッジ */
+.private-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  background-color: #ffeaa7;
+  border: 1px solid #fdcb6e;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.badge-icon {
+  font-size: 0.9rem;
+}
+
+.badge-text {
+  color: #d63031;
+}

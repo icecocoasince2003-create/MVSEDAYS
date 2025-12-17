@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag 'edit', :media => "all" %>
+﻿<%= stylesheet_link_tag 'edit', :media => "all" %>
 
 <div class="edit-journal-container">
   <!-- ヘッダー -->
@@ -139,6 +139,22 @@
           </p>
         </div>
       <% end %>
+    </div>
+
+    <!-- 公開設定 -->
+    <div class="form-group">
+      <%= f.label :is_public, "公開設定", class: "form-label" %>
+      <div class="radio-group">
+        <label class="radio-label">
+          <%= f.radio_button :is_public, true %>
+          <span class="radio-text">🌐 公開（みんなに見せる）</span>
+        </label>
+        <label class="radio-label">
+          <%= f.radio_button :is_public, false %>
+          <span class="radio-text">🔒 非公開（自分だけ）</span>
+        </label>
+      </div>
+      <span class="form-hint">非公開の日記は自分だけが閲覧できます</span>
     </div>
 
     <!-- 送信ボタン -->

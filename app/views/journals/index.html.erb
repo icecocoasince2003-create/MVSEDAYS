@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag 'index', :media => "all" %>
+﻿<%= stylesheet_link_tag 'index', :media => "all" %>
 
 <div class="page-header">
   <h1 class="page-title">MVSEDAYSへようこそ</h1>
@@ -37,6 +37,13 @@
           <% end %>
 
           <div class="journal-content">
+            <% if !journal.is_public %>
+              <div class="private-badge">
+                <span class="badge-icon">🔒</span>
+                <span class="badge-text">非公開</span>
+              </div>
+            <% end %>
+            
             <div class="journal-body">
               <%= truncate(journal.body, length: 150, omission: '...') %>
             </div>
