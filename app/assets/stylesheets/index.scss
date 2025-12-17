@@ -460,3 +460,14 @@ $color-gray-medium: #313131;
 .badge-text {
   color: #d63031;
 }
+
+// 一覧ページの画像（サムネイル・縦横比維持）
+.journal-card .journal-image,
+.journal-image-wrapper img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #c9a961;
+  display: block;
+}
