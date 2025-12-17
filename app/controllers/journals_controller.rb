@@ -104,10 +104,13 @@
         params.require(:journal).permit(
             :body,
             :visit_date,
-            :museum_id,`n            :museum_name,
+            :museum_id,
+            :museum_name,
             :tag_list,
             :overall,
             :rate,
-            :is_public, images: [])
+            :is_public,
+            images: []
+        )
     end
 end
