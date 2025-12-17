@@ -1,22 +1,24 @@
-<div class="user-detail-container">
-  <div class="user-detail-header">
-    <h1>ユーザー詳細</h1>
+﻿<%= stylesheet_link_tag 'admin', media: 'all' %>
+
+<div class="admin-container">
+  <div class="admin-header">
+    <h1>👤 ユーザー詳細</h1>
     <%= link_to "← 戻る", users_path, class: "btn btn-secondary" %>
   </div>
 
   <div class="user-detail-card">
     <div class="user-info-section">
-      <h2>基本情報</h2>
+      <h2>📋 基本情報</h2>
       <dl class="user-info-list">
         <dt>ID</dt>
         <dd><%= @user.id %></dd>
-        
-        <dt>ユーザー名</dt>
-        <dd><%= @user.username || 'N/A' %></dd>
-        
+
+        <dt>ユーザーネーム</dt>
+        <dd><%= @user.display_name %></dd>
+
         <dt>メールアドレス</dt>
         <dd><%= @user.email %></dd>
-        
+
         <dt>権限</dt>
         <dd>
           <% if @user.admin? %>
@@ -25,31 +27,39 @@
             <span class="badge badge-user">一般ユーザー</span>
           <% end %>
         </dd>
-        
+
         <dt>登録日</dt>
         <dd><%= @user.created_at.strftime('%Y年%m月%d日 %H:%M') %></dd>
-        
+
         <dt>最終更新</dt>
         <dd><%= @user.updated_at.strftime('%Y年%m月%d日 %H:%M') %></dd>
       </dl>
     </div>
 
     <div class="user-stats-section">
-      <h2>活動統計</h2>
+      <h2>📊 活動統計</h2>
       <div class="stats-grid">
         <div class="stat-item">
           <span class="stat-label">投稿した日記</span>
           <span class="stat-value"><%= @user.journals.count %></span>
         </div>
         <div class="stat-item">
-          <span class="stat-label">訪問した美術館</span>
-          <span class="stat-value"><%= @user.journals.where.not(museum_id: nil).count %></span>
+          <span class="stat-label">訪問した博物館</span>
+          <span class="stat-value"><%= @user.journals.where.not(museum_id: nil).distinct.count(:museum_id) %></span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">公開日記</span>
+          <span class="stat-value"><%= @user.journals.where(is_public: true).count %></span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">非公開日記</span>
+          <span class="stat-value"><%= @user.journals.where(is_public: false).count %></span>
         </div>
       </div>
     </div>
 
     <div class="user-journals-section">
-      <h2>最近の日記</h2>
+      <h2>📝 最近の日記</h2>
       <% if @user.journals.any? %>
         <div class="journals-list">
           <% @user.journals.order(created_at: :desc).limit(5).each do |journal| %>
@@ -58,9 +68,12 @@
                 <%= journal.visit_date&.strftime('%Y/%m/%d') || journal.created_at.strftime('%Y/%m/%d') %>
               </div>
               <div class="journal-content">
+                <% unless journal.is_public %>
+                  <span class="badge badge-private">🔒 非公開</span>
+                <% end %>
                 <%= truncate(journal.body, length: 100) %>
               </div>
-              <%= link_to "詳細", journal_path(journal), class: "btn btn-sm btn-link" %>
+              <%= link_to "詳細 →", journal_path(journal), class: "btn btn-sm btn-info" %>
             </div>
           <% end %>
         </div>
@@ -68,16 +81,20 @@
           <p class="more-journals">他 <%= @user.journals.count - 5 %> 件の日記</p>
         <% end %>
       <% else %>
-        <p class="empty-message">まだ日記が投稿されていません</p>
+        <div class="empty-state">
+          <div class="empty-state-icon">📭</div>
+          <p class="empty-message">まだ日記が投稿されていません</p>
+        </div>
       <% end %>
     </div>
 
     <% unless @user == current_user %>
       <div class="danger-zone">
-        <h2>危険な操作</h2>
-        <%= link_to "このユーザーを削除", user_path(@user), 
-            method: :delete, 
-            data: { confirm: "#{@user.email} を削除しますか？\nこのユーザーの全ての日記も削除されます。\nこの操作は取り消せません。" }, 
+        <h2>⚠️ 危険な操作</h2>
+        <p class="danger-warning">この操作は取り消せません。このユーザーの全ての日記も削除されます。</p>
+        <%= button_to "このユーザーを削除", user_path(@user),
+            method: :delete,
+            data: { confirm: "#{@user.display_name} を削除しますか?\n\nこのユーザーの全ての日記も削除されます。\nこの操作は取り消せません。" },
             class: "btn btn-danger" %>
       </div>
     <% end %>
@@ -85,23 +102,10 @@
 </div>
 
 <style>
-.user-detail-container {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-.user-detail-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
 .user-detail-card {
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   overflow: hidden;
 }
 
@@ -110,7 +114,11 @@
 .user-journals-section,
 .danger-zone {
   padding: 2rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.danger-zone {
+  border-bottom: none;
 }
 
 .user-info-section h2,
@@ -120,48 +128,52 @@
   margin-top: 0;
   margin-bottom: 1.5rem;
   color: #333;
+  font-size: 1.3rem;
 }
 
 .user-info-list {
   display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 1rem;
+  grid-template-columns: 180px 1fr;
+  gap: 1rem 2rem;
 }
 
 .user-info-list dt {
   font-weight: 600;
-  color: #666;
+  color: #495057;
 }
 
 .user-info-list dd {
   margin: 0;
+  color: #212529;
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .stat-item {
-  background: #f8f9fa;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
   padding: 1.5rem;
-  border-radius: 8px;
+  border-radius: 12px;
   text-align: center;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .stat-label {
   display: block;
   font-size: 0.9rem;
-  color: #666;
+  opacity: 0.95;
   margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
 .stat-value {
   display: block;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #667eea;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 
 .journals-list {
@@ -174,50 +186,66 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1rem;
+  padding: 1.5rem;
   background: #f8f9fa;
   border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.journal-item:hover {
+  background: #e9ecef;
 }
 
 .journal-date {
   font-weight: 600;
   color: #667eea;
   white-space: nowrap;
+  min-width: 90px;
 }
 
 .journal-content {
   flex: 1;
-  color: #666;
+  color: #495057;
 }
 
 .more-journals {
   margin-top: 1rem;
   text-align: center;
-  color: #666;
-}
-
-.empty-message {
-  text-align: center;
-  color: #999;
-  padding: 2rem;
+  color: #6c757d;
+  font-style: italic;
 }
 
 .danger-zone {
   background: #fff5f5;
-  border-bottom: none;
 }
 
 .danger-zone h2 {
   color: #dc3545;
 }
 
-.btn-link {
-  background: transparent;
-  color: #667eea;
-  padding: 0.25rem 0.5rem;
+.danger-warning {
+  color: #721c24;
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-weight: 500;
 }
 
-.btn-link:hover {
-  text-decoration: underline;
+@media (max-width: 768px) {
+  .user-info-list {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .journal-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 </style>
