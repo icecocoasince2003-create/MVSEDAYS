@@ -89,20 +89,41 @@
 
     <!-- 博物館選択 -->
     <div class="form-group">
-      <%= f.label :museum_id, "博物館", class: "form-label" %>
+      <%= f.label :museum_selection, "博物館", class: "form-label" %>
       
-      <!-- Hidden field for museum_id -->
-      <%= f.hidden_field :museum_id, id: 'journal_museum_id' %>
-      
-      <!-- 博物館表示ボックス -->
-      <div class="museum-display-box" id="museum_display_box">
-        <span class="museum-display-text" id="museum_display_text">博物館を選択してください</span>
+      <div class="museum-input-group">
+        <!-- データベースから選択 -->
+        <div class="museum-option">
+          <label class="museum-option-label">
+            <input type="radio" name="museum_input_type" value="database" checked>
+            <span>データベースから選択</span>
+          </label>
+          
+          <%= f.hidden_field :museum_id, id: 'journal_museum_id' %>
+          
+          <div class="museum-display-box" id="museum_display_box">
+            <span class="museum-display-text" id="museum_display_text">博物館を選択してください</span>
+          </div>
+          
+          <button type="button" class="museum-search-btn" id="open_museum_modal">
+            🔍 博物館を検索
+          </button>
+        </div>
+        
+        <!-- 自由記述 -->
+        <div class="museum-option">
+          <label class="museum-option-label">
+            <input type="radio" name="museum_input_type" value="custom">
+            <span>その他の博物館（自由記述）</span>
+          </label>
+          
+          <%= f.text_field :museum_name, 
+                           placeholder: "例: 地元の歴史資料館", 
+                           class: "form-input museum-custom-input",
+                           id: "museum_custom_input",
+                           disabled: true %>
+        </div>
       </div>
-      
-      <!-- 検索ボタン -->
-      <button type="button" class="museum-search-btn" id="open_museum_modal">
-        🔍 博物館を検索
-      </button>
     </div>
 
     <!-- 公開設定 -->
@@ -153,6 +174,34 @@
 </div>
 
 <script>
+// 博物館入力タイプの切り替え
+document.addEventListener('DOMContentLoaded', function() {
+  const radioButtons = document.querySelectorAll('input[name="museum_input_type"]');
+  const customInput = document.getElementById('museum_custom_input');
+  const museumIdField = document.getElementById('journal_museum_id');
+  const museumDisplayBox = document.getElementById('museum_display_box');
+  const searchButton = document.getElementById('open_museum_modal');
+  
+  radioButtons.forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      if (this.value === 'custom') {
+        // 自由記述モード
+        customInput.disabled = false;
+        museumIdField.disabled = true;
+        museumDisplayBox.style.opacity = '0.5';
+        searchButton.disabled = true;
+      } else {
+        // データベース選択モード
+        customInput.disabled = true;
+        customInput.value = '';
+        museumIdField.disabled = false;
+        museumDisplayBox.style.opacity = '1';
+        searchButton.disabled = false;
+      }
+    });
+  });
+});
+
 (function() {
   'use strict';
   

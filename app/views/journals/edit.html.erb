@@ -107,38 +107,59 @@
 
     <!-- 博物館選択 -->
     <div class="form-group">
-      <%= f.label :museum_id, "博物館", class: "form-label" %>
-      <div class="museum-select-wrapper">
-        <%= f.select :museum_id, 
-                     options_for_select(
-                       [["博物館を選択", ""]] + 
-                       Museum.all.map { |m| [m.name, m.id] },
-                       @journal.museum_id
-                     ),
-                     {},
-                     class: "form-select",
-                     id: "museum_select" %>
-        
-        <!-- 検索ボタン -->
-        <%= link_to museums_path, 
-                    class: "museum-search-btn",
-                    target: "_blank" do %>
-          🔍 博物館を検索
-        <% end %>
-      </div>
+      <%= f.label :museum_selection, "博物館", class: "form-label" %>
       
-      <!-- 選択された博物館情報 -->
-      <% if @journal.museum.present? %>
-        <div class="selected-museum-info">
-          <p class="museum-info-text">
-            <span class="museum-info-label">選択中:</span> 
-            <span class="museum-info-name"><%= @journal.museum.name %></span>
-          </p>
-          <p class="museum-info-location">
-            <%= @journal.museum.prefecture %> <%= @journal.museum.city %>
-          </p>
+      <div class="museum-input-group">
+        <!-- データベースから選択 -->
+        <div class="museum-option">
+          <label class="museum-option-label">
+            <input type="radio" name="museum_input_type" value="database" 
+                   <%= 'checked' if @journal.museum_id.present? %>>
+            <span>データベースから選択</span>
+          </label>
+          
+          <%= f.select :museum_id,
+                       options_for_select(
+                         [["博物館を選択", ""]] +
+                         Museum.all.map { |m| [m.name, m.id] },
+                         @journal.museum_id
+                       ),
+                       {},
+                       class: "form-select",
+                       id: "museum_select" %>
+          
+          <%= link_to museums_path, class: "museum-search-btn", target: "_blank" do %>
+            🔍 博物館を検索
+          <% end %>
+          
+          <% if @journal.museum.present? %>
+            <div class="selected-museum-info">
+              <p class="museum-info-text">
+                <span class="museum-info-label">選択中:</span>
+                <span class="museum-info-name"><%= @journal.museum.name %></span>
+              </p>
+              <p class="museum-info-location">
+                <%= @journal.museum.prefecture %> <%= @journal.museum.city %>
+              </p>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+        
+        <!-- 自由記述 -->
+        <div class="museum-option">
+          <label class="museum-option-label">
+            <input type="radio" name="museum_input_type" value="custom"
+                   <%= 'checked' if @journal.museum_name.present? && @journal.museum_id.blank? %>>
+            <span>その他の博物館（自由記述）</span>
+          </label>
+          
+          <%= f.text_field :museum_name, 
+                           placeholder: "例: 地元の歴史資料館", 
+                           class: "form-input museum-custom-input",
+                           id: "museum_custom_input",
+                           disabled: @journal.museum_id.present? || @journal.museum_name.blank? %>
+        </div>
+      </div>
     </div>
 
     <!-- 公開設定 -->

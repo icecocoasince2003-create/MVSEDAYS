@@ -558,3 +558,36 @@ $color-danger: #d46d6d;
     font-size: 0.9rem;
   }
 }
+/* 博物館入力グループ */
+.museum-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.museum-option {
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+}
+
+.museum-option:has(input[type="radio"]:checked) {
+  border-color: #4a90e2;
+  background-color: #f0f8ff;
+}
+
+.museum-option-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+}
+
+.museum-custom-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}

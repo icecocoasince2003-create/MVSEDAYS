@@ -32,8 +32,14 @@
   }
 
   # インスタンスメソッド
-  def museum_name
-    museum&.name || "未選択"
+  def museum_display_name
+    if museum_id.present? && museum.present?
+      museum.name
+    elsif museum_name.present?
+      museum_name
+    else
+      "未選択"
+    end
   end
 
   def tag_list
