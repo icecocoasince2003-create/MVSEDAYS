@@ -48,10 +48,7 @@
 
   def tag_list=(names)
     self.tags = names.split(",").map do |name|
-      next if name.strip.blank?
-      Tag.find_or_create_by(name: name.strip)
-    rescue ActiveRecord::RecordNotUnique
-      Tag.find_by(name: name.strip)
+      Tag.where(name: name.strip).first_or_create! if name.strip.present?
     end.compact
   end
   
