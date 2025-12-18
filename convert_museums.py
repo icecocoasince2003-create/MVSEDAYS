@@ -1,6 +1,6 @@
-# """
+# ================================================
 # MVSEDAYS museum csv data converter
-# """
+# ================================================
 
 import csv
 import sys
@@ -120,7 +120,7 @@ def convert_csv_to_seeds(input_csv, output_rb):
                 # 必須フィールドの確認
                 if not name or not prefecture:
                     if name or prefecture:  # どちらか片方だけある場合のみ警告
-                        print(f"⚠ Warning: 必須フィールドが欠落 (行 {row_num}): name='{name}', pref='{prefecture}'")
+                        print(f" Warning: 必須フィールドが欠落 (行 {row_num}): name='{name}', pref='{prefecture}'")
                         error_count += 1
                     else:
                         skipped_count += 1
@@ -154,7 +154,7 @@ def convert_csv_to_seeds(input_csv, output_rb):
         print(f"  - 都道府県数: {len(museums_by_prefecture)}件\n")
 
         if total_count == 0:
-            print("有効なデータが0件です。CSVファイルの形式を確認してください。")
+            print("有効なデータが0件です")
             return False
 
         # 出力ディレクトリの作成
@@ -311,9 +311,8 @@ def main():
 
     if success:
         print("\n" + "=" * 70)
-        print("変換が完了しました！")
+        print("変換が完了しました")
         print("=" * 70)
-        print("\n【次のステップ】")
         print("1. 生成されたファイルを確認:")
         print(f"   type {output_rb}")
         print("\n2. db/seeds.rbに統合:")

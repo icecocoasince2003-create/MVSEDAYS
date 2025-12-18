@@ -48,7 +48,10 @@
 
   def tag_list=(names)
     self.tags = names.split(",").map do |name|
-      Tag.where(name: name.strip).first_or_create! if name.strip.present?
+      next if name.strip.blank?
+      Tag.find_or_create_by(name: name.strip)
+    rescue ActiveRecord::RecordNotUnique
+      Tag.find_by(name: name.strip)
     end.compact
   end
   
@@ -103,7 +106,6 @@
     journals = journals.by_museum(params[:museum_id]) if params[:museum_id].present?
     journals = journals.by_tags(params[:tag_ids]) if params[:tag_ids].present?
     journals = journals.by_user(params[:user_id]) if params[:user_id].present?
-    journals
   }
   
   # いいねされているか
