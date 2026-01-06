@@ -25,7 +25,7 @@
       <!-- タグ -->
       <div class="form-group form-group-half">
         <%= f.label :tag_list, "タグ", class: "form-label" %>
-        <%= f.text_field :tag_list, placeholder: "例: 国立博物館, 土器, 特別展", class: "form-input" %>
+        <%= f.text_field :tag_list, placeholder: "例: 美術館, 土器, 特別展", class: "form-input" %>
         <span class="form-hint">複数のタグはカンマ(,)で区切ってください</span>
       </div>
     </div>
@@ -194,14 +194,14 @@
              placeholder="博物館名、都道府県、市区町村で検索...">
 
       <div id="museum_results" class="museum-results">
-        <!-- JavaScriptで動的に生成 -->
+        <!-- 検索結果がここに表示されます -->
       </div>
     </div>
   </div>
 </div>
 
 <script>
-// 画像プレビュー機能（軽量版）
+// 画像プレビュー機能
 function previewImages(event) {
   const container = document.getElementById('image-preview-container');
   container.innerHTML = '';
@@ -393,7 +393,7 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script>
   <script>
-  // 画像プレビュー機能（統合版）
+  // 画像プレビュー機能
   document.addEventListener('DOMContentLoaded', function() {
     var input = document.getElementById('journal_images');
     var container = document.getElementById('image-preview-container');

@@ -1,3 +1,6 @@
+# ✅ 追加: タグ専用コントローラー（オプション）
+# タグ一覧、タグで絞り込み機能を実装する場合に使用
+
 class TagsController < ApplicationController
   def index
     @tags = Tag.popular.limit(50)

@@ -1,4 +1,4 @@
-﻿<%= stylesheet_link_tag 'index', :media => "all" %>
+﻿<%=  stylesheet_link_tag 'index', :media => "all" %>
 
 <div class="page-header">
   <h1 class="page-title">MVSEDAYSへようこそ</h1>
@@ -59,14 +59,18 @@
                   <span><%= journal.visit_date.strftime('%Y年%m月%d日') %></span>
                 </div>
               <% end %>
-              <%# 修正: journal.tag → journal.tags %>
-              <% if journal.tags.any? %>
-                <div class="meta-item tag">
-                  <i class="icon-tag"></i>
-                  <span><%= journal.tags.map(&:name).join(', ') %></span>
-                </div>
-              <% end %>
             </div>
+
+            <%# ✅ 修正: タグを個別のバッジとして表示 %>
+            <% if journal.tags.any? %>
+              <div class="tags-container">
+                <% journal.tags.each do |tag| %>
+                  <%= link_to journals_path(search: tag.name), class: "tag-badge" do %>
+                    #<%= tag.name %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
 
             <div class="journal-footer">
               <div class="post-date">
