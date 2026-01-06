@@ -13,148 +13,150 @@
       <h3 class="question-title">Q1. どの分野に一番興味がありますか？</h3>
       <div class="options-grid">
         <label class="option-card">
-          <%= f.radio_button :answers, 'art', { name: 'answers[q1]' }, checked: false %>
+          <%= radio_button_tag 'answers[q1]', 'art' %>
           <span class="option-content">
             <span class="option-icon">🎨</span>
             <span class="option-text">美術・芸術</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'history', { name: 'answers[q1]' }, checked: false %>
+          <%= radio_button_tag 'answers[q1]', 'history' %>
           <span class="option-content">
             <span class="option-icon">📜</span>
             <span class="option-text">歴史・文化</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'science', { name: 'answers[q1]' }, checked: false %>
+          <%= radio_button_tag 'answers[q1]', 'science' %>
           <span class="option-content">
             <span class="option-icon">🔬</span>
-            <span class="option-text">科学・自然</span>
+            <span class="option-text">科学・技術</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'other', { name: 'answers[q1]' }, checked: false %>
+          <%= radio_button_tag 'answers[q1]', 'nature' %>
           <span class="option-content">
-            <span class="option-icon">✨</span>
-            <span class="option-text">特に決めていない</span>
+            <span class="option-icon">🌿</span>
+            <span class="option-text">自然・生物</span>
+          </span>
+        </label>
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q1]', 'culture' %>
+          <span class="option-content">
+            <span class="option-icon">🎭</span>
+            <span class="option-text">民俗・文化</span>
           </span>
         </label>
       </div>
     </div>
 
-    <!-- Q2: 訪問したい地域 -->
+    <!-- Q2: 行きたい地域 -->
     <div class="question-block">
       <h3 class="question-title">Q2. どの地域の博物館に行きたいですか？</h3>
-      <div class="select-wrapper">
-        <%= f.select 'answers[q2]', 
-          options_for_select([
-            ['北海道', '北海道'],
-            ['青森県', '青森県'],
-            ['岩手県', '岩手県'],
-            ['宮城県', '宮城県'],
-            ['秋田県', '秋田県'],
-            ['山形県', '山形県'],
-            ['福島県', '福島県'],
-            ['茨城県', '茨城県'],
-            ['栃木県', '栃木県'],
-            ['群馬県', '群馬県'],
-            ['埼玉県', '埼玉県'],
-            ['千葉県', '千葉県'],
-            ['東京都', '東京都'],
-            ['神奈川県', '神奈川県'],
-            ['新潟県', '新潟県'],
-            ['富山県', '富山県'],
-            ['石川県', '石川県'],
-            ['福井県', '福井県'],
-            ['山梨県', '山梨県'],
-            ['長野県', '長野県'],
-            ['岐阜県', '岐阜県'],
-            ['静岡県', '静岡県'],
-            ['愛知県', '愛知県'],
-            ['三重県', '三重県'],
-            ['滋賀県', '滋賀県'],
-            ['京都府', '京都府'],
-            ['大阪府', '大阪府'],
-            ['兵庫県', '兵庫県'],
-            ['奈良県', '奈良県'],
-            ['和歌山県', '和歌山県'],
-            ['鳥取県', '鳥取県'],
-            ['島根県', '島根県'],
-            ['岡山県', '岡山県'],
-            ['広島県', '広島県'],
-            ['山口県', '山口県'],
-            ['徳島県', '徳島県'],
-            ['香川県', '香川県'],
-            ['愛媛県', '愛媛県'],
-            ['高知県', '高知県'],
-            ['福岡県', '福岡県'],
-            ['佐賀県', '佐賀県'],
-            ['長崎県', '長崎県'],
-            ['熊本県', '熊本県'],
-            ['大分県', '大分県'],
-            ['宮崎県', '宮崎県'],
-            ['鹿児島県', '鹿児島県'],
-            ['沖縄県', '沖縄県'],
-            ['どこでも良い', '']
-          ]), 
-          { prompt: '地域を選択してください' },
-          { class: 'select-input' }
-        %>
+      <div class="options-grid">
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q2]', 'tokyo' %>
+          <span class="option-content">
+            <span class="option-icon">🗼</span>
+            <span class="option-text">東京</span>
+          </span>
+        </label>
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q2]', 'osaka' %>
+          <span class="option-content">
+            <span class="option-icon">🏯</span>
+            <span class="option-text">大阪</span>
+          </span>
+        </label>
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q2]', 'kyoto' %>
+          <span class="option-content">
+            <span class="option-icon">⛩️</span>
+            <span class="option-text">京都</span>
+          </span>
+        </label>
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q2]', 'hokkaido' %>
+          <span class="option-content">
+            <span class="option-icon">❄️</span>
+            <span class="option-text">北海道</span>
+          </span>
+        </label>
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q2]', 'anywhere' %>
+          <span class="option-content">
+            <span class="option-icon">🌏</span>
+            <span class="option-text">どこでもOK</span>
+          </span>
+        </label>
       </div>
     </div>
 
     <!-- Q3: 博物館の規模 -->
     <div class="question-block">
-      <h3 class="question-title">Q3. どのくらいの規模の博物館が好きですか？</h3>
+      <h3 class="question-title">Q3. どの規模の博物館が好きですか？</h3>
       <div class="options-grid">
         <label class="option-card">
-          <%= f.radio_button :answers, 'large', { name: 'answers[q3]' }, checked: false %>
+          <%= radio_button_tag 'answers[q3]', 'large' %>
           <span class="option-content">
             <span class="option-icon">🏛️</span>
             <span class="option-text">大規模（国立など）</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'medium', { name: 'answers[q3]' }, checked: false %>
+          <%= radio_button_tag 'answers[q3]', 'medium' %>
           <span class="option-content">
             <span class="option-icon">🏢</span>
             <span class="option-text">中規模（公立など）</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'small', { name: 'answers[q3]' }, checked: false %>
+          <%= radio_button_tag 'answers[q3]', 'small' %>
           <span class="option-content">
             <span class="option-icon">🏠</span>
             <span class="option-text">小規模（私立など）</span>
           </span>
         </label>
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q3]', 'any' %>
+          <span class="option-content">
+            <span class="option-icon">✨</span>
+            <span class="option-text">気にしない</span>
+          </span>
+        </label>
       </div>
     </div>
 
-    <!-- Q4: 訪問目的 -->
+    <!-- Q4: 訪問の目的 -->
     <div class="question-block">
-      <h3 class="question-title">Q4. 博物館を訪れる主な目的は？</h3>
+      <h3 class="question-title">Q4. 博物館に何を求めますか？</h3>
       <div class="options-grid">
         <label class="option-card">
-          <%= f.radio_button :answers, 'learn', { name: 'answers[q4]' }, checked: false %>
+          <%= radio_button_tag 'answers[q4]', 'learn' %>
           <span class="option-content">
             <span class="option-icon">📚</span>
-            <span class="option-text">学びたい</span>
+            <span class="option-text">学び・知識</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'relax', { name: 'answers[q4]' }, checked: false %>
+          <%= radio_button_tag 'answers[q4]', 'relax' %>
           <span class="option-content">
-            <span class="option-icon">🧘</span>
-            <span class="option-text">リラックスしたい</span>
+            <span class="option-icon">☕</span>
+            <span class="option-text">癒し・リラックス</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'inspiration', { name: 'answers[q4]' }, checked: false %>
+          <%= radio_button_tag 'answers[q4]', 'fun' %>
           <span class="option-content">
-            <span class="option-icon">💡</span>
-            <span class="option-text">インスピレーションを得たい</span>
+            <span class="option-icon">🎪</span>
+            <span class="option-text">楽しさ・体験</span>
+          </span>
+        </label>
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q4]', 'photo' %>
+          <span class="option-content">
+            <span class="option-icon">📸</span>
+            <span class="option-text">写真映え</span>
           </span>
         </label>
       </div>
@@ -162,132 +164,153 @@
 
     <!-- Q5: 好きな時代 -->
     <div class="question-block">
-      <h3 class="question-title">Q5. 興味のある時代は？</h3>
+      <h3 class="question-title">Q5. どの時代に興味がありますか？</h3>
       <div class="options-grid">
         <label class="option-card">
-          <%= f.radio_button :answers, 'ancient', { name: 'answers[q5]' }, checked: false %>
+          <%= radio_button_tag 'answers[q5]', 'ancient' %>
           <span class="option-content">
             <span class="option-icon">🏺</span>
             <span class="option-text">古代</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'medieval', { name: 'answers[q5]' }, checked: false %>
+          <%= radio_button_tag 'answers[q5]', 'medieval' %>
           <span class="option-content">
             <span class="option-icon">⚔️</span>
-            <span class="option-text">中世</span>
+            <span class="option-text">中世・近世</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'modern', { name: 'answers[q5]' }, checked: false %>
+          <%= radio_button_tag 'answers[q5]', 'modern' %>
           <span class="option-content">
-            <span class="option-icon">🏭</span>
+            <span class="option-icon">🚂</span>
             <span class="option-text">近代</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'contemporary', { name: 'answers[q5]' }, checked: false %>
+          <%= radio_button_tag 'answers[q5]', 'contemporary' %>
           <span class="option-content">
-            <span class="option-icon">🌐</span>
+            <span class="option-icon">🚀</span>
             <span class="option-text">現代</span>
+          </span>
+        </label>
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q5]', 'all' %>
+          <span class="option-content">
+            <span class="option-icon">⏳</span>
+            <span class="option-text">すべて</span>
           </span>
         </label>
       </div>
     </div>
 
-    <!-- Q6: 展示物の好み -->
+    <!-- Q6: 好きな展示物 -->
     <div class="question-block">
       <h3 class="question-title">Q6. どんな展示物が好きですか？</h3>
       <div class="options-grid">
         <label class="option-card">
-          <%= f.radio_button :answers, 'painting', { name: 'answers[q6]' }, checked: false %>
+          <%= radio_button_tag 'answers[q6]', 'paintings' %>
           <span class="option-content">
             <span class="option-icon">🖼️</span>
-            <span class="option-text">絵画・美術品</span>
+            <span class="option-text">絵画</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'artifact', { name: 'answers[q6]' }, checked: false %>
+          <%= radio_button_tag 'answers[q6]', 'sculptures' %>
           <span class="option-content">
             <span class="option-icon">🗿</span>
-            <span class="option-text">遺物・工芸品</span>
+            <span class="option-text">彫刻</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'nature', { name: 'answers[q6]' }, checked: false %>
+          <%= radio_button_tag 'answers[q6]', 'artifacts' %>
+          <span class="option-content">
+            <span class="option-icon">⚱️</span>
+            <span class="option-text">工芸品・遺物</span>
+          </span>
+        </label>
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q6]', 'science' %>
+          <span class="option-content">
+            <span class="option-icon">🧪</span>
+            <span class="option-text">科学展示</span>
+          </span>
+        </label>
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q6]', 'nature' %>
           <span class="option-content">
             <span class="option-icon">🦖</span>
-            <span class="option-text">自然・生物</span>
-          </span>
-        </label>
-        <label class="option-card">
-          <%= f.radio_button :answers, 'technology', { name: 'answers[q6]' }, checked: false %>
-          <span class="option-content">
-            <span class="option-icon">⚙️</span>
-            <span class="option-text">科学・技術</span>
+            <span class="option-text">自然標本</span>
           </span>
         </label>
       </div>
     </div>
 
-    <!-- Q7: 訪問時間 -->
+    <!-- Q7: 滞在時間 -->
     <div class="question-block">
-      <h3 class="question-title">Q7. 博物館での滞在時間は？</h3>
+      <h3 class="question-title">Q7. どのくらい滞在したいですか？</h3>
       <div class="options-grid">
         <label class="option-card">
-          <%= f.radio_button :answers, 'short', { name: 'answers[q7]' }, checked: false %>
+          <%= radio_button_tag 'answers[q7]', 'short' %>
           <span class="option-content">
             <span class="option-icon">⏱️</span>
-            <span class="option-text">1時間程度</span>
+            <span class="option-text">1時間以内</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'medium', { name: 'answers[q7]' }, checked: false %>
+          <%= radio_button_tag 'answers[q7]', 'medium' %>
           <span class="option-content">
             <span class="option-icon">⏰</span>
-            <span class="option-text">2-3時間</span>
+            <span class="option-text">1〜2時間</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'long', { name: 'answers[q7]' }, checked: false %>
+          <%= radio_button_tag 'answers[q7]', 'long' %>
           <span class="option-content">
-            <span class="option-icon">🕰️</span>
+            <span class="option-icon">🕐</span>
+            <span class="option-text">2〜3時間</span>
+          </span>
+        </label>
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q7]', 'all_day' %>
+          <span class="option-content">
+            <span class="option-icon">🌅</span>
             <span class="option-text">半日以上</span>
           </span>
         </label>
       </div>
     </div>
 
-    <!-- Q8: 同行者 -->
+    <!-- Q8: 誰と行く？ -->
     <div class="question-block">
-      <h3 class="question-title">Q8. 誰と訪れることが多いですか？</h3>
+      <h3 class="question-title">Q8. 誰と行きますか？</h3>
       <div class="options-grid">
         <label class="option-card">
-          <%= f.radio_button :answers, 'alone', { name: 'answers[q8]' }, checked: false %>
+          <%= radio_button_tag 'answers[q8]', 'alone' %>
           <span class="option-content">
             <span class="option-icon">🚶</span>
             <span class="option-text">一人で</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'couple', { name: 'answers[q8]' }, checked: false %>
+          <%= radio_button_tag 'answers[q8]', 'partner' %>
           <span class="option-content">
             <span class="option-icon">💑</span>
-            <span class="option-text">恋人と</span>
+            <span class="option-text">パートナーと</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'family', { name: 'answers[q8]' }, checked: false %>
+          <%= radio_button_tag 'answers[q8]', 'family' %>
           <span class="option-content">
             <span class="option-icon">👨‍👩‍👧‍👦</span>
             <span class="option-text">家族と</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'friends', { name: 'answers[q8]' }, checked: false %>
+          <%= radio_button_tag 'answers[q8]', 'friends' %>
           <span class="option-content">
             <span class="option-icon">👥</span>
-            <span class="option-text">友人と</span>
+            <span class="option-text">友達と</span>
           </span>
         </label>
       </div>
@@ -295,55 +318,69 @@
 
     <!-- Q9: 建物の雰囲気 -->
     <div class="question-block">
-      <h3 class="question-title">Q9. 好きな建物の雰囲気は？</h3>
+      <h3 class="question-title">Q9. どんな建物が好きですか？</h3>
       <div class="options-grid">
         <label class="option-card">
-          <%= f.radio_button :answers, 'traditional', { name: 'answers[q9]' }, checked: false %>
+          <%= radio_button_tag 'answers[q9]', 'historic' %>
+          <span class="option-content">
+            <span class="option-icon">🏰</span>
+            <span class="option-text">歴史的建造物</span>
+          </span>
+        </label>
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q9]', 'modern' %>
+          <span class="option-content">
+            <span class="option-icon">🏙️</span>
+            <span class="option-text">モダン建築</span>
+          </span>
+        </label>
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q9]', 'traditional' %>
           <span class="option-content">
             <span class="option-icon">🏯</span>
-            <span class="option-text">伝統的</span>
+            <span class="option-text">伝統建築</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'modern', { name: 'answers[q9]' }, checked: false %>
+          <%= radio_button_tag 'answers[q9]', 'any' %>
           <span class="option-content">
-            <span class="option-icon">🏗️</span>
-            <span class="option-text">モダン</span>
-          </span>
-        </label>
-        <label class="option-card">
-          <%= f.radio_button :answers, 'unique', { name: 'answers[q9]' }, checked: false %>
-          <span class="option-content">
-            <span class="option-icon">🎪</span>
-            <span class="option-text">ユニーク</span>
+            <span class="option-icon">🏛️</span>
+            <span class="option-text">気にしない</span>
           </span>
         </label>
       </div>
     </div>
 
-    <!-- Q10: 訪問頻度 -->
+    <!-- Q10: 博物館に行く頻度 -->
     <div class="question-block">
-      <h3 class="question-title">Q10. 博物館に行く頻度は？</h3>
+      <h3 class="question-title">Q10. 博物館にはどのくらい行きますか？</h3>
       <div class="options-grid">
         <label class="option-card">
-          <%= f.radio_button :answers, 'first', { name: 'answers[q10]' }, checked: false %>
+          <%= radio_button_tag 'answers[q10]', 'first' %>
           <span class="option-content">
             <span class="option-icon">🆕</span>
-            <span class="option-text">初めて・久しぶり</span>
+            <span class="option-text">初めて</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'sometimes', { name: 'answers[q10]' }, checked: false %>
+          <%= radio_button_tag 'answers[q10]', 'sometimes' %>
           <span class="option-content">
             <span class="option-icon">📅</span>
-            <span class="option-text">たまに行く</span>
+            <span class="option-text">たまに</span>
           </span>
         </label>
         <label class="option-card">
-          <%= f.radio_button :answers, 'often', { name: 'answers[q10]' }, checked: false %>
+          <%= radio_button_tag 'answers[q10]', 'often' %>
           <span class="option-content">
-            <span class="option-icon">⭐</span>
+            <span class="option-icon">🎫</span>
             <span class="option-text">よく行く</span>
+          </span>
+        </label>
+        <label class="option-card">
+          <%= radio_button_tag 'answers[q10]', 'expert' %>
+          <span class="option-content">
+            <span class="option-icon">🎓</span>
+            <span class="option-text">大好き！</span>
           </span>
         </label>
       </div>
@@ -351,7 +388,8 @@
 
     <!-- 送信ボタン -->
     <div class="submit-section">
-      <%= f.submit '診断結果を見る', class: 'submit-btn' %>
+      <%= f.submit "診断結果を見る", class: "submit-btn" %>
     </div>
+
   <% end %>
 </div>
