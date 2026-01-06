@@ -62,82 +62,28 @@ class Museum < ApplicationRecord
     [prefecture, city, address].reject(&:blank?).join(' ')
   end
 
+  # 訪問回数をインクリメント
   def increment_visit_count!
     increment!(:visit_count)
   end
 
+  # 関連日記取得
   def related_journals
     journals.recent.limit(10)
   end
 
+  # 総日記数
   def journals_count
     journals.count
   end
 
+  # 総いいね数
+  def total_likes
+    journals.sum(:likes)
+  end
+
+  # 平均評価
   def average_rating
     journals.where.not(rate: nil).average(:rate)&.round(1)
   end
 end
-
-# class Museum < ApplicationRecord
-#   has_many :journals, dependent: :nullify
-
-#   validates :name, presence: true
-#   validates :prefecture, presence: true
-  
-#   scope :by_prefecture, ->(prefecture) { where(prefecture: prefecture) if prefecture.present? }
-#   scope :by_city, ->(city) { where(city: city) }
-#   scope :by_museum_type, ->(museum_type) { where(museum_type: museum_type) if museum_type.present? }
-#   scope :search_by_keyword, ->(type) { where(registration_type: type) if type.present? }
-#   scope :featured, -> { where(is_featured: true) }
-#   scope :with_website, -> { where.not(official_website: [nil, '']) }
-  
-#   # 検索
-#   scope :search_by_keyword, (keyword){
-#     if keyword.present?
-#       where("name LIKE ? OR city LIKE? OR address LIKE?",
-#             "%#{sanitize_sql_like(keyword)}%",
-#             "%#{sanitize_sql_like(keyword)}%",
-#             "%#{sanitize_sql_like(keyword)}%")
-#     end
-#   }
-#   # 複合検索
-#   def self.search(params)
-#     results = all
-#     results = results.by_prefecture(params[:prefecture]) if params[:prefecture].present?
-#     results = results.by_museum_type(params[:museum_type]) if params[:museum_type].present?
-#     results = results.by_registration_type(params[:registration_type]) if params[:registration_type].present?
-#     results = results.search_by_keyword(params[:keyword]) if params[:keyword].present?
-#     results
-#   end
-  
-#   # 都道府県リスト
-#   def self.prefectures_list
-#     distinct.pluck(:prefecture).compact.sort
-#   end
-  
-#   # 館種リスト
-#   def self.museum_types
-#     distinct.pluck(:museum_type).compact.sort
-#   end
-  
-#   # 登録区分リスト
-#   def self.registration_type_list
-#     distinct.pluck(:registration_type).compact.reject(&:empty?).uniq.sort
-#   end
-
-#   # 訪問回数
-#   def increment_visit_count!
-#     increment!(:visit_count)
-#   end
-  
-#   # フル住所
-#   def full_address
-#     [prefecture, city, address].reject(&:blank?).join(' ')
-#   end
-  
-#   # 日記数
-#   def diaries_count
-#     diaries.count
-#   end
-# end
