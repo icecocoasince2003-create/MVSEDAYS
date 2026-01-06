@@ -12,7 +12,7 @@
   align-items: center;
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 3px solid #667eea;
+  border-bottom: 3px solid #c9a961;
 }
 
 .admin-header h1 {
@@ -31,17 +31,17 @@
 }
 
 .stat-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #c9a961);
   color: white;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stat-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .stat-card h3 {
@@ -117,7 +117,7 @@
 }
 
 .badge-public {
-  background: #28a745;
+  background: #000000;
   color: white;
 }
 
@@ -171,22 +171,22 @@
 }
 
 .btn-info {
-  background: #17a2b8;
+  background: #000000;
   color: white;
 }
 
 .btn-info:hover {
-  background: #138496;
+  background: #000000;
   transform: translateY(-2px);
 }
 
 .btn-danger {
-  background: #dc3545;
+  background: #000000;
   color: white;
 }
 
 .btn-danger:hover {
-  background: #c82333;
+  background: #000000;
   transform: translateY(-2px);
 }
 

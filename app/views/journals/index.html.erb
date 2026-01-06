@@ -56,12 +56,11 @@
               <% if journal.visit_date %>
                 <div class="meta-item">
                   <i class="icon-calendar"></i>
-                  <span><%= journal.visit_date.strftime('%Y年%m月%d日') %></span>
+                  <span><%= journal.visit_date.strftime('%Y/%m/%d') %></span>
                 </div>
               <% end %>
             </div>
 
-            <%# ✅ 修正: タグを個別のバッジとして表示 %>
             <% if journal.tags.any? %>
               <div class="tags-container">
                 <% journal.tags.each do |tag| %>
@@ -74,7 +73,7 @@
 
             <div class="journal-footer">
               <div class="post-date">
-                <%= journal.created_at.strftime('%Y年%m月%d日 %H:%M') %>
+                <%= journal.created_at.strftime('%Y/%m/%d %H:%M') %>
               </div>
               
               <div class="journal-actions">

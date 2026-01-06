@@ -171,15 +171,15 @@ $color-gray-medium: #313131;
   gap: 0.5rem;
   margin-top: 0.75rem;
   padding-top: 0.75rem;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid #c9a961;
 }
 
 /* タグバッジのスタイル */
 .tag-badge {
   display: inline-block;
   padding: 0.25rem 0.75rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #000000);
+  color: #c9a961;
   border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 500;
@@ -191,7 +191,7 @@ $color-gray-medium: #313131;
 .tag-badge:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  background: linear-gradient(135deg, #000000);
 }
 
 .tag-badge:active {
@@ -449,6 +449,7 @@ $color-gray-medium: #313131;
 
   .meta-item {
     font-size: 0.75rem;
+    color: white;
     padding: 0.25rem 0.6rem;
   }
 }
