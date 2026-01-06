@@ -7,7 +7,7 @@
   has_many_attached :images
 
   # バリデーション
-  validates :body, presence: true # 変更
+  validates :body, presence: true
   validates :visit_date, presence: true
   validates :user_id, presence: true
   validates :overall, numericality: { 
@@ -30,6 +30,17 @@
   scope :in_date_range, ->(start_date, end_date) { 
     where(visit_date: start_date..end_date) 
   }
+  
+  # ✅ 追加: タグで検索
+  scope :by_tags, ->(tag_ids) {
+    joins(:tags).where(tags: { id: tag_ids }).distinct
+  }
+  
+  # ✅ 追加: タグ名で検索
+  scope :by_tag_names, ->(tag_names) {
+    tag_names = [tag_names] unless tag_names.is_a?(Array)
+    joins(:tags).where(tags: { name: tag_names }).distinct
+  }
 
   # インスタンスメソッド
   def museum_display_name
@@ -42,14 +53,24 @@
     end
   end
 
+  # ✅ 修正: タグ一覧を取得（カンマ区切り）
   def tag_list
     tags.pluck(:name).join(", ")
   end
 
+  # ✅ 修正: タグを保存（カンマ区切り文字列から）
   def tag_list=(names)
-    self.tags = names.split(",").map do |name|
-      Tag.where(name: name.strip).first_or_create! if name.strip.present?
-    end.compact
+    return if names.blank?
+    
+    # 既存のタグをクリア
+    self.tags.clear
+    
+    # 新しいタグを追加
+    tag_names = names.to_s.split(",").map(&:strip).reject(&:blank?)
+    tag_names.each do |name|
+      tag = Tag.find_or_create_by(name: name.downcase)
+      self.tags << tag unless self.tags.include?(tag)
+    end
   end
   
   # いいね・コメント
@@ -57,7 +78,7 @@
   has_many :liked_users, through: :journal_likes, source: :user
   has_many :journal_comments, dependent: :destroy
   
-  # 公開日記のみ（is_publicカラムがある場合のみ有効）
+  # 公開日記のみ
   scope :public_journals, -> { where(is_public: true) }
   
   # 非公開日記のみ
@@ -65,8 +86,6 @@
   
   # 人気の日記 (いいね数順)
   scope :popular, -> { 
-    where(is_public: true)
-      .order(likes_count: :desc, created_at: :desc)
     left_joins(:journal_likes)
       .group(:id)
       .order('COUNT(journal_likes.id) DESC, journals.created_at DESC')
@@ -74,8 +93,6 @@
   
   # コメントが多い日記
   scope :most_commented, -> {
-    where(is_public: true)
-      .order(comments_count: :desc, created_at: :desc)
     left_joins(:journal_comments)
       .group(:id)
       .order('COUNT(journal_comments.id) DESC, journals.created_at DESC')
@@ -90,10 +107,12 @@
   scope :search_by_keyword, ->(keyword) {
     return all if keyword.blank?
     
-    where(
-      "body LIKE :keyword OR tweet LIKE :keyword",
-      keyword: "%#{sanitize_sql_like(keyword)}%"
-    )
+    left_joins(:tags)
+      .where(
+        "journals.body LIKE :keyword OR journals.tweet LIKE :keyword OR tags.name LIKE :keyword",
+        keyword: "%#{sanitize_sql_like(keyword)}%"
+      )
+      .distinct
   }
   
   # 複合検索
@@ -103,6 +122,7 @@
     journals = journals.by_museum(params[:museum_id]) if params[:museum_id].present?
     journals = journals.by_tags(params[:tag_ids]) if params[:tag_ids].present?
     journals = journals.by_user(params[:user_id]) if params[:user_id].present?
+    journals
   }
   
   # いいねされているか
@@ -137,12 +157,12 @@
     journal_comments.create(user: user, content: content)
   end
   
-  # 公開・非公開切り替え（is_publicカラムがある場合のみ有効）
+  # 公開・非公開切り替え
   def toggle_visibility
     update(is_public: !is_public)
   end
   
-  # 公開日記か（is_publicカラムがある場合のみ有効）
+  # 公開日記か
   def public?
     is_public
   end
@@ -154,19 +174,6 @@
     return true if viewer&.admin?
     false
   end
-  
-  # コミュニティに共有（未実装）
-  # def share_to_community(community, user, options = {})
-  #   return false unless community.member?(user)
-  #   
-  #   community.community_posts.create(
-  #     user: user,
-  #     journal: self,
-  #     post_type: "journal_share",
-  #     title: options[:title],
-  #     content: options[:content]
-  #   )
-  # end
   
   # 統計情報
   def engagement_score
@@ -183,42 +190,3 @@
     end
   end
 end
-
-# class Journal < ApplicationRecord
-#     belongs_to :user
-#     has_one_attached :image
-#     has_many :tweet_tag_relations, dependent: :destroy
-#     has_many :tags, through: :tweet_tag_relations, dependent: :destroy
-
-#     belongs_to :museum, optional: true
-#     has_many :tweet_tags, dependent: :destroy
-#     has_many :tags, through: :tweet_tags
-
-#     validates :title, presence: true, length: { maximum: 100 }
-#     validates :content, presence: true
-#     validates :visit_date, presence: true
-#     validates :rating, numericality: { 
-#       only_integer: true, 
-#       greater_than_or_equal_to: 1, 
-#       less_than_or_equal_to: 5 
-#     }, allow_nil: true
-
-#     scope :recent, -> { order(created_at: :desc) }
-#     scope :by_rating, ->(rating) { where(rating: rating) if rating.present? }
-#     scope :with_museum, -> { where.not(museum_id: nil) }
-#     scope :by_museum, ->(museum_id) { where(museum_id: museum_id) if museum_id.present? }
-
-#     # 博物館名を返答
-#     def museum_name
-#         museum&.name || "未設定"
-#     end
-
-#     # 博物館訪問数をカウント
-#     after_create :increment_museum_visit_count
-  
-#     private
-    
-#     def increment_museum_visit_count
-#       museum&.increment_visit_count!
-#     end
-# end
