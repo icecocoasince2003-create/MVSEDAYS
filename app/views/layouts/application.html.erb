@@ -29,6 +29,7 @@
           <ul>
             <li><%= link_to "HOME", journals_path, class: "nav-link" %></li>
             <li><%= link_to "Museums", museums_path, class: "nav-link" %></li>
+            <li><%= link_to "Diagnosis", new_museum_diagnosis_path, class: "nav-link" %></li>
             <li><%= link_to "New Diary", new_journal_path, class: "nav-link" %></li>
             
             <% if user_signed_in? %>

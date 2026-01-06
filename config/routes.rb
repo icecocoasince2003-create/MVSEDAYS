@@ -23,6 +23,9 @@
     end
   end
 
+  # 博物館診断機能
+  resources :museum_diagnosis, only: [:new, :create], path: 'museum_diagnosis', controller: 'museum_diagnosis'
+  
   get 'my_page', to: 'users#my_page', as: :my_page
   resources :users, only: [:index, :show, :destroy]
   resources :journal_tag_relations, only: [:create, :destroy]

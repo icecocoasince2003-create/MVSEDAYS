@@ -436,6 +436,33 @@ a {
       }
     }
   }
+  
+  .header-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .btn-diagnosis {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, $color-accent-gold 0%, $color-accent-cream 100%);
+    color: $color-primary-black;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+  
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba($color-accent-gold, 0.4);
+    }
+  }
 }
 
 // * {

@@ -1,0 +1,454 @@
+// カラーパレット
+$color-primary-black: #0a0a0a;
+$color-secondary-black: #1a1a1a;
+$color-tertiary-black: #2a2a2a;
+$color-accent-gold: #c9a961;
+$color-accent-cream: #e8d5b5;
+$color-white: #ffffff;
+$color-gray-light: #4a4a4a;
+$color-gray-medium: #313131;
+
+// ========== 診断ページ ==========
+
+.quiz-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.quiz-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
+  border-radius: 12px;
+  border: 2px solid $color-accent-gold;
+}
+
+.quiz-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $color-accent-gold;
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.quiz-description {
+  font-size: 1.1rem;
+  color: $color-accent-cream;
+  line-height: 1.6;
+}
+
+// 質問ブロック
+.question-block {
+  background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
+  border: 1px solid $color-gray-medium;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $color-accent-gold;
+    box-shadow: 0 4px 12px rgba($color-accent-gold, 0.1);
+  }
+}
+
+.question-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: $color-accent-gold;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid rgba($color-accent-gold, 0.3);
+}
+
+// オプショングリッド
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.option-card {
+  position: relative;
+  cursor: pointer;
+
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .option-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 1rem;
+    background-color: $color-tertiary-black;
+    border: 2px solid $color-gray-medium;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .option-icon {
+    font-size: 2.5rem;
+  }
+
+  .option-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: $color-accent-cream;
+  }
+
+  input[type="radio"]:checked + .option-content {
+    background: linear-gradient(135deg, $color-accent-gold 0%, darken($color-accent-gold, 10%) 100%);
+    border-color: $color-accent-gold;
+    box-shadow: 0 4px 12px rgba($color-accent-gold, 0.3);
+
+    .option-text {
+      color: $color-primary-black;
+      font-weight: 600;
+    }
+  }
+
+  &:hover .option-content {
+    border-color: $color-accent-gold;
+    transform: translateY(-2px);
+  }
+}
+
+// セレクトボックス
+.select-wrapper {
+  position: relative;
+}
+
+.select-input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  background-color: $color-tertiary-black;
+  border: 2px solid $color-gray-medium;
+  border-radius: 8px;
+  color: $color-white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent-gold;
+    box-shadow: 0 0 0 3px rgba($color-accent-gold, 0.1);
+  }
+}
+
+// 送信セクション
+.submit-section {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.submit-btn {
+  padding: 1.2rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, $color-accent-gold 0%, darken($color-accent-gold, 10%) 100%);
+  color: $color-primary-black;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba($color-accent-gold, 0.3);
+  letter-spacing: 0.05em;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba($color-accent-gold, 0.4);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+// ========== 診断結果ページ ==========
+
+.result-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.result-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2.5rem;
+  background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
+  border-radius: 12px;
+  border: 2px solid $color-accent-gold;
+  box-shadow: 0 8px 24px rgba($color-accent-gold, 0.2);
+}
+
+.result-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: $color-accent-gold;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.result-subtitle {
+  font-size: 1.2rem;
+  color: $color-accent-cream;
+}
+
+// 博物館結果カード
+.museums-results {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.museum-result-card {
+  background: linear-gradient(135deg, $color-secondary-black 0%, $color-tertiary-black 100%);
+  border: 2px solid $color-gray-medium;
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &.rank-1 {
+    border-color: #FFD700;
+    box-shadow: 0 8px 24px rgba(#FFD700, 0.2);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #FFD700, #FFA500);
+    }
+  }
+
+  &.rank-2 {
+    border-color: #C0C0C0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #C0C0C0, #A8A8A8);
+    }
+  }
+
+  &.rank-3 {
+    border-color: #CD7F32;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #CD7F32, #B8732D);
+    }
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba($color-accent-gold, 0.3);
+  }
+}
+
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  background: rgba($color-accent-gold, 0.2);
+  border-radius: 50px;
+  margin-bottom: 1.5rem;
+  border: 1px solid $color-accent-gold;
+}
+
+.rank-icon {
+  font-size: 1.5rem;
+}
+
+.rank-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: $color-accent-gold;
+  letter-spacing: 0.05em;
+}
+
+.museum-info {
+  .museum-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $color-accent-gold;
+    margin-bottom: 1.2rem;
+    line-height: 1.4;
+  }
+
+  .museum-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    color: $color-accent-cream;
+    font-size: 0.95rem;
+  }
+
+  .detail-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .detail-text {
+    line-height: 1.6;
+  }
+
+  .museum-description {
+    padding: 1rem;
+    background-color: rgba($color-tertiary-black, 0.5);
+    border-radius: 6px;
+    color: $color-accent-cream;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid $color-accent-gold;
+  }
+
+  .museum-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+
+// ボタンスタイル
+.btn {
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-detail {
+  background: linear-gradient(135deg, $color-accent-gold 0%, darken($color-accent-gold, 10%) 100%);
+  color: $color-primary-black;
+  border: none;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba($color-accent-gold, 0.4);
+  }
+}
+
+.btn-website {
+  background-color: transparent;
+  color: $color-accent-gold;
+  border: 2px solid $color-accent-gold;
+
+  &:hover {
+    background-color: $color-accent-gold;
+    color: $color-primary-black;
+  }
+}
+
+// 結果アクション
+.result-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid $color-gray-medium;
+}
+
+.btn-retry {
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, $color-accent-gold 0%, darken($color-accent-gold, 10%) 100%);
+  color: $color-primary-black;
+  border: none;
+  font-size: 1.1rem;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba($color-accent-gold, 0.4);
+  }
+}
+
+.btn-back {
+  padding: 1rem 2.5rem;
+  background-color: transparent;
+  color: $color-accent-cream;
+  border: 2px solid $color-accent-cream;
+  font-size: 1.1rem;
+
+  &:hover {
+    background-color: $color-accent-cream;
+    color: $color-primary-black;
+  }
+}
+
+// レスポンシブ
+@media (max-width: 768px) {
+  .quiz-container,
+  .result-container {
+    padding: 1rem;
+  }
+
+  .quiz-title,
+  .result-title {
+    font-size: 2rem;
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .museum-result-card {
+    padding: 1.5rem;
+  }
+
+  .museum-info .museum-name {
+    font-size: 1.5rem;
+  }
+
+  .result-actions {
+    flex-direction: column;
+
+    .btn {
+      width: 100%;
+    }
+  }
+
+  .museum-actions {
+    flex-direction: column;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
