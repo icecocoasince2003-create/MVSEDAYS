@@ -2,7 +2,7 @@
 
 class MuseumDiagnosisController < ApplicationController
   # 診断は誰でも利用可能（ログイン不要）
-  skip_before_action :authenticate_user!, only: [:new, :create]
+  # skip_before_action :authenticate_user!, only: [:new, :create]
 
   # 診断ページ
   def new
